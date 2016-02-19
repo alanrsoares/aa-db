@@ -22,6 +22,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var ENDPOINT_HOST = 'http://www.aa.co.nz';
+
 var parseAnswers = function parseAnswers(answers) {
   var links = (0, _parsers.parseTags)('a', 'g')(answers);
   var contents = links.map((0, _parsers.parseTags)('a'));
@@ -37,16 +39,27 @@ var parseAnswers = function parseAnswers(answers) {
   }, {});
 };
 
-var unwrap = function unwrap(res) {
-  return res.json();
+var parseImage = function parseImage(image) {
+  return '' + ENDPOINT_HOST + (0, _parsers.parseProp)('src')(image).split('?m=')[0];
+};
+
+var makeKey = function makeKey(_ref3) {
+  var Question = _ref3.Question;
+  var RoadCodePage = _ref3.RoadCodePage;
+  var CorrectAnswer = _ref3.CorrectAnswer;
+  return Question + '/' + RoadCodePage + '/' + CorrectAnswer;
 };
 
 var refineQuestion = function refineQuestion(question) {
   return _extends({}, question, {
-    key: question.Question,
-    Image: (0, _parsers.parseProps)(['src', 'alt'])(question.Image),
+    key: makeKey(question),
+    Image: parseImage(question.Image),
     Answers: parseAnswers(question.Answers)
   });
+};
+
+var unwrap = function unwrap(res) {
+  return res.json();
 };
 
 var refine = function refine(data) {
@@ -54,11 +67,11 @@ var refine = function refine(data) {
 };
 
 var Questions = function () {
-  function Questions(_ref3) {
-    var endpoint = _ref3.endpoint;
-    var cache = _ref3.cache;
-    var _ref3$maximumEmptyAtt = _ref3.maximumEmptyAttempts;
-    var maximumEmptyAttempts = _ref3$maximumEmptyAtt === undefined ? 10 : _ref3$maximumEmptyAtt;
+  function Questions(_ref4) {
+    var endpoint = _ref4.endpoint;
+    var cache = _ref4.cache;
+    var _ref4$maximumEmptyAtt = _ref4.maximumEmptyAttempts;
+    var maximumEmptyAttempts = _ref4$maximumEmptyAtt === undefined ? 10 : _ref4$maximumEmptyAtt;
 
     _classCallCheck(this, Questions);
 
@@ -66,8 +79,8 @@ var Questions = function () {
       endpoint: endpoint,
       cache: cache,
       maximumEmptyAttempts: maximumEmptyAttempts,
-      store: this.store.bind(this),
-      emptyAttempts: 0
+      emptyAttempts: 0,
+      store: this.store.bind(this)
     });
   }
 

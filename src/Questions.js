@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch'
 
-import { parseProps, parseTags } from './parsers'
+import { parseProp, parseTags } from './parsers'
+
+const ENDPOINT_HOST = 'http://www.aa.co.nz'
 
 const parseAnswers = answers => {
   const links = parseTags('a', 'g')(answers)
@@ -14,14 +16,21 @@ const parseAnswers = answers => {
   }), {})
 }
 
-const unwrap = res => res.json()
+const parseImage = image => `${ENDPOINT_HOST}${
+    parseProp('src')(image).split('?m=')[0]
+  }`
+
+const makeKey = ({ Question, RoadCodePage, CorrectAnswer }) =>
+  `${Question}/${RoadCodePage}/${CorrectAnswer}`
 
 const refineQuestion = question => ({
   ...question,
-  key: question.Question,
-  Image: parseProps(['src', 'alt'])(question.Image),
+  key: makeKey(question),
+  Image: parseImage(question.Image),
   Answers: parseAnswers(question.Answers)
 })
+
+const unwrap = res => res.json()
 
 const refine = data => Promise.resolve(data.map(refineQuestion))
 
