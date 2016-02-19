@@ -43,8 +43,7 @@ var Cache = function () {
 
 		_classCallCheck(this, Cache);
 
-		this.stdTTL = stdTTL;
-		this.db = db;
+		Object.assign(this, { stdTTL: stdTTL, db: db });
 	}
 
 	_createClass(Cache, [{
