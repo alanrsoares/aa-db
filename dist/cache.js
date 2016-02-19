@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _lowdb = require('lowdb');
 
@@ -34,7 +34,7 @@ var CacheKey = function CacheKey(key, value) {
 	Object.assign(this, { key: key, value: value });
 };
 
-var Cache = (function () {
+var Cache = function () {
 	function Cache(_ref) {
 		var _ref$stdTTL = _ref.stdTTL;
 		var stdTTL = _ref$stdTTL === undefined ? STD_TTL : _ref$stdTTL;
@@ -67,6 +67,6 @@ var Cache = (function () {
 	}]);
 
 	return Cache;
-})();
+}();
 
 exports.default = Cache;
