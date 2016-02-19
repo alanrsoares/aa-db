@@ -76,19 +76,19 @@ var Questions = (function () {
     value: function store(questions) {
       var _this = this;
 
-      var newQuestions = questions.filter(function (q) {
+      var uncachedQuestions = questions.filter(function (q) {
         return !_this.cache.get(q.key);
       });
 
-      if (!newQuestions.length) {
+      if (!uncachedQuestions.length) {
         this.emptyAttempts++;
         console.log('empty attempts: ' + this.emptyAttempts);
       } else {
         this.emptyAttempts = 0;
-        newQuestions.forEach(function (q) {
+        uncachedQuestions.forEach(function (q) {
           return _this.cache.set(q.key, q);
         });
-        console.log('new questions cached: ' + newQuestions.length);
+        console.log('new questions cached: ' + uncachedQuestions.length);
       }
 
       this.fetchQuestions();

@@ -18,6 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var STD_TTL = 600;
 var COLLECTION_ID = 'cache';
 
 var createDB = (0, _lowdb2.default)(__dirname + '/db.json', { storage: _fileSync2.default });
@@ -35,13 +36,14 @@ var CacheKey = function CacheKey(key, value) {
 
 var Cache = (function () {
 	function Cache(_ref) {
-		var stdTTL = _ref.stdTTL;
+		var _ref$stdTTL = _ref.stdTTL;
+		var stdTTL = _ref$stdTTL === undefined ? STD_TTL : _ref$stdTTL;
 		var _ref$db = _ref.db;
 		var db = _ref$db === undefined ? createDB(COLLECTION_ID) : _ref$db;
 
 		_classCallCheck(this, Cache);
 
-		this.stdTTL = stdTTL || 600;
+		this.stdTTL = stdTTL;
 		this.db = db;
 	}
 
