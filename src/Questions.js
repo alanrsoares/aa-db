@@ -31,8 +31,8 @@ export default class Questions {
       endpoint,
       cache,
       maximumEmptyAttempts,
-      store: this.store.bind(this),
-      emptyAttempts: 0
+      emptyAttempts: 0,
+      store: this.store.bind(this)
     })
   }
 
