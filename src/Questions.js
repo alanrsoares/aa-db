@@ -37,15 +37,15 @@ export default class Questions {
   }
 
   store(questions) {
-    const newQuestions = questions.filter(q => !this.cache.get(q.key))
+    const uncachedQuestions = questions.filter(q => !this.cache.get(q.key))
 
-    if (!newQuestions.length) {
+    if (!uncachedQuestions.length) {
       this.emptyAttempts++
       console.log(`empty attempts: ${this.emptyAttempts}`)
     } else {
       this.emptyAttempts = 0
-      newQuestions.forEach(q => this.cache.set(q.key, q))
-      console.log(`new questions cached: ${newQuestions.length}`)
+      uncachedQuestions.forEach(q => this.cache.set(q.key, q))
+      console.log(`new questions cached: ${uncachedQuestions.length}`)
     }
 
     this.fetchQuestions()
