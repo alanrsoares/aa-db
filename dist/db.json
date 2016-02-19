@@ -3506,6 +3506,46 @@
         },
         "key": "If your vehicle breaks down on a motorway, you should:"
       }
+    },
+    {
+      "created": 1455849764757,
+      "key": "What is the best way to check for hazards before reversing your vehicle?",
+      "value": {
+        "Question": "What is the best way to check for hazards before reversing your vehicle?",
+        "Answers": {
+          "A": "Relying only on the outside mirrors.",
+          "B": "Turning to look over your shoulders.",
+          "C": "Relying only on the inside mirrors.",
+          "D": "Walking around the vehicle before reversing."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "150",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q016.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 016"
+        },
+        "key": "What is the best way to check for hazards before reversing your vehicle?"
+      }
+    },
+    {
+      "created": 1455849769762,
+      "key": "You are driving past a line of parked cars. You notice a ball bouncing out into the road ahead. What should you do?",
+      "value": {
+        "Question": "You are driving past a line of parked cars. You notice a ball bouncing out into the road ahead. What should you do?",
+        "Answers": {
+          "A": "Keep driving at the same speed.",
+          "B": "Keep driving at the same speed and flash the vehicle's headlights.",
+          "C": "Slow down and be prepared to stop for children.",
+          "D": "Slow down and move to the right-hand side of the road."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "197",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q212.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 212"
+        },
+        "key": "You are driving past a line of parked cars. You notice a ball bouncing out into the road ahead. What should you do?"
+      }
     }
   ]
 }

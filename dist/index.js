@@ -2,9 +2,9 @@
 
 require('babel-polyfill');
 
-var _cache = require('./cache');
+var _Cache = require('./Cache');
 
-var _cache2 = _interopRequireDefault(_cache);
+var _Cache2 = _interopRequireDefault(_Cache);
 
 var _Questions = require('./Questions');
 
@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var q = new _Questions2.default({
   endpoint: _constants.QUESTIONS_ENDPOINT,
-  cache: _cache2.default
+  cache: new _Cache2.default({ stdTTL: _constants.ONE_WEEK })
 });
 
 q.fetchQuestions();

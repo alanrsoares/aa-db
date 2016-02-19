@@ -1,9 +1,9 @@
 import lowdb from 'lowdb'
 import storage from 'lowdb/file-sync'
 
-import { ONE_WEEK, COLLECTION_ID } from './constants'
+const COLLECTION_ID = 'cache'
 
-const db = lowdb(`${ __dirname }/db.json`, { storage })
+const createDB = lowdb(`${ __dirname }/db.json`, { storage })
 
 const isValidCacheKey = (key, ttl) =>
  	Math.floor((Date.now() - key.created) / 1000) <= ttl
@@ -15,10 +15,10 @@ class CacheKey {
 	}
 }
 
-class Cache {
-	constructor({ stdTTL }) {
+export default class Cache {
+	constructor({ stdTTL, db = createDB(COLLECTION_ID) }) {
 		this.stdTTL = stdTTL || 600
-		this.db = db(COLLECTION_ID)
+		this.db = db
 	}
 
 	get(key) {
@@ -37,5 +37,3 @@ class Cache {
 		this.db.remove({ key })
 	}
 }
-
-export default new Cache({ stdTTL: ONE_WEEK })

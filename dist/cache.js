@@ -14,13 +14,13 @@ var _fileSync = require('lowdb/file-sync');
 
 var _fileSync2 = _interopRequireDefault(_fileSync);
 
-var _constants = require('./constants');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var db = (0, _lowdb2.default)(__dirname + '/db.json', { storage: _fileSync2.default });
+var COLLECTION_ID = 'cache';
+
+var createDB = (0, _lowdb2.default)(__dirname + '/db.json', { storage: _fileSync2.default });
 
 var isValidCacheKey = function isValidCacheKey(key, ttl) {
 	return Math.floor((Date.now() - key.created) / 1000) <= ttl;
@@ -36,11 +36,13 @@ var CacheKey = function CacheKey(key, value) {
 var Cache = (function () {
 	function Cache(_ref) {
 		var stdTTL = _ref.stdTTL;
+		var _ref$db = _ref.db;
+		var db = _ref$db === undefined ? createDB(COLLECTION_ID) : _ref$db;
 
 		_classCallCheck(this, Cache);
 
 		this.stdTTL = stdTTL || 600;
-		this.db = db(_constants.COLLECTION_ID);
+		this.db = db;
 	}
 
 	_createClass(Cache, [{
@@ -65,4 +67,4 @@ var Cache = (function () {
 	return Cache;
 })();
 
-exports.default = new Cache({ stdTTL: _constants.ONE_WEEK });
+exports.default = Cache;
