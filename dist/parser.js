@@ -9,12 +9,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var propPattern = function propPattern(prop) {
-  return new RegExp(prop + "=[\"'](.*?)[\"']");
+  return new RegExp(prop + "=([\"'])(.*?)\\1");
 };
 
 var parseProp = exports.parseProp = function parseProp(prop) {
   return function (subject) {
-    return propPattern(prop).exec(subject)[1];
+    return propPattern(prop).exec(subject)[2];
   };
 };
 

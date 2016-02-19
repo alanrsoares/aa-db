@@ -1,7 +1,7 @@
-const propPattern = prop => new RegExp(`${prop}=["'](.*?)["']`)
+const propPattern = prop => new RegExp(`${prop}=(["'])(.*?)\\1`)
 
-export const parseProp = prop =>
-  subject => propPattern(prop).exec(subject)[1]
+export const parseProp = prop => subject =>
+  propPattern(prop).exec(subject)[2]
 
 export const parseProps = props => subject =>
   props.reduce((acc, prop) => ({

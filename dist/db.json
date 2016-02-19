@@ -3448,6 +3448,64 @@
         },
         "key": "You're coming up to a school crossing and both the School Patrol stop signs are held out. When can you drive on?"
       }
+    },
+    {
+      "created": 1455848703749,
+      "key": "This sign means the speed for safe and comfortable driving around the curve is 65 km/h.",
+      "value": {
+        "Question": "This sign means the speed for safe and comfortable driving around the curve is 65 km/h.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "211",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q062.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 062"
+        },
+        "key": "This sign means the speed for safe and comfortable driving around the curve is 65 km/h."
+      }
+    },
+    {
+      "created": 1455848709728,
+      "key": "When may you pass on the left at an intersection, if you can do so safely?",
+      "value": {
+        "Question": "When may you pass on the left at an intersection, if you can do so safely?",
+        "Answers": {
+          "A": "When you have the headlights of your vehicle turned on.",
+          "B": "When the vehicle in front is signalling a left turn.",
+          "C": "When the vehicle in front is signalling a right turn.",
+          "D": "When the vehicle in front is going faster than the speed limit."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "141",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q167.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 167"
+        },
+        "key": "When may you pass on the left at an intersection, if you can do so safely?"
+      }
+    },
+    {
+      "created": 1455848710736,
+      "key": "If your vehicle breaks down on a motorway, you should:",
+      "value": {
+        "Question": "If your vehicle breaks down on a motorway, you should:",
+        "Answers": {
+          "A": "Walk to get help.",
+          "B": "Wave down a passing vehicle.",
+          "C": "Lift up the bonnet and boot of your vehicle.",
+          "D": "Push your vehicle to the nearest off-ramp."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "146",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q007.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 007"
+        },
+        "key": "If your vehicle breaks down on a motorway, you should:"
+      }
     }
   ]
 }
