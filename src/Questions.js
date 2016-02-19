@@ -44,7 +44,7 @@ export default class Questions {
       console.log(`empty attempts: ${this.emptyAttempts}`)
     } else {
       this.emptyAttempts = 0
-      newQuestions.map(q => this.cache.set(q.key, q))
+      newQuestions.forEach(q => this.cache.set(q.key, q))
       console.log(`new questions cached: ${newQuestions.length}`)
     }
 
