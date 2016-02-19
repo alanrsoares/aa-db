@@ -1,0 +1,3551 @@
+{
+  "cache": [
+    {
+      "created": 1455850989040,
+      "key": "When driving on an unlaned road, your vehicle should be positioned:",
+      "value": {
+        "Question": "When driving on an unlaned road, your vehicle should be positioned:",
+        "Answers": {
+          "A": "Anywhere, so long as you can see what is coming.",
+          "B": "1 metre from the left-hand kerb.",
+          "C": "Close to the centre of the road.",
+          "D": "As close to the left side of the road as possible."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "112",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q010.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 010"
+        },
+        "key": "When driving on an unlaned road, your vehicle should be positioned:"
+      }
+    },
+    {
+      "created": 1455850989041,
+      "key": "Who can require you to undergo a breath screening test?",
+      "value": {
+        "Question": "Who can require you to undergo a breath screening test?",
+        "Answers": {
+          "A": "An ambulance officer.",
+          "B": "A doctor.",
+          "C": "A member of the public.",
+          "D": "A police officer."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "214",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q109.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 109"
+        },
+        "key": "Who can require you to undergo a breath screening test?"
+      }
+    },
+    {
+      "created": 1455850989043,
+      "key": "If your vehicle breaks down on a motorway, you should:",
+      "value": {
+        "Question": "If your vehicle breaks down on a motorway, you should:",
+        "Answers": {
+          "A": "Walk to get help.",
+          "B": "Wave down a passing vehicle.",
+          "C": "Lift up the bonnet and boot of your vehicle.",
+          "D": "Push your vehicle to the nearest off-ramp."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "146",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q007.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 007"
+        },
+        "key": "If your vehicle breaks down on a motorway, you should:"
+      }
+    },
+    {
+      "created": 1455850989043,
+      "key": "What does a warrant of fitness show?",
+      "value": {
+        "Question": "What does a warrant of fitness show?",
+        "Answers": {
+          "A": "The vehicle was inspected by an approved WoF inspector and was roadworthy when last inspected.",
+          "B": "The vehicle failed the WoF inspection and you have 28 days to fix the vehicle.",
+          "C": "Your commercial vehicle has been inspected and is roadworthy.",
+          "D": "The vehicle was inspected by an approved WoF inspector but is not considered roadworthy."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "245",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q233.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 233"
+        },
+        "key": "What does a warrant of fitness show?"
+      }
+    },
+    {
+      "created": 1455850989046,
+      "key": "When following a vehicle on a dusty metal (unsealed) road, you should:",
+      "value": {
+        "Question": "When following a vehicle on a dusty metal (unsealed) road, you should:",
+        "Answers": {
+          "A": "Keep close to the other vehicles.",
+          "B": "Drive down the centre of the road.",
+          "C": "Adjust your speed to suit the conditions.",
+          "D": "Pass the vehicle in front of you."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "191",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q045.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 045"
+        },
+        "key": "When following a vehicle on a dusty metal (unsealed) road, you should:"
+      }
+    },
+    {
+      "created": 1455850989047,
+      "key": "What is the least distance of clear road you MUST have in front of you when you have finished passing another vehicle?",
+      "value": {
+        "Question": "What is the least distance of clear road you MUST have in front of you when you have finished passing another vehicle?",
+        "Answers": {
+          "A": "40 metres.",
+          "B": "60 metres.",
+          "C": "80 metres.",
+          "D": "100 metres."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "135",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/passing-right.jpg?m=1301369278?m=1301369278",
+          "alt": "Passing right"
+        },
+        "key": "What is the least distance of clear road you MUST have in front of you when you have finished passing another vehicle?"
+      }
+    },
+    {
+      "created": 1455850989048,
+      "key": "At night, what must a towed vehicle have at the back of it?",
+      "value": {
+        "Question": "At night, what must a towed vehicle have at the back of it?",
+        "Answers": {
+          "A": "A white flag.",
+          "B": "Reflective tape.",
+          "C": "A white light.",
+          "D": "A red light."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "147",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q118.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 118"
+        },
+        "key": "At night, what must a towed vehicle have at the back of it?"
+      }
+    },
+    {
+      "created": 1455850989050,
+      "key": "What must you do before going over a rail crossing?",
+      "value": {
+        "Question": "What must you do before going over a rail crossing?",
+        "Answers": {
+          "A": "Speed up to beat the train.",
+          "B": "Drive on an angle to lessen the bumps.",
+          "C": "Search up and down the railway line and check there is space on the other side to exit.",
+          "D": "Stop at every railway line."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "168",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/railway-cross-sign.gif?m=1301369278?m=1301369278",
+          "alt": "Railway cross sign"
+        },
+        "key": "What must you do before going over a rail crossing?"
+      }
+    },
+    {
+      "created": 1455850989052,
+      "key": "Does the driver of the blue car have to give way?",
+      "value": {
+        "Question": "Does the driver of the blue car have to give way?",
+        "Answers": {
+          "A": "Yes",
+          "B": "No"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "158",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q173.jpg?m=1301369277?m=1301369277",
+          "alt": "Q 173"
+        },
+        "key": "Does the driver of the blue car have to give way?"
+      }
+    },
+    {
+      "created": 1455850989053,
+      "key": "What should you do if the vehicle behind you wishes to pass?",
+      "value": {
+        "Question": "What should you do if the vehicle behind you wishes to pass?",
+        "Answers": {
+          "A": "Move to the centre so that they cannot pass.",
+          "B": "Speed up so that they will not need to pass.",
+          "C": "Move as far to the left of the road as possible."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "135",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q026.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 026"
+        },
+        "key": "What should you do if the vehicle behind you wishes to pass?"
+      }
+    },
+    {
+      "created": 1455850990114,
+      "key": "What does a yellow reflector (cat's eye) placed on the road mean?",
+      "value": {
+        "Question": "What does a yellow reflector (cat's eye) placed on the road mean?",
+        "Answers": {
+          "A": "The left side of the road.",
+          "B": "The centre of the road.",
+          "C": "No passing.",
+          "D": "The far right side of the road."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "186",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/reflector-yellow.gif?m=1301369277?m=1301369277",
+          "alt": "Reflector yellow"
+        },
+        "key": "What does a yellow reflector (cat's eye) placed on the road mean?"
+      }
+    },
+    {
+      "created": 1455850990115,
+      "key": "What may you do at traffic signals if there is a green arrow pointing to the right and a red light showing at the same time?",
+      "value": {
+        "Question": "What may you do at traffic signals if there is a green arrow pointing to the right and a red light showing at the same time?",
+        "Answers": {
+          "A": "You may turn right.",
+          "B": "You may go straight ahead.",
+          "C": "You must stop until all lights turn green.",
+          "D": "You may turn left or right."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "161",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/stop-right-green-arrow-light.gif?m=1301369281?m=1301369281",
+          "alt": "Stop right green arrow light"
+        },
+        "key": "What may you do at traffic signals if there is a green arrow pointing to the right and a red light showing at the same time?"
+      }
+    },
+    {
+      "created": 1455850990116,
+      "key": "If you have had a flat tyre and have fitted a 'space saver wheel' what must you do?",
+      "value": {
+        "Question": "If you have had a flat tyre and have fitted a 'space saver wheel' what must you do?",
+        "Answers": {
+          "A": "Make sure the space-saver tyre is inflated to normal tyre pressure.",
+          "B": "Drive for a short distance only and not faster than 80 km/h.",
+          "C": "Drive  as far as you like but not faster than 80 km/h.",
+          "D": "Drive for a short distance only and not faster than 100 km/h."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "228",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q241.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 241"
+        },
+        "key": "If you have had a flat tyre and have fitted a 'space saver wheel' what must you do?"
+      }
+    },
+    {
+      "created": 1455850990117,
+      "key": "What should you do if an ambulance comes up behind you, flashing red lights or sounding its siren?",
+      "value": {
+        "Question": "What should you do if an ambulance comes up behind you, flashing red lights or sounding its siren?",
+        "Answers": {
+          "A": "Speed up to avoid delay.",
+          "B": "Put your vehicle hazard lights on and drive on at the same speed.",
+          "C": "Slow down, pull over and allow the ambulance to pass.",
+          "D": "Flash your vehicle headlights to warn oncoming traffic."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "117",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/police-flash-lights.gif?m=1301369277?m=1301369277",
+          "alt": "Police flash lights"
+        },
+        "key": "What should you do if an ambulance comes up behind you, flashing red lights or sounding its siren?"
+      }
+    },
+    {
+      "created": 1455850990118,
+      "key": "When turning right at a roundabout, you must:",
+      "value": {
+        "Question": "When turning right at a roundabout, you must:",
+        "Answers": {
+          "A": "Not indicate at any time on the roundabout.",
+          "B": "Indicate left before entering the roundabout.",
+          "C": "Indicate right before entering the roundabout.",
+          "D": "Indicate right when leaving the roundabout."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "170",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q156.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 156"
+        },
+        "key": "When turning right at a roundabout, you must:"
+      }
+    },
+    {
+      "created": 1455850990120,
+      "key": "When coming up to a one-lane bridge, what does this sign indicate?",
+      "value": {
+        "Question": "When coming up to a one-lane bridge, what does this sign indicate?",
+        "Answers": {
+          "A": "You must give way.",
+          "B": "You have the right of way.",
+          "C": "You must stop.",
+          "D": "You must slow down."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "171",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/one-lane-bridge-sign.gif?m=1301369278?m=1301369278",
+          "alt": "One lane bridge sign"
+        },
+        "key": "When coming up to a one-lane bridge, what does this sign indicate?"
+      }
+    },
+    {
+      "created": 1455850990121,
+      "key": "A vehicle should not send out visible smoke for more than:",
+      "value": {
+        "Question": "A vehicle should not send out visible smoke for more than:",
+        "Answers": {
+          "A": "3 seconds.",
+          "B": "5 seconds.",
+          "C": "8 seconds.",
+          "D": "10 seconds."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "226",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q207.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 207"
+        },
+        "key": "A vehicle should not send out visible smoke for more than:"
+      }
+    },
+    {
+      "created": 1455850991142,
+      "key": "You can stop or park your vehicle over a fire hydrant (fire plug) if someone stays with the vehicle who can move it.",
+      "value": {
+        "Question": "You can stop or park your vehicle over a fire hydrant (fire plug) if someone stays with the vehicle who can move it.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "175",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q053.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 053"
+        },
+        "key": "You can stop or park your vehicle over a fire hydrant (fire plug) if someone stays with the vehicle who can move it."
+      }
+    },
+    {
+      "created": 1455850991144,
+      "key": "What does this sign mean?",
+      "value": {
+        "Question": "What does this sign mean?",
+        "Answers": {
+          "A": "Do not drive slower than 70 km/h.",
+          "B": "The maximum speed you can travel is 70 km/h.",
+          "C": "A rest area is 70 metres ahead.",
+          "D": "Do not stop for the next 70 metres."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "209",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q159.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 159"
+        },
+        "key": "What does this sign mean?"
+      }
+    },
+    {
+      "created": 1455850991145,
+      "key": "On a transit lane what does T2 mean?",
+      "value": {
+        "Question": "On a transit lane what does T2 mean?",
+        "Answers": {
+          "A": "You can only use a bicycle or motorcycle in this lane.",
+          "B": "Buses only may use this lane.",
+          "C": "Vehicles with 2 or more passengers, buses, bicycles and motorcycles may use this lane.",
+          "D": "Taxis only may use this lane."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "111",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q223.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 223"
+        },
+        "key": "On a transit lane what does T2 mean?"
+      }
+    },
+    {
+      "created": 1455850991146,
+      "key": "To help you from being blinded by the headlights of an oncoming vehicle, you should:",
+      "value": {
+        "Question": "To help you from being blinded by the headlights of an oncoming vehicle, you should:",
+        "Answers": {
+          "A": "Look to the left-hand side of the road.",
+          "B": "Look to the right-hand side of the road.",
+          "C": "Look to the centre of the road.",
+          "D": "Turn the headlights of your vehicle onto high beam."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "185",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q011.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 011"
+        },
+        "key": "To help you from being blinded by the headlights of an oncoming vehicle, you should:"
+      }
+    },
+    {
+      "created": 1455850991147,
+      "key": "What does the legal definition of a road include?",
+      "value": {
+        "Question": "What does the legal definition of a road include?",
+        "Answers": {
+          "A": "Tar-sealed roads only.",
+          "B": "One way streets and cycle lanes.",
+          "C": "Public roads, highways, footpaths and car parks.",
+          "D": "Streets, highways, and any place the public has access to such as bridges, beaches, car parks etc."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "111",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q222.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 222"
+        },
+        "key": "What does the legal definition of a road include?"
+      }
+    },
+    {
+      "created": 1455850991148,
+      "key": "If you are the driver and you hurt somebody in a crash, who must you report it to?",
+      "value": {
+        "Question": "If you are the driver and you hurt somebody in a crash, who must you report it to?",
+        "Answers": {
+          "A": "A Police Officer within 2 hours.",
+          "B": "A Police Officer within 6 hours.",
+          "C": "A Police Officer within 24 hours.",
+          "D": "A Police Officer within 1 week."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "233",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q131.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 131"
+        },
+        "key": "If you are the driver and you hurt somebody in a crash, who must you report it to?"
+      }
+    },
+    {
+      "created": 1455850991150,
+      "key": "What is the safest way to drive up to intersections?",
+      "value": {
+        "Question": "What is the safest way to drive up to intersections?",
+        "Answers": {
+          "A": "Looking to the right.",
+          "B": "Travelling at the speed limit.",
+          "C": "Looking to the left.",
+          "D": "Use the system of car control."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "152",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q028.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 028"
+        },
+        "key": "What is the safest way to drive up to intersections?"
+      }
+    },
+    {
+      "created": 1455850991151,
+      "key": "To tow a trailer on a full car licence, the weight of your vehicle plus the weight of the trailer must not exceed what weight?",
+      "value": {
+        "Question": "To tow a trailer on a full car licence, the weight of your vehicle plus the weight of the trailer must not exceed what weight?",
+        "Answers": {
+          "A": "6000 kg (including the load you are carrying).",
+          "B": "4500 kg (excluding the load you are carrying).",
+          "C": "4000 kg (including the load you are carrying).",
+          "D": "5000 kg (including the load you are carrying)."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "147",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q033.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 033"
+        },
+        "key": "To tow a trailer on a full car licence, the weight of your vehicle plus the weight of the trailer must not exceed what weight?"
+      }
+    },
+    {
+      "created": 1455850992064,
+      "key": "You MUST dip the headlights on your vehicle when:",
+      "value": {
+        "Question": "You MUST dip the headlights on your vehicle when:",
+        "Answers": {
+          "A": "Coming up to an intersection.",
+          "B": "Driving in city shopping areas.",
+          "C": "Driving on a winding road.",
+          "D": "You are following other vehicles."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "184",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q011.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 011"
+        },
+        "key": "You MUST dip the headlights on your vehicle when:"
+      }
+    },
+    {
+      "created": 1455850992065,
+      "key": "What do these road markings mean?",
+      "value": {
+        "Question": "What do these road markings mean?",
+        "Answers": {
+          "A": "Turning vehicles should enter turning lane at arrows and avoid striped area.",
+          "B": "Turning vehicles should avoid all road markings and use the left-hand lane.",
+          "C": "All vehicles can make a U-turn at these road markings.",
+          "D": "Vehicles turning right drive straight over all road markings and wait to turn right."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "124",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/road-markings.jpg?m=1301369283?m=1301369283",
+          "alt": "Road markings photo"
+        },
+        "key": "What do these road markings mean?"
+      }
+    },
+    {
+      "created": 1455850992066,
+      "key": "This sign means the speed for safe and comfortable driving around the curve is 65 km/h.",
+      "value": {
+        "Question": "This sign means the speed for safe and comfortable driving around the curve is 65 km/h.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "211",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q062.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 062"
+        },
+        "key": "This sign means the speed for safe and comfortable driving around the curve is 65 km/h."
+      }
+    },
+    {
+      "created": 1455850992068,
+      "key": "What does a blue reflector (cat's eye) placed on the road mean?",
+      "value": {
+        "Question": "What does a blue reflector (cat's eye) placed on the road mean?",
+        "Answers": {
+          "A": "The left side of the road.",
+          "B": "The centre of the road.",
+          "C": "No passing.",
+          "D": "Fire hydrant."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "186",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q101.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 101"
+        },
+        "key": "What does a blue reflector (cat's eye) placed on the road mean?"
+      }
+    },
+    {
+      "created": 1455850992069,
+      "key": "What must you do at an intersection controlled by a Give Way sign?",
+      "value": {
+        "Question": "What must you do at an intersection controlled by a Give Way sign?",
+        "Answers": {
+          "A": "Give way to all vehicles, including those on a stop sign.",
+          "B": "Come to a complete stop.",
+          "C": "Give way to all vehicles, except those on a stop sign.",
+          "D": "Give way to all vehicles on your right."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "154",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q023.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 023"
+        },
+        "key": "What must you do at an intersection controlled by a Give Way sign?"
+      }
+    },
+    {
+      "created": 1455850992071,
+      "key": "A broken yellow line painted close to the edge of the road means you may stop or park your vehicle there at any time.",
+      "value": {
+        "Question": "A broken yellow line painted close to the edge of the road means you may stop or park your vehicle there at any time.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "174",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q057.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 057"
+        },
+        "key": "A broken yellow line painted close to the edge of the road means you may stop or park your vehicle there at any time."
+      }
+    },
+    {
+      "created": 1455850992072,
+      "key": "What must you do FIRST of all, if you are the driver involved in a traffic crash?",
+      "value": {
+        "Question": "What must you do FIRST of all, if you are the driver involved in a traffic crash?",
+        "Answers": {
+          "A": "Report it to the Police.",
+          "B": "Use a telephone and dial 111.",
+          "C": "Stop and check if anyone is hurt and give help.",
+          "D": "Drive on to the nearest garage."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "233",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q013.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 013"
+        },
+        "key": "What must you do FIRST of all, if you are the driver involved in a traffic crash?"
+      }
+    },
+    {
+      "created": 1455850992074,
+      "key": "What is the meaning of a yellow broken line painted on the road near the kerb?",
+      "value": {
+        "Question": "What is the meaning of a yellow broken line painted on the road near the kerb?",
+        "Answers": {
+          "A": "You may not pass.",
+          "B": "Only trucks may park here.",
+          "C": "You may stop for no more than 5 minutes.",
+          "D": "No vehicles may stop here."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "175",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q057.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 057"
+        },
+        "key": "What is the meaning of a yellow broken line painted on the road near the kerb?"
+      }
+    },
+    {
+      "created": 1455850993297,
+      "key": "This sign means that:",
+      "value": {
+        "Question": "This sign means that:",
+        "Answers": {
+          "A": "You may stop your vehicle if there are no buses coming.",
+          "B": "You may stop your vehicle between 6 pm and 8 pm except on Fridays and Saturdays.",
+          "C": "You may stop your vehicle if someone stays with it.",
+          "D": "You may not stop your vehicle at any time."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "177",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q143.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 143"
+        },
+        "key": "This sign means that:"
+      }
+    },
+    {
+      "created": 1455850993299,
+      "key": "When should you use the hazard lights on your vehicle?",
+      "value": {
+        "Question": "When should you use the hazard lights on your vehicle?",
+        "Answers": {
+          "A": "When you are changing a tyre on the side of the road.",
+          "B": "When you are coming up to an airport.",
+          "C": "When you are double-parked.",
+          "D": "When you are in a hurry."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "116",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q077.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 077"
+        },
+        "key": "When should you use the hazard lights on your vehicle?"
+      }
+    },
+    {
+      "created": 1455850993301,
+      "key": "If you have a restricted licence when can you carry passengers?",
+      "value": {
+        "Question": "If you have a restricted licence when can you carry passengers?",
+        "Answers": {
+          "A": "One of your passengers has their full licence.",
+          "B": "If it is an emergency.",
+          "C": "Between the hours of 10 pm and 5 am.",
+          "D": "When a supervisor, who has held a NZ car licence for at least 2 years, is in the front seat."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "30",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q244.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 244"
+        },
+        "key": "If you have a restricted licence when can you carry passengers?"
+      }
+    },
+    {
+      "created": 1455850993302,
+      "key": "What must you do when you hear a siren or see red flashing lights from an ambulance or fire engine?",
+      "value": {
+        "Question": "What must you do when you hear a siren or see red flashing lights from an ambulance or fire engine?",
+        "Answers": {
+          "A": "Speed up to get out of the way.",
+          "B": "Drive up onto the footpath.",
+          "C": "Pull over and allow it to pass.",
+          "D": "Keep driving as you were."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "117",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/police-flash-lights.gif?m=1301369277?m=1301369277",
+          "alt": "Police flash lights"
+        },
+        "key": "What must you do when you hear a siren or see red flashing lights from an ambulance or fire engine?"
+      }
+    },
+    {
+      "created": 1455850993304,
+      "key": "In addition to checking it is safe to move out from the kerb into the traffic flow, what must you do?",
+      "value": {
+        "Question": "In addition to checking it is safe to move out from the kerb into the traffic flow, what must you do?",
+        "Answers": {
+          "A": "Accelerate quickly into the traffic flow.",
+          "B": "Move slowly into a space in the traffic flow.",
+          "C": "Signal for at least 3 seconds.",
+          "D": "Reverse away from the kerb."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "114",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q112.jpg?m=1301369277?m=1301369277",
+          "alt": "Q 112"
+        },
+        "key": "In addition to checking it is safe to move out from the kerb into the traffic flow, what must you do?"
+      }
+    },
+    {
+      "created": 1455850993306,
+      "key": "The number on this sign shows:",
+      "value": {
+        "Question": "The number on this sign shows:",
+        "Answers": {
+          "A": "The fastest speed to drive around the curve.",
+          "B": "The speed in the right-hand lane.",
+          "C": "The safest speed to drive around the curve.",
+          "D": "The distance to the next intersection."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "211",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q062.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 062"
+        },
+        "key": "The number on this sign shows:"
+      }
+    },
+    {
+      "created": 1455850993308,
+      "key": "You are driving downhill on a steep, narrow road and a vehicle is coming up the hill. You should:",
+      "value": {
+        "Question": "You are driving downhill on a steep, narrow road and a vehicle is coming up the hill. You should:",
+        "Answers": {
+          "A": "Pull over to the left and give way to the vehicle coming up the hill.",
+          "B": "Flash the headlights of your vehicle at the vehicle coming up the hill.",
+          "C": "Sound the horn of your vehicle to get the vehicle coming up the hill out of the way.",
+          "D": "Do nothing, the vehicle coming up the hill should give way to you."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "227",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q051.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 051"
+        },
+        "key": "You are driving downhill on a steep, narrow road and a vehicle is coming up the hill. You should:"
+      }
+    },
+    {
+      "created": 1455850994121,
+      "key": "When must you pull over and allow an ambulance or fire engine to pass?",
+      "value": {
+        "Question": "When must you pull over and allow an ambulance or fire engine to pass?",
+        "Answers": {
+          "A": "At all times.",
+          "B": "At an uncontrolled intersection.",
+          "C": "When it is operating its siren or flashing lights.",
+          "D": "When it is turning right and you have the right of way."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "123",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/police-flash-lights.gif?m=1301369277?m=1301369277",
+          "alt": "Police flash lights"
+        },
+        "key": "When must you pull over and allow an ambulance or fire engine to pass?"
+      }
+    },
+    {
+      "created": 1455850994123,
+      "key": "What should you do if you are driving and become sleepy?",
+      "value": {
+        "Question": "What should you do if you are driving and become sleepy?",
+        "Answers": {
+          "A": "Drive on the far left side of the road.",
+          "B": "Move off to the left of the road in a safe place and have a rest.",
+          "C": "Speed up so that you can get home quickly.",
+          "D": "Keep on driving but use a lower gear."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "220",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q133.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 133"
+        },
+        "key": "What should you do if you are driving and become sleepy?"
+      }
+    },
+    {
+      "created": 1455850994125,
+      "key": "What should you do when another vehicle is following you very closely?",
+      "value": {
+        "Question": "What should you do when another vehicle is following you very closely?",
+        "Answers": {
+          "A": "Speed up to get further ahead.",
+          "B": "Brake suddenly to warn them.",
+          "C": "Flick your vehicle lights and wave your arm.",
+          "D": "Slow down, move to the left and allow the vehicle to pass."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "197",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q026.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 026"
+        },
+        "key": "What should you do when another vehicle is following you very closely?"
+      }
+    },
+    {
+      "created": 1455850994127,
+      "key": "What should you do when parking your vehicle next to the kerb when facing down a steep hill?",
+      "value": {
+        "Question": "What should you do when parking your vehicle next to the kerb when facing down a steep hill?",
+        "Answers": {
+          "A": "Leave the front wheels of your vehicle straight ahead.",
+          "B": "Turn the front wheels of your vehicle towards the kerb.",
+          "C": "Turn the front wheels of your vehicle away from the kerb.",
+          "D": "Run the front and back wheels of your vehicle hard against the kerb."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "174",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q051.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 051"
+        },
+        "key": "What should you do when parking your vehicle next to the kerb when facing down a steep hill?"
+      }
+    },
+    {
+      "created": 1455850994129,
+      "key": "When are you allowed to pass another vehicle?",
+      "value": {
+        "Question": "When are you allowed to pass another vehicle?",
+        "Answers": {
+          "A": "When you are coming up to a blind corner or blind bend.",
+          "B": "When a vehicle has stopped at a pedestrian crossing.",
+          "C": "When you can see at least 100 metres of clear road in front of you once you have finished passing.",
+          "D": "When you are less than 10 metres away from a railway level crossing."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "135",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q092.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 092"
+        },
+        "key": "When are you allowed to pass another vehicle?"
+      }
+    },
+    {
+      "created": 1455850994131,
+      "key": "You look in the mirror and see a cyclist. What should you do when opening the car door?",
+      "value": {
+        "Question": "You look in the mirror and see a cyclist. What should you do when opening the car door?",
+        "Answers": {
+          "A": "Check you won't cause a hazard to the cyclist.",
+          "B": "Wait for the cyclist to go past before opening the door.",
+          "C": "Warn the cyclist by sounding the horn.",
+          "D": "Expect the cyclist to swerve."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "227",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q208.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 208"
+        },
+        "key": "You look in the mirror and see a cyclist. What should you do when opening the car door?"
+      }
+    },
+    {
+      "created": 1455850994134,
+      "key": "At night, you MUST always dip the headlights on your vehicle when:",
+      "value": {
+        "Question": "At night, you MUST always dip the headlights on your vehicle when:",
+        "Answers": {
+          "A": "Driving around town.",
+          "B": "Driving on a motorway.",
+          "C": "Following other vehicles.",
+          "D": "Driving in the country."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "184",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q122.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 122"
+        },
+        "key": "At night, you MUST always dip the headlights on your vehicle when:"
+      }
+    },
+    {
+      "created": 1455850995140,
+      "key": "How can small amounts of alcohol affect your driving?",
+      "value": {
+        "Question": "How can small amounts of alcohol affect your driving?",
+        "Answers": {
+          "A": "You can judge your speed more easily.",
+          "B": "Your driving improves.",
+          "C": "It will alter your senses.",
+          "D": "Your driving reactions will be quicker."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "212",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q109.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 109"
+        },
+        "key": "How can small amounts of alcohol affect your driving?"
+      }
+    },
+    {
+      "created": 1455850995143,
+      "key": "When may you park your vehicle on a loading zone?",
+      "value": {
+        "Question": "When may you park your vehicle on a loading zone?",
+        "Answers": {
+          "A": "You are loading or unloading people or goods.",
+          "B": "There is no other vehicle on it.",
+          "C": "It is between the hours of 12.00 am and 6.00 am.",
+          "D": "It is between the hours of 6.00 pm and 6.00 am."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "178",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q106.jpg?m=1301369277?m=1301369277",
+          "alt": "Q 106"
+        },
+        "key": "When may you park your vehicle on a loading zone?"
+      }
+    },
+    {
+      "created": 1455850996174,
+      "key": "If you are driving and you want to use a cell phone what should you do?",
+      "value": {
+        "Question": "If you are driving and you want to use a cell phone what should you do?",
+        "Answers": {
+          "A": "Stop in the flush median to answer calls when it is safe to do so.",
+          "B": "Answer the call at the next set of traffic signals.",
+          "C": "Slow down to answer the call when it is safe to do so.",
+          "D": "Pull over and stop to use the cell phone when it is safe to do so."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "235",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q082.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 082"
+        },
+        "key": "If you are driving and you want to use a cell phone what should you do?"
+      }
+    },
+    {
+      "created": 1455850996177,
+      "key": "What does this marking mean?",
+      "value": {
+        "Question": "What does this marking mean?",
+        "Answers": {
+          "A": "5 hours.",
+          "B": "Fire hydrant.",
+          "C": "Fire hose.",
+          "D": "Fire hazard."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "175",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/road-marking.gif?m=1301369279?m=1301369279",
+          "alt": "Road markings"
+        },
+        "key": "What does this marking mean?"
+      }
+    },
+    {
+      "created": 1455850996179,
+      "key": "If you have to drive at a slow speed, which may hold up other vehicles, what should you do?",
+      "value": {
+        "Question": "If you have to drive at a slow speed, which may hold up other vehicles, what should you do?",
+        "Answers": {
+          "A": "Keep as close as you can to the centre of the road.",
+          "B": "Keep as close as you can to the left side of the road.",
+          "C": "Make the traffic behind you slow down to the speed that you are driving at.",
+          "D": "Drive down the middle of the road so that any vehicles behind you can pass on the left."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "130",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q026.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 026"
+        },
+        "key": "If you have to drive at a slow speed, which may hold up other vehicles, what should you do?"
+      }
+    },
+    {
+      "created": 1455850996182,
+      "key": "What is the maximum legal speed for a car towing a trailer on the open road?",
+      "value": {
+        "Question": "What is the maximum legal speed for a car towing a trailer on the open road?",
+        "Answers": {
+          "A": "70 km/h.",
+          "B": "80 km/h.",
+          "C": "90 km/h.",
+          "D": "100 km/h."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "148",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q033.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 033"
+        },
+        "key": "What is the maximum legal speed for a car towing a trailer on the open road?"
+      }
+    },
+    {
+      "created": 1455850996185,
+      "key": "When you have a learner licence do you have to have it with you when you drive?",
+      "value": {
+        "Question": "When you have a learner licence do you have to have it with you when you drive?",
+        "Answers": {
+          "A": "No, your supervisor will carry their licence because they're responsible for the car.",
+          "B": "Only when you're driving at night.",
+          "C": "Yes, you must have your learner licence with you whenever you are driving.",
+          "D": "Only when you are carrying passengers as well as your supervisor."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "25",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q246.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 246"
+        },
+        "key": "When you have a learner licence do you have to have it with you when you drive?"
+      }
+    },
+    {
+      "created": 1455850996188,
+      "key": "You are driving past a line of parked cars. You notice a ball bouncing out into the road ahead. What should you do?",
+      "value": {
+        "Question": "You are driving past a line of parked cars. You notice a ball bouncing out into the road ahead. What should you do?",
+        "Answers": {
+          "A": "Keep driving at the same speed.",
+          "B": "Keep driving at the same speed and flash the vehicle's headlights.",
+          "C": "Slow down and be prepared to stop for children.",
+          "D": "Slow down and move to the right-hand side of the road."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "197",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q212.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 212"
+        },
+        "key": "You are driving past a line of parked cars. You notice a ball bouncing out into the road ahead. What should you do?"
+      }
+    },
+    {
+      "created": 1455850996190,
+      "key": "What should you do if the vehicle behind you starts to pass you?",
+      "value": {
+        "Question": "What should you do if the vehicle behind you starts to pass you?",
+        "Answers": {
+          "A": "Move over to the right so that they cannot pass.",
+          "B": "Speed up so that they will not need to pass.",
+          "C": "Signal for them to stay behind you because you think they are going too fast.",
+          "D": "Move as far to the left side of the road as is safe and do not speed up."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "135",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q026.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 026"
+        },
+        "key": "What should you do if the vehicle behind you starts to pass you?"
+      }
+    },
+    {
+      "created": 1455850996193,
+      "key": "You are the driver of the blue car. What must you do?",
+      "value": {
+        "Question": "You are the driver of the blue car. What must you do?",
+        "Answers": {
+          "A": "Speed up to get around in front of the cyclist.",
+          "B": "Keep driving as the cyclist has to give way to larger vehicles.",
+          "C": "Sound the warning device to warn the cyclist.",
+          "D": "Stop and give way to the cyclist."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "158",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q214.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 214"
+        },
+        "key": "You are the driver of the blue car. What must you do?"
+      }
+    },
+    {
+      "created": 1455850997095,
+      "key": "When must you signal that you are turning to the right?",
+      "value": {
+        "Question": "When must you signal that you are turning to the right?",
+        "Answers": {
+          "A": "Signal just before you turn.",
+          "B": "Signal only if vehicles are coming towards you.",
+          "C": "Give no signal.",
+          "D": "Give a right-turn signal for at least 3 seconds."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "119",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q132.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 132"
+        },
+        "key": "When must you signal that you are turning to the right?"
+      }
+    },
+    {
+      "created": 1455850997098,
+      "key": " When passing a bus displaying a School sign that has stopped to let children on or off, you must not drive faster than:",
+      "value": {
+        "Question": " When passing a bus displaying a School sign that has stopped to let children on or off, you must not drive faster than:",
+        "Answers": {
+          "A": "20 km/h.",
+          "B": "25 km/h.",
+          "C": "30 km/h.",
+          "D": "35 km/h."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "211",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q046.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 046"
+        },
+        "key": " When passing a bus displaying a School sign that has stopped to let children on or off, you must not drive faster than:"
+      }
+    },
+    {
+      "created": 1455850997101,
+      "key": "When going 'straight' through a roundabout, don't signal as you approach the roundabout, only signal left as you pass the exit before the one you want.",
+      "value": {
+        "Question": "When going 'straight' through a roundabout, don't signal as you approach the roundabout, only signal left as you pass the exit before the one you want.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "164",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q156.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 156"
+        },
+        "key": "When going 'straight' through a roundabout, don't signal as you approach the roundabout, only signal left as you pass the exit before the one you want."
+      }
+    },
+    {
+      "created": 1455850997104,
+      "key": "You are turning right at traffic signals showing a red arrow pointing to the right. What should you do?",
+      "value": {
+        "Question": "You are turning right at traffic signals showing a red arrow pointing to the right. What should you do?",
+        "Answers": {
+          "A": "Drive on but give way to all oncoming vehicles.",
+          "B": "Stop if you are travelling in the direction the arrow is pointing.",
+          "C": "Drive on straight ahead only if it is safe.",
+          "D": "Drive on because all oncoming vehicles are stopped."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "160",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/go-right-red-arrow-light.gif?m=1301369284?m=1301369284",
+          "alt": "Go right red arrow light"
+        },
+        "key": "You are turning right at traffic signals showing a red arrow pointing to the right. What should you do?"
+      }
+    },
+    {
+      "created": 1455850997107,
+      "key": "What would usually happen if you had a left rear tyre blow out?",
+      "value": {
+        "Question": "What would usually happen if you had a left rear tyre blow out?",
+        "Answers": {
+          "A": "The car will come to an immediate stop.",
+          "B": "The rear will sway from side to side.",
+          "C": "The car will pull towards the right.",
+          "D": "The car will pull towards the left."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "201",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/tyre-blowout.jpg?m=1372218173?m=1372218173",
+          "alt": "tyre blowout"
+        },
+        "key": "What would usually happen if you had a left rear tyre blow out?"
+      }
+    },
+    {
+      "created": 1455850998061,
+      "key": "You wish to turn left at the intersection. Do you:",
+      "value": {
+        "Question": "You wish to turn left at the intersection. Do you:",
+        "Answers": {
+          "A": "Speed up and turn in front of the cyclist.",
+          "B": "Sound the warning device to warn the cyclist.",
+          "C": "Stay back until the cyclist has passed the intersection.",
+          "D": "Keep driving to the next intersection."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "155",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/cyclist-turn.jpg?m=1369623533?m=1369623533",
+          "alt": "cyclist turn"
+        },
+        "key": "You wish to turn left at the intersection. Do you:"
+      }
+    },
+    {
+      "created": 1455850998064,
+      "key": "How close can you park your vehicle to the approach side of a pedestrian crossing where no broken yellow lines have been marked?",
+      "value": {
+        "Question": "How close can you park your vehicle to the approach side of a pedestrian crossing where no broken yellow lines have been marked?",
+        "Answers": {
+          "A": "6 metres.",
+          "B": "5 metres.",
+          "C": "4 metres.",
+          "D": "3 metres."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "175",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q154.jpg?m=1301369285?m=1301369285",
+          "alt": "Q 154"
+        },
+        "key": "How close can you park your vehicle to the approach side of a pedestrian crossing where no broken yellow lines have been marked?"
+      }
+    },
+    {
+      "created": 1455850998067,
+      "key": "You can drive a moped on a car licence.",
+      "value": {
+        "Question": "You can drive a moped on a car licence.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "271",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q044.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 044"
+        },
+        "key": "You can drive a moped on a car licence."
+      }
+    },
+    {
+      "created": 1455850998070,
+      "key": "When you have a learner licence you must always drive with a supervisor. What is a supervisor?",
+      "value": {
+        "Question": "When you have a learner licence you must always drive with a supervisor. What is a supervisor?",
+        "Answers": {
+          "A": "An adult that sits next to you in the passenger seat.",
+          "B": "Someone that has held a valid full NZ licence for at least 2 years and sits in the passenger seat.",
+          "C": "Anyone in the car that has held a valid full NZ licence for at least 2 years.",
+          "D": "Someone who sits in the passenger seat with a restricted NZ licence."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "28",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q246.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 246"
+        },
+        "key": "When you have a learner licence you must always drive with a supervisor. What is a supervisor?"
+      }
+    },
+    {
+      "created": 1455850999146,
+      "key": "One or more yellow lights flashing at traffic signals means:",
+      "value": {
+        "Question": "One or more yellow lights flashing at traffic signals means:",
+        "Answers": {
+          "A": "Be careful and apply the give way rule.",
+          "B": "Drive on but increase your speed.",
+          "C": "Stop until the lights no longer flash.",
+          "D": "Move to the left-hand side of the road."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "160",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q043.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 043"
+        },
+        "key": "One or more yellow lights flashing at traffic signals means:"
+      }
+    },
+    {
+      "created": 1455850999149,
+      "key": "You see a pedestrian carrying a white cane crossing the road. What should you do?",
+      "value": {
+        "Question": "You see a pedestrian carrying a white cane crossing the road. What should you do?",
+        "Answers": {
+          "A": "Rev the engine to let them know that you are waiting.",
+          "B": "Take extra care and allow them to cross the road in their own time.",
+          "C": "Turn on the vehicle hazard lights and drive on.",
+          "D": "Speed up and pass in front of them."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "256",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q210.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 210"
+        },
+        "key": "You see a pedestrian carrying a white cane crossing the road. What should you do?"
+      }
+    },
+    {
+      "created": 1455850999152,
+      "key": "A white diamond painted on the road means that you are coming up to:",
+      "value": {
+        "Question": "A white diamond painted on the road means that you are coming up to:",
+        "Answers": {
+          "A": "A pedestrian crossing.",
+          "B": "Traffic signals.",
+          "C": "A roundabout.",
+          "D": "An intersection."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "252",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q080.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 080"
+        },
+        "key": "A white diamond painted on the road means that you are coming up to:"
+      }
+    },
+    {
+      "created": 1455850999156,
+      "key": "You are the driver of the blue car. What should you do?",
+      "value": {
+        "Question": "You are the driver of the blue car. What should you do?",
+        "Answers": {
+          "A": "Keep driving as the cyclist has to stop.",
+          "B": "Stop and give way to the cyclist.",
+          "C": "Keep driving as the cyclist has to give way to larger vehicles.",
+          "D": "Sound the warning device to warn the cyclist."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "154",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q213.jpg?m=1301369277?m=1301369277",
+          "alt": "Q 213"
+        },
+        "key": "You are the driver of the blue car. What should you do?"
+      }
+    },
+    {
+      "created": 1455850999159,
+      "key": "What is the purpose of the 2-second rule?",
+      "value": {
+        "Question": "What is the purpose of the 2-second rule?",
+        "Answers": {
+          "A": "When reversing out of a driveway.",
+          "B": "When following other vehicles at the same speed.",
+          "C": "When giving way at a pedestrian crossing.",
+          "D": "When using the indicators on your vehicle."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "132",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q049.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 049"
+        },
+        "key": "What is the purpose of the 2-second rule?"
+      }
+    },
+    {
+      "created": 1455851000174,
+      "key": "A vehicle can use the flush median strip:",
+      "value": {
+        "Question": "A vehicle can use the flush median strip:",
+        "Answers": {
+          "A": "To move into the traffic flow.",
+          "B": "To park for 5 minutes only.",
+          "C": "As a driving lane.",
+          "D": "To unload goods or passengers."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "125",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q067.jpg?m=1312075811?m=1312075811",
+          "alt": "Q 067"
+        },
+        "key": "A vehicle can use the flush median strip:"
+      }
+    },
+    {
+      "created": 1455851000178,
+      "key": "The speed limit sign shown, means the:",
+      "value": {
+        "Question": "The speed limit sign shown, means the:",
+        "Answers": {
+          "A": "Slowest speed you are allowed to drive on the motorway.",
+          "B": "Average speed you are allowed to drive in good conditions.",
+          "C": "Maximum speed you are allowed to drive in good conditions.",
+          "D": "Fastest speed you are allowed to drive, except when passing."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "209",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q158.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 158"
+        },
+        "key": "The speed limit sign shown, means the:"
+      }
+    },
+    {
+      "created": 1455851000181,
+      "key": "You are driving on a country road at night when your vehicle headlights suddenly go out. What is the safest thing to do?",
+      "value": {
+        "Question": "You are driving on a country road at night when your vehicle headlights suddenly go out. What is the safest thing to do?",
+        "Answers": {
+          "A": "Carry on driving to the nearest garage with your vehicle hazard lights on.",
+          "B": "Slow down and drive on the far left side of the road.",
+          "C": "Carry on driving to the nearest garage with your vehicle's interior lights on.",
+          "D": "Slow down, move off the road gradually, stop and turn your vehicle hazard lights on."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "205",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q118.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 118"
+        },
+        "key": "You are driving on a country road at night when your vehicle headlights suddenly go out. What is the safest thing to do?"
+      }
+    },
+    {
+      "created": 1455851000185,
+      "key": "If you intend to move your vehicle from the right-hand lane to the left-hand lane, you must first:",
+      "value": {
+        "Question": "If you intend to move your vehicle from the right-hand lane to the left-hand lane, you must first:",
+        "Answers": {
+          "A": "Move to the left as quickly as possible.",
+          "B": "Speed up and signal as you move to the left.",
+          "C": "Signal for at least 3 seconds before moving left.",
+          "D": "Slow down and signal as you move to the left."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "128",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q031.jpg?m=1301369285?m=1301369285",
+          "alt": "Q 031"
+        },
+        "key": "If you intend to move your vehicle from the right-hand lane to the left-hand lane, you must first:"
+      }
+    },
+    {
+      "created": 1455851000189,
+      "key": "When should you apply the 4-second rule?",
+      "value": {
+        "Question": "When should you apply the 4-second rule?",
+        "Answers": {
+          "A": "Never. You should only use the 2-second rule.",
+          "B": "In wet, frosty or icy road conditions.",
+          "C": "When passing other vehicles.",
+          "D": "When waiting for any vehicles coming over a one-way bridge."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "133",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q049.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 049"
+        },
+        "key": "When should you apply the 4-second rule?"
+      }
+    },
+    {
+      "created": 1455851000193,
+      "key": "You are coming up to a one-lane bridge and you see this sign. What must you do?",
+      "value": {
+        "Question": "You are coming up to a one-lane bridge and you see this sign. What must you do?",
+        "Answers": {
+          "A": "Give way to any oncoming vehicles.",
+          "B": "Only give way to any larger oncoming vehicles.",
+          "C": "Drive straight ahead without stopping.",
+          "D": "Drive straight ahead but keep to the far left."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "171",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q086.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 086"
+        },
+        "key": "You are coming up to a one-lane bridge and you see this sign. What must you do?"
+      }
+    },
+    {
+      "created": 1455851000197,
+      "key": "This sign tells you that you are coming up to a railway level crossing. What should you do?",
+      "value": {
+        "Question": "This sign tells you that you are coming up to a railway level crossing. What should you do?",
+        "Answers": {
+          "A": "Slow down so that you can look both ways to check that the crossing is clear.",
+          "B": "Speed up to drive over the crossing as quickly as possible.",
+          "C": "Stop to check whether the crossing is clear.",
+          "D": "Turn your vehicle indicators on before driving over the crossing."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "168",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/railway-cross-sign.gif?m=1301369278?m=1301369278",
+          "alt": "Railway cross sign"
+        },
+        "key": "This sign tells you that you are coming up to a railway level crossing. What should you do?"
+      }
+    },
+    {
+      "created": 1455851001198,
+      "key": "What does a reflectorised triangle placed on the side of the road mean?",
+      "value": {
+        "Question": "What does a reflectorised triangle placed on the side of the road mean?",
+        "Answers": {
+          "A": "There is a pothole in the road.",
+          "B": "There is a breakdown ahead.",
+          "C": "There is flooding on the road.",
+          "D": "There is a police officer directing traffic."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "233",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/warning-triangle.jpg?m=1301369276?m=1301369276",
+          "alt": "Warning triangle"
+        },
+        "key": "What does a reflectorised triangle placed on the side of the road mean?"
+      }
+    },
+    {
+      "created": 1455851001202,
+      "key": "At an intersection what do a police officer's directions overrule?",
+      "value": {
+        "Question": "At an intersection what do a police officer's directions overrule?",
+        "Answers": {
+          "A": "The speed limit.",
+          "B": "Traffic signals only.",
+          "C": "The give way rules.",
+          "D": "Traffic signals, road signs, the give way rules."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "119",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q223.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 223"
+        },
+        "key": "At an intersection what do a police officer's directions overrule?"
+      }
+    },
+    {
+      "created": 1455851001206,
+      "key": "You are the driver of the blue car. Of the 4 hazards marked, which one is most likely to require you to take urgent action?",
+      "value": {
+        "Question": "You are the driver of the blue car. Of the 4 hazards marked, which one is most likely to require you to take urgent action?",
+        "Answers": {
+          "A": "The car parked on the left.",
+          "B": "The reversing car.",
+          "C": "The oncoming car.",
+          "D": "The car parked on the right."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "194",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/hazard-reversing-car.jpg?m=1301369279?m=1301369279",
+          "alt": "Hazard reversing car"
+        },
+        "key": "You are the driver of the blue car. Of the 4 hazards marked, which one is most likely to require you to take urgent action?"
+      }
+    },
+    {
+      "created": 1455851001210,
+      "key": "If you miss your exit on a motorway, you should:",
+      "value": {
+        "Question": "If you miss your exit on a motorway, you should:",
+        "Answers": {
+          "A": "Reverse back to the exit.",
+          "B": "Make a U-turn back to the exit.",
+          "C": "Drive on to the next exit.",
+          "D": "To stop and flash your lights."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "146",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q008.jpg?m=1301369277?m=1301369277",
+          "alt": "Q 008"
+        },
+        "key": "If you miss your exit on a motorway, you should:"
+      }
+    },
+    {
+      "created": 1455851002234,
+      "key": "You wish to move your vehicle out of a parking space into the traffic flow. What must you do before you move?",
+      "value": {
+        "Question": "You wish to move your vehicle out of a parking space into the traffic flow. What must you do before you move?",
+        "Answers": {
+          "A": "Flash your vehicle indicators for 1 second.",
+          "B": "Signal with your vehicle indicators for at least 3 seconds.",
+          "C": "Turn on your vehicle parking lights.",
+          "D": "Use your vehicle stop lights."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "114",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q116.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 116"
+        },
+        "key": "You wish to move your vehicle out of a parking space into the traffic flow. What must you do before you move?"
+      }
+    },
+    {
+      "created": 1455851002239,
+      "key": "When driving at night, which vehicle lights should you turn on?",
+      "value": {
+        "Question": "When driving at night, which vehicle lights should you turn on?",
+        "Answers": {
+          "A": "Headlights.",
+          "B": "Park lights.",
+          "C": "Interior lights.",
+          "D": "Hazard lights."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "183",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q118.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 118"
+        },
+        "key": "When driving at night, which vehicle lights should you turn on?"
+      }
+    },
+    {
+      "created": 1455851002244,
+      "key": "What must be displayed on the back of a trailer being towed at night?",
+      "value": {
+        "Question": "What must be displayed on the back of a trailer being towed at night?",
+        "Answers": {
+          "A": "A blue light.",
+          "B": "A red light.",
+          "C": "A white flag.",
+          "D": "A white light."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "148",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q033.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 033"
+        },
+        "key": "What must be displayed on the back of a trailer being towed at night?"
+      }
+    },
+    {
+      "created": 1455851002250,
+      "key": "If you are driving at night with your vehicle headlights on high beam, you MUST dip them when coming up to:",
+      "value": {
+        "Question": "If you are driving at night with your vehicle headlights on high beam, you MUST dip them when coming up to:",
+        "Answers": {
+          "A": "An intersection.",
+          "B": "A one-way street.",
+          "C": "A police officer directing traffic.",
+          "D": "A town or city."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "184",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q011.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 011"
+        },
+        "key": "If you are driving at night with your vehicle headlights on high beam, you MUST dip them when coming up to:"
+      }
+    },
+    {
+      "created": 1455851002253,
+      "key": "What is the speed limit from the time you pass an 'Accident' sign until you are past the crash site?",
+      "value": {
+        "Question": "What is the speed limit from the time you pass an 'Accident' sign until you are past the crash site?",
+        "Answers": {
+          "A": "20 km/h.",
+          "B": "30 km/h.",
+          "C": "40 km/h.",
+          "D": "50 km/h."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "210",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/accident-sign.gif?m=1301369277?m=1301369277",
+          "alt": "Accident sign"
+        },
+        "key": "What is the speed limit from the time you pass an 'Accident' sign until you are past the crash site?"
+      }
+    },
+    {
+      "created": 1455851002258,
+      "key": "You may stop on a motorway only:",
+      "value": {
+        "Question": "You may stop on a motorway only:",
+        "Answers": {
+          "A": "To let down or pick up passengers.",
+          "B": "If there is an emergency.",
+          "C": "To make a U-turn.",
+          "D": "To stop and take a photo."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "146",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q031.jpg?m=1301369285?m=1301369285",
+          "alt": "Q 031"
+        },
+        "key": "You may stop on a motorway only:"
+      }
+    },
+    {
+      "created": 1455851002262,
+      "key": "What is the closest distance your vehicle may be parked to a vehicle entrance?",
+      "value": {
+        "Question": "What is the closest distance your vehicle may be parked to a vehicle entrance?",
+        "Answers": {
+          "A": "0.5 metre.",
+          "B": "0.75 metre.",
+          "C": "1.00 metre.",
+          "D": "1.25 metres."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "175",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q102.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 102"
+        },
+        "key": "What is the closest distance your vehicle may be parked to a vehicle entrance?"
+      }
+    },
+    {
+      "created": 1455851003057,
+      "key": "You are in the left-hand lane at traffic signals. You are waiting to turn left. At which of these traffic signals may you move on?",
+      "value": {
+        "Question": "You are in the left-hand lane at traffic signals. You are waiting to turn left. At which of these traffic signals may you move on?",
+        "Answers": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "161",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/traffic-lights-v2.jpg?m=1371069755?m=1371069755",
+          "alt": "traffic lights"
+        },
+        "key": "You are in the left-hand lane at traffic signals. You are waiting to turn left. At which of these traffic signals may you move on?"
+      }
+    },
+    {
+      "created": 1455851003061,
+      "key": "What is the maximum distance a load may extend in front of a car?",
+      "value": {
+        "Question": "What is the maximum distance a load may extend in front of a car?",
+        "Answers": {
+          "A": "2 metres forward of the front edge of the front seat.",
+          "B": "4 metres forward of the front edge of the front seat.",
+          "C": "3 metres forward of the front edge of the front seat.",
+          "D": "2.5 metres forward of the front edge of the front seat."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "248",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q231.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 231"
+        },
+        "key": "What is the maximum distance a load may extend in front of a car?"
+      }
+    },
+    {
+      "created": 1455851003065,
+      "key": "What is the maximum distance a load may overhang your vehicle behind the rear axle?",
+      "value": {
+        "Question": "What is the maximum distance a load may overhang your vehicle behind the rear axle?",
+        "Answers": {
+          "A": "2 metres.",
+          "B": "4 metres.",
+          "C": "3 metres.",
+          "D": "2.5 metres."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "251",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q231.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 231"
+        },
+        "key": "What is the maximum distance a load may overhang your vehicle behind the rear axle?"
+      }
+    },
+    {
+      "created": 1455851003069,
+      "key": "When must you indicate when turning right at a roundabout?",
+      "value": {
+        "Question": "When must you indicate when turning right at a roundabout?",
+        "Answers": {
+          "A": "Only signal right as you approach the roundabout.",
+          "B": "Signal right all through the roundabout.",
+          "C": "Signal right when you approach the roundabout, then signal left as you pass the exit before the one you wish to take.",
+          "D": "Don’t signal, take the first gap."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "164",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q156.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 156"
+        },
+        "key": "When must you indicate when turning right at a roundabout?"
+      }
+    },
+    {
+      "created": 1455851003074,
+      "key": "You are waiting at a railway level crossing and the red lights continue to flash after the train has passed. You should:",
+      "value": {
+        "Question": "You are waiting at a railway level crossing and the red lights continue to flash after the train has passed. You should:",
+        "Answers": {
+          "A": "Drive on carefully while the lights are still flashing.",
+          "B": "Stay stopped until the lights stop flashing.",
+          "C": "Check both ways and then drive on.",
+          "D": "Wait for 15 seconds and then drive on."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "169",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/railway-cross-sign.gif?m=1301369278?m=1301369278",
+          "alt": "Railway cross sign"
+        },
+        "key": "You are waiting at a railway level crossing and the red lights continue to flash after the train has passed. You should:"
+      }
+    },
+    {
+      "created": 1455851004105,
+      "key": "When coming up to a pedestrian crossing with a raised traffic island, what must you do?",
+      "value": {
+        "Question": "When coming up to a pedestrian crossing with a raised traffic island, what must you do?",
+        "Answers": {
+          "A": "Stop and give way to pedestrians on any part of the crossing.",
+          "B": "Keep going because the pedestrian will stop on the raised island.",
+          "C": "Stop and give way to pedestrians on your half of the road.",
+          "D": "Slow down until the pedestrian is on the raised island then drive on."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "253",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q221.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 221"
+        },
+        "key": "When coming up to a pedestrian crossing with a raised traffic island, what must you do?"
+      }
+    },
+    {
+      "created": 1455851004110,
+      "key": "What must you do before turning left into a driveway?",
+      "value": {
+        "Question": "What must you do before turning left into a driveway?",
+        "Answers": {
+          "A": "Check the driveway is clear and enter.",
+          "B": "Signal only if there is a vehicle behind you and enter.",
+          "C": "Signal for 3 seconds or more and if the driveway is clear, enter.",
+          "D": "Signal only if another vehicle is coming towards you and enter."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "121",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q006.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 006"
+        },
+        "key": "What must you do before turning left into a driveway?"
+      }
+    },
+    {
+      "created": 1455851004114,
+      "key": "You may use a right turn bay to overtake a vehicle travelling straight ahead.",
+      "value": {
+        "Question": "You may use a right turn bay to overtake a vehicle travelling straight ahead.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "124",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q219.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 219"
+        },
+        "key": "You may use a right turn bay to overtake a vehicle travelling straight ahead."
+      }
+    },
+    {
+      "created": 1455851004120,
+      "key": "Can you stop on a bus stop in a private motor vehicle?",
+      "value": {
+        "Question": "Can you stop on a bus stop in a private motor vehicle?",
+        "Answers": {
+          "A": "Only between midnight and 6 am.",
+          "B": "Under no circumstances.",
+          "C": "When dropping off passengers.",
+          "D": "Only if it is for less than 5 minutes."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "177",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q036.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 036"
+        },
+        "key": "Can you stop on a bus stop in a private motor vehicle?"
+      }
+    },
+    {
+      "created": 1455851004125,
+      "key": "What does a white reflector (cat's eye) placed on the road mean?",
+      "value": {
+        "Question": "What does a white reflector (cat's eye) placed on the road mean?",
+        "Answers": {
+          "A": "The left side of the road.",
+          "B": "The centre of the road.",
+          "C": "No passing.",
+          "D": "The far right side of the road."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "186",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/reflector-white.gif?m=1301369281?m=1301369281",
+          "alt": "Reflector white"
+        },
+        "key": "What does a white reflector (cat's eye) placed on the road mean?"
+      }
+    },
+    {
+      "created": 1455851005094,
+      "key": "What is the minimum depth of tread you must have on the tyres of your vehicle?",
+      "value": {
+        "Question": "What is the minimum depth of tread you must have on the tyres of your vehicle?",
+        "Answers": {
+          "A": "2.0 mm.",
+          "B": "1.5 mm.",
+          "C": "1.0 mm.",
+          "D": "0.5 mm."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "247",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q121.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 121"
+        },
+        "key": "What is the minimum depth of tread you must have on the tyres of your vehicle?"
+      }
+    },
+    {
+      "created": 1455851005100,
+      "key": "What is the speed limit for vehicles passing a school bus that has stopped to let children on or off?",
+      "value": {
+        "Question": "What is the speed limit for vehicles passing a school bus that has stopped to let children on or off?",
+        "Answers": {
+          "A": "20 km/h.",
+          "B": "30 km/h.",
+          "C": "40 km/h.",
+          "D": "50 km/h."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "211",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q046.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 046"
+        },
+        "key": "What is the speed limit for vehicles passing a school bus that has stopped to let children on or off?"
+      }
+    },
+    {
+      "created": 1455851005104,
+      "key": "Before making a lane change to your left, you must signal for at least 3 seconds and what else must you do?",
+      "value": {
+        "Question": "Before making a lane change to your left, you must signal for at least 3 seconds and what else must you do?",
+        "Answers": {
+          "A": "Use your vehicle brake lights to warn other road users.",
+          "B": "Use your vehicle hazard lights to warn other road users.",
+          "C": "Check your blind spot before moving left.",
+          "D": "Ensure that there are no oncoming vehicles."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "128",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q049.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 049"
+        },
+        "key": "Before making a lane change to your left, you must signal for at least 3 seconds and what else must you do?"
+      }
+    },
+    {
+      "created": 1455851006121,
+      "key": "If your vehicle was first registered less than six years ago, when does it require a warrant of fitness inspection?",
+      "value": {
+        "Question": "If your vehicle was first registered less than six years ago, when does it require a warrant of fitness inspection?",
+        "Answers": {
+          "A": "Every 12 months.",
+          "B": "Every 18 months.",
+          "C": "Every 8 months.",
+          "D": "Every 6 months."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "245",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q233.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 233"
+        },
+        "key": "If your vehicle was first registered less than six years ago, when does it require a warrant of fitness inspection?"
+      }
+    },
+    {
+      "created": 1455851006127,
+      "key": "What colour is the line painted on a sealed road at a Give Way sign?",
+      "value": {
+        "Question": "What colour is the line painted on a sealed road at a Give Way sign?",
+        "Answers": {
+          "A": "Yellow.",
+          "B": "White.",
+          "C": "Grey.",
+          "D": "Red."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "154",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q023.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 023"
+        },
+        "key": "What colour is the line painted on a sealed road at a Give Way sign?"
+      }
+    },
+    {
+      "created": 1455851006132,
+      "key": "Which parts of the car must be in good condition to prevent too much noise and gases entering the car?",
+      "value": {
+        "Question": "Which parts of the car must be in good condition to prevent too much noise and gases entering the car?",
+        "Answers": {
+          "A": "The engine and exhaust system.",
+          "B": "The exhaust system and silencer.",
+          "C": "The doors and windows.",
+          "D": "The silencer and engine."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "226",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q133.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 133"
+        },
+        "key": "Which parts of the car must be in good condition to prevent too much noise and gases entering the car?"
+      }
+    },
+    {
+      "created": 1455851007145,
+      "key": "You can be fined if your vehicle is on a road and not up to warrant of fitness standard.",
+      "value": {
+        "Question": "You can be fined if your vehicle is on a road and not up to warrant of fitness standard.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "245",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q220.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 220"
+        },
+        "key": "You can be fined if your vehicle is on a road and not up to warrant of fitness standard."
+      }
+    },
+    {
+      "created": 1455851007150,
+      "key": "Where should the warrant of fitness label for your car be displayed?",
+      "value": {
+        "Question": "Where should the warrant of fitness label for your car be displayed?",
+        "Answers": {
+          "A": "Inside the windscreen, in the top left-hand corner (as viewed from the driver's seat).",
+          "B": "Inside the windscreen, in the top right-hand corner (as viewed from the driver's seat).",
+          "C": "Inside the windscreen, in the bottom right-hand corner (as viewed from the driver's seat).",
+          "D": "Inside the windscreen, in the bottom left-hand corner (as viewed from the driver's seat)."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "245",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q233.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 233"
+        },
+        "key": "Where should the warrant of fitness label for your car be displayed?"
+      }
+    },
+    {
+      "created": 1455851007156,
+      "key": "What does this traffic signal mean?",
+      "value": {
+        "Question": "What does this traffic signal mean?",
+        "Answers": {
+          "A": "Drive on before the signal changes to red.",
+          "B": "Drive on because the signal will turn green.",
+          "C": "Stop if you can do so safely.",
+          "D": "Stop only if traffic is in the way."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "159",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q043.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 043"
+        },
+        "key": "What does this traffic signal mean?"
+      }
+    },
+    {
+      "created": 1455851008172,
+      "key": "You must not open the door of your motor vehicle if:",
+      "value": {
+        "Question": "You must not open the door of your motor vehicle if:",
+        "Answers": {
+          "A": "You are parked within 10 metres of a bus stop.",
+          "B": "You are likely to scratch the paint of your vehicle.",
+          "C": "The car radio in your vehicle is playing loud music.",
+          "D": "You are likely to hurt any person."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "227",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q078.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 078"
+        },
+        "key": "You must not open the door of your motor vehicle if:"
+      }
+    },
+    {
+      "created": 1455851008178,
+      "key": "How close can you park to an intersection where there are no broken yellow lines painted on the side of the road?",
+      "value": {
+        "Question": "How close can you park to an intersection where there are no broken yellow lines painted on the side of the road?",
+        "Answers": {
+          "A": "3 metres.",
+          "B": "4 metres.",
+          "C": "5 metres.",
+          "D": "6 metres."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "174",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q028.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 028"
+        },
+        "key": "How close can you park to an intersection where there are no broken yellow lines painted on the side of the road?"
+      }
+    },
+    {
+      "created": 1455851008183,
+      "key": "What should you do when you are coming up to traffic signals and the signals change from green to yellow?",
+      "value": {
+        "Question": "What should you do when you are coming up to traffic signals and the signals change from green to yellow?",
+        "Answers": {
+          "A": "Stop at the signals if you can do so safely.",
+          "B": "Speed up before the light changes to red.",
+          "C": "Stop even if it means stopping in the middle of the intersection.",
+          "D": "Turn hard to the left and stop around the corner."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "159",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q043.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 043"
+        },
+        "key": "What should you do when you are coming up to traffic signals and the signals change from green to yellow?"
+      }
+    },
+    {
+      "created": 1455851008188,
+      "key": "What lights should you use if your vehicle has broken down and is being towed?",
+      "value": {
+        "Question": "What lights should you use if your vehicle has broken down and is being towed?",
+        "Answers": {
+          "A": "High beam.",
+          "B": "Headlights.",
+          "C": "Hazard lights.",
+          "D": "Left hand indicator."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "116",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q033.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 033"
+        },
+        "key": "What lights should you use if your vehicle has broken down and is being towed?"
+      }
+    },
+    {
+      "created": 1455851009090,
+      "key": "When parking downhill on a steep road, the 'Road code' suggests that you should:",
+      "value": {
+        "Question": "When parking downhill on a steep road, the 'Road code' suggests that you should:",
+        "Answers": {
+          "A": "Leave your keys in the vehicle in case the brakes fail.",
+          "B": "Turn the front wheels of your vehicle away from the kerb and leave the vehicle in first gear.",
+          "C": "Turn the front wheels of your vehicle towards the kerb and leave the vehicle in reverse gear.",
+          "D": "Leave the wheels of your vehicle straight ahead and make sure that the handbrake is on."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "174",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q051.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 051"
+        },
+        "key": "When parking downhill on a steep road, the 'Road code' suggests that you should:"
+      }
+    },
+    {
+      "created": 1455851009096,
+      "key": "When can flush medians be used?",
+      "value": {
+        "Question": "When can flush medians be used?",
+        "Answers": {
+          "A": "When passing other vehicles.",
+          "B": "When stopping at traffic signals.",
+          "C": "When waiting to turn right.",
+          "D": "When parking for 5 minutes only."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "125",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q066.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 066"
+        },
+        "key": "When can flush medians be used?"
+      }
+    },
+    {
+      "created": 1455851010120,
+      "key": "You're coming up to a school crossing and both the School Patrol stop signs are held out. When can you drive on?",
+      "value": {
+        "Question": "You're coming up to a school crossing and both the School Patrol stop signs are held out. When can you drive on?",
+        "Answers": {
+          "A": "When both the signs have been pulled in.",
+          "B": "When there are no pedestrians on the crossing.",
+          "C": "When the sign on your side of the crossing has been pulled in.",
+          "D": "When there are no pedestrians on your half of the crossing."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "255",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q065.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 065"
+        },
+        "key": "You're coming up to a school crossing and both the School Patrol stop signs are held out. When can you drive on?"
+      }
+    },
+    {
+      "created": 1455851010126,
+      "key": "As the holder of any class of driver licence you must carry your licence with you at all times when driving.",
+      "value": {
+        "Question": "As the holder of any class of driver licence you must carry your licence with you at all times when driving.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "13",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q144.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 144"
+        },
+        "key": "As the holder of any class of driver licence you must carry your licence with you at all times when driving."
+      }
+    },
+    {
+      "created": 1455851010132,
+      "key": "What is the recommended distance you should allow when driving past a cyclist? (x metres)",
+      "value": {
+        "Question": "What is the recommended distance you should allow when driving past a cyclist? (x metres)",
+        "Answers": {
+          "A": "1.5 metres.",
+          "B": "1 metre.",
+          "C": "2 metres.",
+          "D": "2.5 metres."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "259",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q209.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 209"
+        },
+        "key": "What is the recommended distance you should allow when driving past a cyclist? (x metres)"
+      }
+    },
+    {
+      "created": 1455851010138,
+      "key": "When driving into bright sunlight, you should use sunglasses and your vehicle sun visors for safety. You are also advised to:",
+      "value": {
+        "Question": "When driving into bright sunlight, you should use sunglasses and your vehicle sun visors for safety. You are also advised to:",
+        "Answers": {
+          "A": "Turn the headlights of your vehicle on.",
+          "B": "Drive safely on the far left of the road.",
+          "C": "Look at and drive close to the centre of the road.",
+          "D": "Pull over or stop and wait for a few minutes."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "189",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q117.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 117"
+        },
+        "key": "When driving into bright sunlight, you should use sunglasses and your vehicle sun visors for safety. You are also advised to:"
+      }
+    },
+    {
+      "created": 1455851011148,
+      "key": "When passing a horse and rider, you should:",
+      "value": {
+        "Question": "When passing a horse and rider, you should:",
+        "Answers": {
+          "A": "Warn the rider by sounding the horn on your vehicle.",
+          "B": "Slow down and give them as much room as you can.",
+          "C": "Speed up.",
+          "D": "Warn the rider by turning your vehicle headlights on."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "261",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q022.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 022"
+        },
+        "key": "When passing a horse and rider, you should:"
+      }
+    },
+    {
+      "created": 1455851011154,
+      "key": "If you have a learner licence can you carry passengers?",
+      "value": {
+        "Question": "If you have a learner licence can you carry passengers?",
+        "Answers": {
+          "A": "Yes, provided your supervisor agrees and is sitting in the front passenger seat.",
+          "B": "Yes, provided you're with a supervisor and it's between the hours of 5 am and 10 pm.",
+          "C": "No, you can only drive with a supervisor.",
+          "D": "Yes, provided you're with a supervisor and you have no more than 2 passengers."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "25",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q244.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 244"
+        },
+        "key": "If you have a learner licence can you carry passengers?"
+      }
+    },
+    {
+      "created": 1455851011160,
+      "key": "You are driving in a 100 km/h speed area and you see an 'Accident' sign. What speed must you slow down to?",
+      "value": {
+        "Question": "You are driving in a 100 km/h speed area and you see an 'Accident' sign. What speed must you slow down to?",
+        "Answers": {
+          "A": "50 km/h.",
+          "B": "40 km/h.",
+          "C": "30 km/h.",
+          "D": "20 km/h."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "210",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/accident-sign.gif?m=1301369277?m=1301369277",
+          "alt": "Accident sign"
+        },
+        "key": "You are driving in a 100 km/h speed area and you see an 'Accident' sign. What speed must you slow down to?"
+      }
+    },
+    {
+      "created": 1455851011166,
+      "key": "After driving through surface water, you should:",
+      "value": {
+        "Question": "After driving through surface water, you should:",
+        "Answers": {
+          "A": "Pump your vehicle brakes carefully.",
+          "B": "Not use the brakes on your vehicle.",
+          "C": "Brake heavily.",
+          "D": "Check that the headlights on your vehicle are working."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "182",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q060.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 060"
+        },
+        "key": "After driving through surface water, you should:"
+      }
+    },
+    {
+      "created": 1455851011172,
+      "key": "You wish to make a right turn on a narrow country road. There is a vehicle coming towards you and traffic behind you. What is the safest option?",
+      "value": {
+        "Question": "You wish to make a right turn on a narrow country road. There is a vehicle coming towards you and traffic behind you. What is the safest option?",
+        "Answers": {
+          "A": "Wait in the centre of the road and turn when it is clear.",
+          "B": "Drive straight ahead and do a U-turn when the road is clear.",
+          "C": "Decide not to turn and drive straight ahead.",
+          "D": "Move to the left side of the road and turn when the road is clear."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "123",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q104.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 104"
+        },
+        "key": "You wish to make a right turn on a narrow country road. There is a vehicle coming towards you and traffic behind you. What is the safest option?"
+      }
+    },
+    {
+      "created": 1455851012167,
+      "key": "Alcohol slows down your reactions when driving.",
+      "value": {
+        "Question": "Alcohol slows down your reactions when driving.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "212",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q109.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 109"
+        },
+        "key": "Alcohol slows down your reactions when driving."
+      }
+    },
+    {
+      "created": 1455851012173,
+      "key": "If anybody is hurt in a crash, the driver must tell a police officer as soon as possible but within:",
+      "value": {
+        "Question": "If anybody is hurt in a crash, the driver must tell a police officer as soon as possible but within:",
+        "Answers": {
+          "A": "24 hours.",
+          "B": "36 hours.",
+          "C": "48 hours.",
+          "D": "60 hours."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "233",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q131.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 131"
+        },
+        "key": "If anybody is hurt in a crash, the driver must tell a police officer as soon as possible but within:"
+      }
+    },
+    {
+      "created": 1455851013185,
+      "key": "For the purpose of applying the give way rule, how should entrance ways in to public areas (car parks) be treated?",
+      "value": {
+        "Question": "For the purpose of applying the give way rule, how should entrance ways in to public areas (car parks) be treated?",
+        "Answers": {
+          "A": "As turning bays.",
+          "B": "As pedestrian crossings.",
+          "C": "As intersections.",
+          "D": "As merging lanes."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "151",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q037.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 037"
+        },
+        "key": "For the purpose of applying the give way rule, how should entrance ways in to public areas (car parks) be treated?"
+      }
+    },
+    {
+      "created": 1455851014091,
+      "key": "What must you do at an intersection controlled by a stop sign?",
+      "value": {
+        "Question": "What must you do at an intersection controlled by a stop sign?",
+        "Answers": {
+          "A": "Stop where you can see all vehicles coming from your right.",
+          "B": "Slow down and drive on if no vehicles are coming.",
+          "C": "Give way to all vehicles on your left.",
+          "D": "Come to a complete stop where you can see vehicles coming from all directions."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "153",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q228.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 228"
+        },
+        "key": "What must you do at an intersection controlled by a stop sign?"
+      }
+    },
+    {
+      "created": 1455851014097,
+      "key": "When may you park your vehicle over a fire hydrant?",
+      "value": {
+        "Question": "When may you park your vehicle over a fire hydrant?",
+        "Answers": {
+          "A": "A mobility card is displayed in the front window.",
+          "B": "It is not left unattended for less than 10 minutes.",
+          "C": "There is someone with the vehicle who can move it",
+          "D": "If your vehicle breaks down."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "181",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q053.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 053"
+        },
+        "key": "When may you park your vehicle over a fire hydrant?"
+      }
+    },
+    {
+      "created": 1455851014103,
+      "key": "A policeman can impound your car on the spot if you are caught driving while disqualified.",
+      "value": {
+        "Question": "A policeman can impound your car on the spot if you are caught driving while disqualified.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "242",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q162.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 162"
+        },
+        "key": "A policeman can impound your car on the spot if you are caught driving while disqualified."
+      }
+    },
+    {
+      "created": 1455851015245,
+      "key": "What must you do when you come up to a red light showing at traffic signals?",
+      "value": {
+        "Question": "What must you do when you come up to a red light showing at traffic signals?",
+        "Answers": {
+          "A": "Stop and then go on carefully.",
+          "B": "Go on slowly if no other traffic is coming.",
+          "C": "Stop only if other vehicles are coming from the right.",
+          "D": "Stop and wait until it changes to a green light."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "159",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q136.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 136"
+        },
+        "key": "What must you do when you come up to a red light showing at traffic signals?"
+      }
+    },
+    {
+      "created": 1455851015252,
+      "key": "You are driving on a road with marked lanes and you are in the lane with an arrow showing a left turn only. You must:",
+      "value": {
+        "Question": "You are driving on a road with marked lanes and you are in the lane with an arrow showing a left turn only. You must:",
+        "Answers": {
+          "A": "Drive straight ahead.",
+          "B": "Turn left.",
+          "C": "Turn right.",
+          "D": "Not signal."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "132",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q164.jpg?m=1301369285?m=1301369285",
+          "alt": "Q 164"
+        },
+        "key": "You are driving on a road with marked lanes and you are in the lane with an arrow showing a left turn only. You must:"
+      }
+    },
+    {
+      "created": 1455851015259,
+      "key": "Are you allowed to drive a vehicle towing a trailer with a load that is not tied on properly?",
+      "value": {
+        "Question": "Are you allowed to drive a vehicle towing a trailer with a load that is not tied on properly?",
+        "Answers": {
+          "A": "Yes, if you drive at less than 20 km/h.",
+          "B": "Yes, if you put a white flag on the right-hand corner.",
+          "C": "Yes, if you think it will not come off the trailer.",
+          "D": "No, not at all."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "225",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q087.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 087"
+        },
+        "key": "Are you allowed to drive a vehicle towing a trailer with a load that is not tied on properly?"
+      }
+    },
+    {
+      "created": 1455851016138,
+      "key": "If you are driving in fog, your vehicle should have its:",
+      "value": {
+        "Question": "If you are driving in fog, your vehicle should have its:",
+        "Answers": {
+          "A": "Park lights on.",
+          "B": "Headlights on dip.",
+          "C": "Headlights on high beam.",
+          "D": "Hazard lights on."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "182",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q015.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 015"
+        },
+        "key": "If you are driving in fog, your vehicle should have its:"
+      }
+    },
+    {
+      "created": 1455851016145,
+      "key": "The 'speed limit' means the:",
+      "value": {
+        "Question": "The 'speed limit' means the:",
+        "Answers": {
+          "A": "Slowest speed you can drive in good conditions.",
+          "B": "Average speed you can drive in good conditions.",
+          "C": "Maximum legal speed you can drive in good conditions.",
+          "D": "Fastest speed you can drive, except when overtaking."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "208",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q211.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 211"
+        },
+        "key": "The 'speed limit' means the:"
+      }
+    },
+    {
+      "created": 1455851016151,
+      "key": "When turning right from a two-laned road into a one-way street that has two lanes, you must turn into the:",
+      "value": {
+        "Question": "When turning right from a two-laned road into a one-way street that has two lanes, you must turn into the:",
+        "Answers": {
+          "A": "Right-hand lane.",
+          "B": "Left-hand lane.",
+          "C": "Lane that has the least vehicles.",
+          "D": "Lane that gives you the most direct route."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "128",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q132.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 132"
+        },
+        "key": "When turning right from a two-laned road into a one-way street that has two lanes, you must turn into the:"
+      }
+    },
+    {
+      "created": 1455851017198,
+      "key": "When coming up to a roundabout you must give way to all vehicles that will cross your path from your left.",
+      "value": {
+        "Question": "When coming up to a roundabout you must give way to all vehicles that will cross your path from your left.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "162",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q156.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 156"
+        },
+        "key": "When coming up to a roundabout you must give way to all vehicles that will cross your path from your left."
+      }
+    },
+    {
+      "created": 1455851017205,
+      "key": "When traffic is merging, what is a good rule to follow?",
+      "value": {
+        "Question": "When traffic is merging, what is a good rule to follow?",
+        "Answers": {
+          "A": "Slow down to 40 km/h.",
+          "B": "Speed up to make room behind.",
+          "C": "Let 1 vehicle in from the other lane go first and then go.",
+          "D": "Let 2 vehicles in and go."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "143",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/merge-like-zip.jpg?m=1301369277?m=1301369277",
+          "alt": "Merge like zip"
+        },
+        "key": "When traffic is merging, what is a good rule to follow?"
+      }
+    },
+    {
+      "created": 1455851017211,
+      "key": "What is the best way to check for hazards before reversing your vehicle?",
+      "value": {
+        "Question": "What is the best way to check for hazards before reversing your vehicle?",
+        "Answers": {
+          "A": "Relying only on the outside mirrors.",
+          "B": "Turning to look over your shoulders.",
+          "C": "Relying only on the inside mirrors.",
+          "D": "Walking around the vehicle before reversing."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "150",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q016.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 016"
+        },
+        "key": "What is the best way to check for hazards before reversing your vehicle?"
+      }
+    },
+    {
+      "created": 1455851017218,
+      "key": "What is the safest way to carry goods inside a vehicle?",
+      "value": {
+        "Question": "What is the safest way to carry goods inside a vehicle?",
+        "Answers": {
+          "A": "On the driver's lap.",
+          "B": "On the floor by the driver's feet.",
+          "C": "On the shelf near the rear window.",
+          "D": "In a secure place."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "226",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q076.jpg?m=1301369285?m=1301369285",
+          "alt": "Q 076"
+        },
+        "key": "What is the safest way to carry goods inside a vehicle?"
+      }
+    },
+    {
+      "created": 1455851017225,
+      "key": "What should you do when following another vehicle in wet conditions?",
+      "value": {
+        "Question": "What should you do when following another vehicle in wet conditions?",
+        "Answers": {
+          "A": "Drive closer to the vehicle so that you can follow in its tracks.",
+          "B": "Drive with your vehicle handbrake on.",
+          "C": "Apply the 4-second rule.",
+          "D": "Apply the 2-second rule."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "183",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q041.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 041"
+        },
+        "key": "What should you do when following another vehicle in wet conditions?"
+      }
+    },
+    {
+      "created": 1455851018112,
+      "key": "When coming up to a Stop sign, where should you stop?",
+      "value": {
+        "Question": "When coming up to a Stop sign, where should you stop?",
+        "Answers": {
+          "A": "With the front wheels of your vehicle on the yellow lines.",
+          "B": "With the rear wheels of your vehicle on the yellow lines.",
+          "C": "Where you can see all vehicles coming from all directions.",
+          "D": "Where you can only see vehicles coming from your right."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "153",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q074.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 074"
+        },
+        "key": "When coming up to a Stop sign, where should you stop?"
+      }
+    },
+    {
+      "created": 1455851018119,
+      "key": "What would usually happen if your front left tyre blows out?",
+      "value": {
+        "Question": "What would usually happen if your front left tyre blows out?",
+        "Answers": {
+          "A": "The car will come to an immediate stop.",
+          "B": "The rear will sway from side to side.",
+          "C": "The car will pull towards the right.",
+          "D": "The car will pull towards the left."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "207",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/tyre-blowout.jpg?m=1372218173?m=1372218173",
+          "alt": "tyre blowout"
+        },
+        "key": "What would usually happen if your front left tyre blows out?"
+      }
+    },
+    {
+      "created": 1455851019137,
+      "key": "If you tow another vehicle, what is the maximum distance allowed between the two vehicles?",
+      "value": {
+        "Question": "If you tow another vehicle, what is the maximum distance allowed between the two vehicles?",
+        "Answers": {
+          "A": "2 metres.",
+          "B": "4 metres.",
+          "C": "The length of the vehicle you are driving.",
+          "D": "The length of the vehicle being towed."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "148",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q033.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 033"
+        },
+        "key": "If you tow another vehicle, what is the maximum distance allowed between the two vehicles?"
+      }
+    },
+    {
+      "created": 1455851019144,
+      "key": "Who is responsible for making a child under 15 years use a safety belt or a safety seat in a vehicle?",
+      "value": {
+        "Question": "Who is responsible for making a child under 15 years use a safety belt or a safety seat in a vehicle?",
+        "Answers": {
+          "A": "The child's parents.",
+          "B": "The driver of the vehicle.",
+          "C": "The owner of the vehicle.",
+          "D": "The child."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "231",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q161.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 161"
+        },
+        "key": "Who is responsible for making a child under 15 years use a safety belt or a safety seat in a vehicle?"
+      }
+    },
+    {
+      "created": 1455851020160,
+      "key": "What are you NOT allowed to do when driving on a motorway?",
+      "value": {
+        "Question": "What are you NOT allowed to do when driving on a motorway?",
+        "Answers": {
+          "A": "Indicate before changing lanes.",
+          "B": "Pass using the left-hand lane.",
+          "C": "Pass other vehicles.",
+          "D": "Let down or pick up passengers."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "146",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q031.jpg?m=1301369285?m=1301369285",
+          "alt": "Q 031"
+        },
+        "key": "What are you NOT allowed to do when driving on a motorway?"
+      }
+    },
+    {
+      "created": 1455851021158,
+      "key": "When there are farm animals coming towards you on the road, you should:",
+      "value": {
+        "Question": "When there are farm animals coming towards you on the road, you should:",
+        "Answers": {
+          "A": "Sound your vehicle horn loudly until the animals move.",
+          "B": "Slow down and pull over to the side of the road.",
+          "C": "Get a passenger to clear a path through the animals.",
+          "D": "Ask the farmer to move the animals quickly."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "227",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q034.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 034"
+        },
+        "key": "When there are farm animals coming towards you on the road, you should:"
+      }
+    },
+    {
+      "created": 1455851022104,
+      "key": "If yellow traffic signals are flashing it means:",
+      "value": {
+        "Question": "If yellow traffic signals are flashing it means:",
+        "Answers": {
+          "A": "That a crash has just happened.",
+          "B": "The traffic signals are not working, apply the give way rules.",
+          "C": "Vehicles may only proceed straight ahead and not turn.",
+          "D": "Emergency vehicles are about to come through."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "160",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q043.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 043"
+        },
+        "key": "If yellow traffic signals are flashing it means:"
+      }
+    },
+    {
+      "created": 1455851023236,
+      "key": "What must you do if you want to turn right at traffic signals where a green light is showing?",
+      "value": {
+        "Question": "What must you do if you want to turn right at traffic signals where a green light is showing?",
+        "Answers": {
+          "A": "Push your way through the vehicles coming towards you.",
+          "B": "Give way to vehicles coming towards you.",
+          "C": "Wait until the lights change to red and then turn quickly.",
+          "D": "Turn at once as the vehicles coming towards you will be stopped."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "159",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q127.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 127"
+        },
+        "key": "What must you do if you want to turn right at traffic signals where a green light is showing?"
+      }
+    },
+    {
+      "created": 1455851023243,
+      "key": "When a flock of sheep are coming towards you on a country road, you should:",
+      "value": {
+        "Question": "When a flock of sheep are coming towards you on a country road, you should:",
+        "Answers": {
+          "A": "Sound the horn on your vehicle to move them.",
+          "B": "Slow down or pull over to the side of the road.",
+          "C": "Turn on your vehicle hazard lights and drive on.",
+          "D": "Turn on your vehicle headlights and then drive on."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "233",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q034.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 034"
+        },
+        "key": "When a flock of sheep are coming towards you on a country road, you should:"
+      }
+    },
+    {
+      "created": 1455851024098,
+      "key": "Your vehicle has a current warrant of fitness but a rear red stop light is not working. What should you do?",
+      "value": {
+        "Question": "Your vehicle has a current warrant of fitness but a rear red stop light is not working. What should you do?",
+        "Answers": {
+          "A": "Get it fixed before your next warrant is due.",
+          "B": "Your vehicle still has a warrant of fitness so you don't need to do anything.",
+          "C": "Fix it immediately because you could get a fine.",
+          "D": "Stop driving your vehicle until it is fixed."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "246",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q232.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 232"
+        },
+        "key": "Your vehicle has a current warrant of fitness but a rear red stop light is not working. What should you do?"
+      }
+    },
+    {
+      "created": 1455851025177,
+      "key": "When may you pass on the left at an intersection, if you can do so safely?",
+      "value": {
+        "Question": "When may you pass on the left at an intersection, if you can do so safely?",
+        "Answers": {
+          "A": "When you have the headlights of your vehicle turned on.",
+          "B": "When the vehicle in front is signalling a left turn.",
+          "C": "When the vehicle in front is signalling a right turn.",
+          "D": "When the vehicle in front is going faster than the speed limit."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "141",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q167.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 167"
+        },
+        "key": "When may you pass on the left at an intersection, if you can do so safely?"
+      }
+    },
+    {
+      "created": 1455851027227,
+      "key": "You must NOT park on the right-hand side of the road except when you are:",
+      "value": {
+        "Question": "You must NOT park on the right-hand side of the road except when you are:",
+        "Answers": {
+          "A": "In the countryside.",
+          "B": "Picking up passengers.",
+          "C": "Delivering packages.",
+          "D": "In a one-way street."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "174",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q168.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 168"
+        },
+        "key": "You must NOT park on the right-hand side of the road except when you are:"
+      }
+    },
+    {
+      "created": 1455851028153,
+      "key": "What must you do if glass falls on to the road from your vehicle?",
+      "value": {
+        "Question": "What must you do if glass falls on to the road from your vehicle?",
+        "Answers": {
+          "A": "Sweep it up within 2 hours.",
+          "B": "Sweep it up straight away if you can do so safely.",
+          "C": "Sweep it up within 24 hours.",
+          "D": "Tell a police officer."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "228",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q150.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 150"
+        },
+        "key": "What must you do if glass falls on to the road from your vehicle?"
+      }
+    },
+    {
+      "created": 1455851028160,
+      "key": "If you are under 20 years of age the legal alcohol limit is zero. What does this mean?",
+      "value": {
+        "Question": "If you are under 20 years of age the legal alcohol limit is zero. What does this mean?",
+        "Answers": {
+          "A": "One drink could see you charged with drink driving.",
+          "B": "You could face a fine and 50 demerit points if your alcohol level is less than 150 micrograms per litre of breath.",
+          "C": "You could be disqualified from driving, given demerits, fined or imprisoned if your alcohol level is higher than 150 micrograms per litre of breath.",
+          "D": "All of the above."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "212",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q109.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 109"
+        },
+        "key": "If you are under 20 years of age the legal alcohol limit is zero. What does this mean?"
+      }
+    },
+    {
+      "created": 1455851030298,
+      "key": "When does a police officer have the power to arrest you?",
+      "value": {
+        "Question": "When does a police officer have the power to arrest you?",
+        "Answers": {
+          "A": "If you fail to supply your correct name and address.",
+          "B": "If you have no warrant of fitness for your vehicle.",
+          "C": "If you fail to signal a right turn.",
+          "D": "If you fail to stop at a Stop sign."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "243",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q162.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 162"
+        },
+        "key": "When does a police officer have the power to arrest you?"
+      }
+    },
+    {
+      "created": 1455851031223,
+      "key": "The bonnet of your vehicle lifts up while you are driving and you cannot see. What should you do?",
+      "value": {
+        "Question": "The bonnet of your vehicle lifts up while you are driving and you cannot see. What should you do?",
+        "Answers": {
+          "A": "Turn your vehicle headlights on and look out of the side window.",
+          "B": "Brake smoothly, indicate and move over to the left hand side of the road.",
+          "C": "Steer your vehicle straight ahead and stop as quickly as you can.",
+          "D": "Speed up and move to the left side of the road."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "204",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q094.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 094"
+        },
+        "key": "The bonnet of your vehicle lifts up while you are driving and you cannot see. What should you do?"
+      }
+    },
+    {
+      "created": 1455851034091,
+      "key": "When following another vehicle on a dusty road, you should:",
+      "value": {
+        "Question": "When following another vehicle on a dusty road, you should:",
+        "Answers": {
+          "A": "Speed up to get past.",
+          "B": "Turn your vehicle windscreen wipers on.",
+          "C": "Stay back from the dust cloud.",
+          "D": "Turn your vehicle headlights on."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "191",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q045.jpg?m=1301369279?m=1301369279",
+          "alt": "Q 045"
+        },
+        "key": "When following another vehicle on a dusty road, you should:"
+      }
+    },
+    {
+      "created": 1455851034099,
+      "key": "You must check that there is space for your vehicle on the other side of the line before going over a railway level crossing.",
+      "value": {
+        "Question": "You must check that there is space for your vehicle on the other side of the line before going over a railway level crossing.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "168",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q029.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 029"
+        },
+        "key": "You must check that there is space for your vehicle on the other side of the line before going over a railway level crossing."
+      }
+    },
+    {
+      "created": 1455851036064,
+      "key": "You must turn your vehicle headlights on:",
+      "value": {
+        "Question": "You must turn your vehicle headlights on:",
+        "Answers": {
+          "A": "15 minutes after sunset until 15 minutes before sunrise.",
+          "B": "30 minutes after sunset until 30 minutes before sunrise.",
+          "C": "45 minutes after sunset until 45 minutes before sunrise.",
+          "D": "1 hour after sunset until 1 hour before sunrise."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "184",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q011.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 011"
+        },
+        "key": "You must turn your vehicle headlights on:"
+      }
+    },
+    {
+      "created": 1455851038110,
+      "key": "You are driving and you see an accident sign. What speed must you slow down to?",
+      "value": {
+        "Question": "You are driving and you see an accident sign. What speed must you slow down to?",
+        "Answers": {
+          "A": "75 kms",
+          "B": "30 kms",
+          "C": "80 kms",
+          "D": "20 kms"
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "210",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/accident-sign.gif?m=1301369277?m=1301369277",
+          "alt": "Accident sign"
+        },
+        "key": "You are driving and you see an accident sign. What speed must you slow down to?"
+      }
+    },
+    {
+      "created": 1455851039211,
+      "key": "What must you do when you see blue and red flashing lights behind you?",
+      "value": {
+        "Question": "What must you do when you see blue and red flashing lights behind you?",
+        "Answers": {
+          "A": "Speed up to get out of the way.",
+          "B": "Slow down and drive on carefully.",
+          "C": "Slow down and stop.",
+          "D": "Drive on as usual."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "117",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/police-flash-lights.gif?m=1301369277?m=1301369277",
+          "alt": "Police flash lights"
+        },
+        "key": "What must you do when you see blue and red flashing lights behind you?"
+      }
+    },
+    {
+      "created": 1455851040062,
+      "key": "When driving in foggy weather, you should:",
+      "value": {
+        "Question": "When driving in foggy weather, you should:",
+        "Answers": {
+          "A": "Stay close to the vehicle ahead of you.",
+          "B": "Turn your vehicle headlights onto dip.",
+          "C": "Use the centre line as a guide.",
+          "D": "Turn your vehicle park lights on."
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "183",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q015.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 015"
+        },
+        "key": "When driving in foggy weather, you should:"
+      }
+    },
+    {
+      "created": 1455851042098,
+      "key": "Which person can legally stop and do a roadside check of your vehicle?",
+      "value": {
+        "Question": "Which person can legally stop and do a roadside check of your vehicle?",
+        "Answers": {
+          "A": "A Justice of the Peace.",
+          "B": "A fire or ambulance officer.",
+          "C": "A police officer.",
+          "D": "A lawyer."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "246",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q234.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 234"
+        },
+        "key": "Which person can legally stop and do a roadside check of your vehicle?"
+      }
+    },
+    {
+      "created": 1455851043109,
+      "key": "What must you do when red lights are flashing at a railway level crossing?",
+      "value": {
+        "Question": "What must you do when red lights are flashing at a railway level crossing?",
+        "Answers": {
+          "A": "Drive over the lines as soon as the train has passed.",
+          "B": "Slow down and then drive over the lines.",
+          "C": "Stop until the lights stop flashing.",
+          "D": "Stop and if no train is coming you may drive over the lines."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "169",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/railway-cross-sign.gif?m=1301369278?m=1301369278",
+          "alt": "Railway cross sign"
+        },
+        "key": "What must you do when red lights are flashing at a railway level crossing?"
+      }
+    },
+    {
+      "created": 1455851043117,
+      "key": "What should you do before any modification is carried out on your vehicle?",
+      "value": {
+        "Question": "What should you do before any modification is carried out on your vehicle?",
+        "Answers": {
+          "A": "Ask a mechanic to check whether the modifications are safe.",
+          "B": "If you're only fitting extra lights you don't need to do anything.",
+          "C": "Make sure a trained professional is carrying out the modifications.",
+          "D": "Check with an approved WoF inspector that the modifications are legal."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "249",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q239.jpg?m=1301369284?m=1301369284",
+          "alt": "Q 239"
+        },
+        "key": "What should you do before any modification is carried out on your vehicle?"
+      }
+    },
+    {
+      "created": 1455851046126,
+      "key": "You don't have to do anything if your doctor gives you medication as medicine does not affect your driving.",
+      "value": {
+        "Question": "You don't have to do anything if your doctor gives you medication as medicine does not affect your driving.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "213",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q056.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 056"
+        },
+        "key": "You don't have to do anything if your doctor gives you medication as medicine does not affect your driving."
+      }
+    },
+    {
+      "created": 1455851047203,
+      "key": "What must you do when you see two red lights flashing outside a fire station?",
+      "value": {
+        "Question": "What must you do when you see two red lights flashing outside a fire station?",
+        "Answers": {
+          "A": "Slow down and drive on carefully if the way is clear.",
+          "B": "Slow down and stop if any other vehicle is coming.",
+          "C": "Slow down to 20 km/h.",
+          "D": "Stop until the lights stop flashing."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "119",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q136.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 136"
+        },
+        "key": "What must you do when you see two red lights flashing outside a fire station?"
+      }
+    },
+    {
+      "created": 1455851051200,
+      "key": "Who may legally require you to give a blood sample?",
+      "value": {
+        "Question": "Who may legally require you to give a blood sample?",
+        "Answers": {
+          "A": "A police officer, an ambulance officer, other crash party.",
+          "B": "A medical doctor, other crash party, a police officer.",
+          "C": "A police officer, a medical doctor or an approved person.",
+          "D": "An ambulance driver, an approved person or a medical doctor."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "214",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q004.jpg?m=1301369278?m=1301369278",
+          "alt": "Q 004"
+        },
+        "key": "Who may legally require you to give a blood sample?"
+      }
+    },
+    {
+      "created": 1455851051209,
+      "key": "What should you do when you come up to a one-lane bridge?",
+      "value": {
+        "Question": "What should you do when you come up to a one-lane bridge?",
+        "Answers": {
+          "A": "Sound your vehicle horn and drive slowly over the bridge.",
+          "B": "Turn your vehicle headlights on and drive quickly over the bridge.",
+          "C": "Slow down and check for vehicles that may already be on the bridge before driving on.",
+          "D": "Drive on and make sure any oncoming vehicles reverse off the bridge."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "170",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q086.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 086"
+        },
+        "key": "What should you do when you come up to a one-lane bridge?"
+      }
+    },
+    {
+      "created": 1455851057135,
+      "key": "What is the maximum speed you may drive if you have a 'space saver wheel' fitted? (km/h)",
+      "value": {
+        "Question": "What is the maximum speed you may drive if you have a 'space saver wheel' fitted? (km/h)",
+        "Answers": {
+          "A": "70 km/h.",
+          "B": "100 km/h so you don't hold up other traffic.",
+          "C": "80 km/h. If the space-saver wheel displays a lower speed that speed applies.",
+          "D": "90 km/h."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "228",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q241.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 241"
+        },
+        "key": "What is the maximum speed you may drive if you have a 'space saver wheel' fitted? (km/h)"
+      }
+    },
+    {
+      "created": 1455851058181,
+      "key": "What rule applies when both vehicles are controlled by a Give Way sign?",
+      "value": {
+        "Question": "What rule applies when both vehicles are controlled by a Give Way sign?",
+        "Answers": {
+          "A": "The give way rule.",
+          "B": "The lane rule.",
+          "C": "The passing rule.",
+          "D": "The 2-second rule."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "154",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q023.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 023"
+        },
+        "key": "What rule applies when both vehicles are controlled by a Give Way sign?"
+      }
+    },
+    {
+      "created": 1455851059183,
+      "key": "Passengers in your vehicle are 15 years or over. Who is responsible for making sure they wear a safety belt?",
+      "value": {
+        "Question": "Passengers in your vehicle are 15 years or over. Who is responsible for making sure they wear a safety belt?",
+        "Answers": {
+          "A": "The passengers themselves.",
+          "B": "The parents of the passengers.",
+          "C": "You as the driver of the vehicle.",
+          "D": "Other passengers in your vehicle."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "231",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q100.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 100"
+        },
+        "key": "Passengers in your vehicle are 15 years or over. Who is responsible for making sure they wear a safety belt?"
+      }
+    },
+    {
+      "created": 1455851061108,
+      "key": "When coming up to a pedestrian crossing without a raised traffic island, what must you do?",
+      "value": {
+        "Question": "When coming up to a pedestrian crossing without a raised traffic island, what must you do?",
+        "Answers": {
+          "A": "Stop and give way to pedestrians on any part of the crossing.",
+          "B": "Speed up before pedestrians cross.",
+          "C": "Sound the horn on your vehicle to warn pedestrians.",
+          "D": "Slow down to 30 km/h."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "253",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/pedestrian-crossing-no-island.jpg?m=1301369284?m=1301369284",
+          "alt": "Pedestrian crossing no island"
+        },
+        "key": "When coming up to a pedestrian crossing without a raised traffic island, what must you do?"
+      }
+    },
+    {
+      "created": 1455851062264,
+      "key": "When driving on an unlaned road, you must drive your vehicle on the:",
+      "value": {
+        "Question": "When driving on an unlaned road, you must drive your vehicle on the:",
+        "Answers": {
+          "A": "Left-hand side of the road.",
+          "B": "Right-hand side of the road.",
+          "C": "Centre of the road.",
+          "D": "Shoulder of the road."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "112",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q010.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 010"
+        },
+        "key": "When driving on an unlaned road, you must drive your vehicle on the:"
+      }
+    },
+    {
+      "created": 1455851062275,
+      "key": "If you are a driver involved in a crash, the FIRST action you should take is to:",
+      "value": {
+        "Question": "If you are a driver involved in a crash, the FIRST action you should take is to:",
+        "Answers": {
+          "A": "Stop and place a warning triangle at the side of the road.",
+          "B": "Drive past at 20 km/h until you pass the site of the crash.",
+          "C": "Stop and check to see if anyone is hurt.",
+          "D": "Tell a police officer as soon as possible."
+        },
+        "CorrectAnswer": "C",
+        "RoadCodePage": "233",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q013.jpg?m=1301369282?m=1301369282",
+          "alt": "Q 013"
+        },
+        "key": "If you are a driver involved in a crash, the FIRST action you should take is to:"
+      }
+    },
+    {
+      "created": 1455851066148,
+      "key": "When driving at night on a road with lanes you must be able to stop in half the length of clear road you can see in front of you.",
+      "value": {
+        "Question": "When driving at night on a road with lanes you must be able to stop in half the length of clear road you can see in front of you.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "185",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q217.jpg?m=1301369280?m=1301369280",
+          "alt": "Q 217"
+        },
+        "key": "When driving at night on a road with lanes you must be able to stop in half the length of clear road you can see in front of you."
+      }
+    },
+    {
+      "created": 1455851130250,
+      "key": "If you are turning left at an intersection, you must give way to vehicles coming towards you that are turning right.",
+      "value": {
+        "Question": "If you are turning left at an intersection, you must give way to vehicles coming towards you that are turning right.",
+        "Answers": {
+          "A": "True",
+          "B": "False"
+        },
+        "CorrectAnswer": "B",
+        "RoadCodePage": "157",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q141.jpg?m=1301369283?m=1301369283",
+          "alt": "Q 141"
+        },
+        "key": "If you are turning left at an intersection, you must give way to vehicles coming towards you that are turning right."
+      }
+    },
+    {
+      "created": 1455851342636,
+      "key": "What rule should you use to judge a safe following distance in wet, frosty or icy conditions if driving a car?",
+      "value": {
+        "Question": "What rule should you use to judge a safe following distance in wet, frosty or icy conditions if driving a car?",
+        "Answers": {
+          "A": "The 1-second rule.",
+          "B": "The 2-second rule.",
+          "C": "The 3-second rule.",
+          "D": "The 4-second rule."
+        },
+        "CorrectAnswer": "D",
+        "RoadCodePage": "133",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q041.jpg?m=1301369276?m=1301369276",
+          "alt": "Q 041"
+        },
+        "key": "What rule should you use to judge a safe following distance in wet, frosty or icy conditions if driving a car?"
+      }
+    },
+    {
+      "created": 1455851343581,
+      "key": "You must turn your vehicle headlights on when visibility is less than:",
+      "value": {
+        "Question": "You must turn your vehicle headlights on when visibility is less than:",
+        "Answers": {
+          "A": "100 metres.",
+          "B": "120 metres.",
+          "C": "140 metres.",
+          "D": "160 metres."
+        },
+        "CorrectAnswer": "A",
+        "RoadCodePage": "183",
+        "Image": {
+          "src": "/assets/motoring/rcq/qImg/q011.jpg?m=1301369281?m=1301369281",
+          "alt": "Q 011"
+        },
+        "key": "You must turn your vehicle headlights on when visibility is less than:"
+      }
+    }
+  ]
+}

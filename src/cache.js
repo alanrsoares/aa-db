@@ -4,7 +4,7 @@ import storage from 'lowdb/file-sync'
 const STD_TTL = 600
 const COLLECTION_ID = 'cache'
 
-const createDB = lowdb(`${ __dirname }/db.json`, { storage })
+const createDB = lowdb(`${ __dirname }/../db/db.json`, { storage })
 
 const isValidCacheKey = (key, ttl) =>
  	Math.floor((Date.now() - key.created) / 1000) <= ttl

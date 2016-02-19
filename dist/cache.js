@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var STD_TTL = 600;
 var COLLECTION_ID = 'cache';
 
-var createDB = (0, _lowdb2.default)(__dirname + '/db.json', { storage: _fileSync2.default });
+var createDB = (0, _lowdb2.default)(__dirname + '/../db/db.json', { storage: _fileSync2.default });
 
 var isValidCacheKey = function isValidCacheKey(key, ttl) {
 	return Math.floor((Date.now() - key.created) / 1000) <= ttl;
