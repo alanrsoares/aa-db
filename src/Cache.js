@@ -18,8 +18,7 @@ class CacheKey {
 
 export default class Cache {
 	constructor({ stdTTL = STD_TTL, db = createDB(COLLECTION_ID) }) {
-		this.stdTTL = stdTTL
-		this.db = db
+		Object.assign(this, { stdTTL, db })
 	}
 
 	get(key) {
