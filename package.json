@@ -1,5 +1,5 @@
 {
-  "name": "aa-database",
+  "name": "aa-db",
   "version": "0.1.0",
   "description": "Crawler to drain AA Questions Database",
   "main": "dist/index.js",
@@ -7,6 +7,7 @@
     "dist": "babel src --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "git@github.com:alanrsoares/aa-db.git",
   "author": "Alan Soares <alanrsoars@gmail.com> github.com/alanrsoares",
   "license": "MIT",
   "devDependencies": {
