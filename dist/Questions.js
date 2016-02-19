@@ -14,7 +14,7 @@ var _isomorphicFetch = require('isomorphic-fetch');
 
 var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _parser = require('./parser');
+var _parsers = require('./parsers');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,10 +23,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var parseAnswers = function parseAnswers(answers) {
-  var links = (0, _parser.parseTags)('a', 'g')(answers);
-  var contents = links.map((0, _parser.parseTags)('a'));
-  var spans = contents.map((0, _parser.parseTags)('span', 'g'));
-  var spanContent = (0, _parser.parseTags)('span');
+  var links = (0, _parsers.parseTags)('a', 'g')(answers);
+  var contents = links.map((0, _parsers.parseTags)('a'));
+  var spans = contents.map((0, _parsers.parseTags)('span', 'g'));
+  var spanContent = (0, _parsers.parseTags)('span');
 
   return spans.reduce(function (acc, _ref) {
     var _ref2 = _slicedToArray(_ref, 2);
@@ -44,7 +44,7 @@ var unwrap = function unwrap(res) {
 var refineQuestion = function refineQuestion(question) {
   return _extends({}, question, {
     key: question.Question,
-    Image: (0, _parser.parseProps)(['src', 'alt'])(question.Image),
+    Image: (0, _parsers.parseProps)(['src', 'alt'])(question.Image),
     Answers: parseAnswers(question.Answers)
   });
 };
