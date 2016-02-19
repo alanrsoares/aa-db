@@ -1,6 +1,7 @@
 import lowdb from 'lowdb'
 import storage from 'lowdb/file-sync'
 
+const STD_TTL = 600
 const COLLECTION_ID = 'cache'
 
 const createDB = lowdb(`${ __dirname }/db.json`, { storage })
@@ -16,8 +17,8 @@ class CacheKey {
 }
 
 export default class Cache {
-	constructor({ stdTTL, db = createDB(COLLECTION_ID) }) {
-		this.stdTTL = stdTTL || 600
+	constructor({ stdTTL = STD_TTL, db = createDB(COLLECTION_ID) }) {
+		this.stdTTL = stdTTL
 		this.db = db
 	}
 
