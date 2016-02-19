@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-import { parseProp, parseProps, parseTags } from './parser'
+import { parseProps, parseTags } from './parsers'
 
 const parseAnswers = answers => {
   const links = parseTags('a', 'g')(answers)
