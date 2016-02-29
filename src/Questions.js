@@ -38,7 +38,7 @@ const unwrap = res => res.json()
 const refine = data => Promise.resolve(data.map(refineQuestion))
 
 export default class Questions {
-  constructor({ endpoint, cache, maximumEmptyAttempts = 20 }) {
+  constructor({ cache, endpoint = QUESTIONS_ENDPOINT, maximumEmptyAttempts = 20 }) {
     Object.assign(this, {
       endpoint,
       cache,
