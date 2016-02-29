@@ -16,13 +16,19 @@ var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
 var _parsers = require('./parsers');
 
+var _utils = require('./utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var ENDPOINT_HOST = 'http://www.aa.co.nz';
+
+var QUESTIONS_ENDPOINT = ENDPOINT_HOST + '/RoadCodeQuizController/getSet';
 
 var parseAnswers = function parseAnswers(answers) {
   var links = (0, _parsers.parseTags)('a', 'g')(answers);
@@ -40,7 +46,9 @@ var parseAnswers = function parseAnswers(answers) {
 };
 
 var parseImage = function parseImage(image) {
-  return '' + ENDPOINT_HOST + (0, _parsers.parseProp)('src')(image).split('?m=')[0];
+  return {
+    uri: (0, _utils.removeQueryString)('' + ENDPOINT_HOST + (0, _parsers.parseProp)('src')(image))
+  };
 };
 
 var makeKey = function makeKey(_ref3) {
@@ -51,11 +59,11 @@ var makeKey = function makeKey(_ref3) {
 };
 
 var refineQuestion = function refineQuestion(question) {
-  return _extends({}, question, {
+  return (0, _utils.uncapitalizeKeys)(_extends({}, question, {
     key: makeKey(question),
     Image: parseImage(question.Image),
     Answers: parseAnswers(question.Answers)
-  });
+  }));
 };
 
 var unwrap = function unwrap(res) {
@@ -85,6 +93,23 @@ var Questions = function () {
   }
 
   _createClass(Questions, [{
+    key: 'random',
+    value: function random() {
+      var length = arguments.length <= 0 || arguments[0] === undefined ? 30 : arguments[0];
+
+      var result = [];
+      var questions = this.cache.db.toJSON().map(function (x) {
+        return x.value;
+      });
+
+      for (var i = 0; i < length; i++) {
+        var index = (0, _utils.randomInt)({ max: questions.length - 1 });
+        result.push.apply(result, _toConsumableArray(questions.splice(index, 1)));
+      }
+
+      return result;
+    }
+  }, {
     key: 'store',
     value: function store(questions) {
       var _this = this;
@@ -121,7 +146,7 @@ var Questions = function () {
         return;
       }
 
-      this.fetchQuestions().then(this.store).catch((_context = console).log.bind(_context));
+      this.fetchQuestions().then(this.store).catch((_context = console).error.bind(_context));
     }
   }]);
 

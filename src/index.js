@@ -4,7 +4,9 @@ import Cache from './Cache'
 import Questions from './Questions'
 import { QUESTIONS_ENDPOINT, ONE_WEEK } from './constants'
 
-export default new Questions({
+const db = new Questions({
   endpoint: QUESTIONS_ENDPOINT,
   cache: new Cache({ stdTTL: ONE_WEEK })
 })
+
+export default db

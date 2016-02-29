@@ -1,8 +1,10 @@
 import fetch from 'isomorphic-fetch'
-
 import { parseProp, parseTags } from './parsers'
+import { uncapitalizeKeys, removeQueryString, randomInt } from './utils'
 
 const ENDPOINT_HOST = 'http://www.aa.co.nz'
+
+const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`
 
 const parseAnswers = answers => {
   const links = parseTags('a', 'g')(answers)
@@ -16,14 +18,14 @@ const parseAnswers = answers => {
   }), {})
 }
 
-const parseImage = image => `${ENDPOINT_HOST}${
-    parseProp('src')(image).split('?m=')[0]
-  }`
+const parseImage = image => ({
+  uri: removeQueryString(`${ENDPOINT_HOST}${parseProp('src')(image)}`)
+})
 
 const makeKey = ({ Question, RoadCodePage, CorrectAnswer }) =>
   `${Question}/${RoadCodePage}/${CorrectAnswer}`
 
-const refineQuestion = question => ({
+const refineQuestion = question => uncapitalizeKeys({
   ...question,
   key: makeKey(question),
   Image: parseImage(question.Image),
@@ -43,6 +45,18 @@ export default class Questions {
       emptyAttempts: 0,
       store: this.store.bind(this)
     })
+  }
+
+  random(length = 30) {
+    const result = []
+    const questions = this.cache.db.toJSON().map(x => x.value)
+
+    for (let i = 0; i < length; i++) {
+      const index = randomInt({ max: questions.length - 1 })
+      result.push(...questions.splice(index, 1))
+    }
+
+    return result
   }
 
   store(questions) {
@@ -74,6 +88,6 @@ export default class Questions {
 
     this.fetchQuestions()
       .then(this.store)
-      .catch(::console.log)
+      .catch(::console.error)
   }
 }
