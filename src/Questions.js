@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+
 import { parseProp, parseTags } from './parsers'
 import { uncapitalizeKeys, removeQueryString, randomInt } from './utils'
 
