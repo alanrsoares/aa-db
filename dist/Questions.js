@@ -71,7 +71,7 @@ var Questions = function () {
     var endpoint = _ref4.endpoint;
     var cache = _ref4.cache;
     var _ref4$maximumEmptyAtt = _ref4.maximumEmptyAttempts;
-    var maximumEmptyAttempts = _ref4$maximumEmptyAtt === undefined ? 10 : _ref4$maximumEmptyAtt;
+    var maximumEmptyAttempts = _ref4$maximumEmptyAtt === undefined ? 20 : _ref4$maximumEmptyAtt;
 
     _classCallCheck(this, Questions);
 
@@ -104,11 +104,16 @@ var Questions = function () {
         console.log('new questions cached: ' + uncachedQuestions.length);
       }
 
-      this.fetchQuestions();
+      this.sync();
     }
   }, {
     key: 'fetchQuestions',
     value: function fetchQuestions() {
+      return (0, _isomorphicFetch2.default)(this.endpoint).then(unwrap).then(refine);
+    }
+  }, {
+    key: 'sync',
+    value: function sync() {
       var _context;
 
       if (this.emptyAttempts >= this.maximumEmptyAttempts) {
@@ -116,7 +121,7 @@ var Questions = function () {
         return;
       }
 
-      (0, _isomorphicFetch2.default)(this.endpoint).then(unwrap).then(refine).then(this.store).catch((_context = console).log.bind(_context));
+      this.fetchQuestions().then(this.store).catch((_context = console).log.bind(_context));
     }
   }]);
 

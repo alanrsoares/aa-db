@@ -35,7 +35,7 @@ const unwrap = res => res.json()
 const refine = data => Promise.resolve(data.map(refineQuestion))
 
 export default class Questions {
-  constructor({ endpoint, cache, maximumEmptyAttempts = 10 }) {
+  constructor({ endpoint, cache, maximumEmptyAttempts = 20 }) {
     Object.assign(this, {
       endpoint,
       cache,
@@ -57,18 +57,22 @@ export default class Questions {
       console.log(`new questions cached: ${uncachedQuestions.length}`)
     }
 
-    this.fetchQuestions()
+    this.sync()
   }
 
   fetchQuestions() {
+    return fetch(this.endpoint)
+      .then(unwrap)
+      .then(refine)
+  }
+
+  sync() {
     if (this.emptyAttempts >= this.maximumEmptyAttempts) {
       console.log(`operation cancelled after ${this.maximumEmptyAttempts} empty attempts`)
       return
     }
 
-    fetch(this.endpoint)
-      .then(unwrap)
-      .then(refine)
+    this.fetchQuestions()
       .then(this.store)
       .catch(::console.log)
   }

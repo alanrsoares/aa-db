@@ -6,6 +6,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "dist": "npm run clean && babel src --out-dir dist",
+    "sync": "rimraf db && mkdir db && node ./dist/sync.js",
+    "postinstall": "npm run sync",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git@github.com:alanrsoares/aa-db.git",
