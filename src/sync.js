@@ -1,3 +1,3 @@
-import db from './'
+import db from "./";
 
-db.sync()
+db.sync();
