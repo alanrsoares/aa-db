@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21,12 +21,12 @@ var uncapitalizeKeys = exports.uncapitalizeKeys = function uncapitalizeKeys(obj)
 };
 
 var removeQueryString = exports.removeQueryString = function removeQueryString(uri) {
-  return uri.split('?')[0];
+  return uri.split("?")[0];
 };
 
 var randomInt = exports.randomInt = function randomInt(_ref) {
-  var _ref$min = _ref.min;
-  var min = _ref$min === undefined ? 0 : _ref$min;
-  var max = _ref.max;
+  var _ref$min = _ref.min,
+      min = _ref$min === undefined ? 0 : _ref$min,
+      max = _ref.max;
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };

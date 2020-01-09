@@ -1,10 +1,13 @@
 import lowdb from "lowdb";
-import storage from "lowdb/file-sync";
+import FileSync from "lowdb/adapters/FileSync";
 
 const STD_TTL = 600;
 const COLLECTION_ID = "cache";
 
-const createDB = lowdb(`${__dirname}/../db/db.json`, { storage });
+const adapter = new FileSync(`${__dirname}/../db/db.json`);
+const DB = lowdb(adapter);
+
+DB.defaults({ [COLLECTION_ID]: [] }).write();
 
 const isValidCacheKey = (key, ttl) =>
   Math.floor((Date.now() - key.created) / 1000) <= ttl;
@@ -17,12 +20,16 @@ class CacheKey {
 }
 
 export default class Cache {
-  constructor({ stdTTL = STD_TTL, db = createDB(COLLECTION_ID) }) {
-    Object.assign(this, { stdTTL, db });
+  constructor({ stdTTL = STD_TTL, db = DB }) {
+    this.stdTTL = stdTTL;
+    this.db = db;
   }
 
   get(key) {
-    const cached = this.db.find({ key });
+    const cached = this.db
+      .get(COLLECTION_ID)
+      .find({ key })
+      .value();
 
     return cached && isValidCacheKey(cached, this.stdTTL)
       ? cached.value
@@ -30,10 +37,16 @@ export default class Cache {
   }
 
   set(key, value) {
-    this.db.push(new CacheKey(key, value));
+    this.db
+      .get(COLLECTION_ID)
+      .push(new CacheKey(key, value))
+      .write();
   }
 
   invalidate(key) {
-    this.db.remove({ key });
+    this.db
+      .get(COLLECTION_ID)
+      .remove({ key })
+      .write();
   }
 }

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var _ = require('./');
+var _ = require("./");
 
 var _2 = _interopRequireDefault(_);
 
