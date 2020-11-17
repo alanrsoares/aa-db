@@ -55,24 +55,29 @@ var Cache = function () {
   _createClass(Cache, [{
     key: "get",
     value: function get(key) {
-      var cached = this.db.get(COLLECTION_ID).find({ key: key }).value();
+      var cached = this.collection.find({ key: key }).value();
 
       return cached && isValidCacheKey(cached, this.stdTTL) ? cached.value : this.invalidate(key);
     }
   }, {
     key: "set",
     value: function set(key, value) {
-      this.db.get(COLLECTION_ID).push(new CacheKey(key, value)).write();
+      this.collection.push(new CacheKey(key, value)).write();
     }
   }, {
     key: "invalidate",
     value: function invalidate(key) {
-      this.db.get(COLLECTION_ID).remove({ key: key }).write();
+      this.collection.remove({ key: key }).write();
+    }
+  }, {
+    key: "collection",
+    get: function get() {
+      return this.db.get(COLLECTION_ID);
     }
   }, {
     key: "length",
     get: function get() {
-      return this.db.get(COLLECTION_ID).value().length;
+      return this.collection.value().length;
     }
   }]);
 

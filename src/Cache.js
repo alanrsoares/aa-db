@@ -25,12 +25,16 @@ export default class Cache {
     this.db = db;
   }
 
+  get collection() {
+    return this.db.get(COLLECTION_ID);
+  }
+
   get length() {
-    return this.db.get(COLLECTION_ID).value().length;
+    return this.collection.value().length;
   }
 
   get(key) {
-    const cached = this.db.get(COLLECTION_ID).find({ key }).value();
+    const cached = this.collection.find({ key }).value();
 
     return cached && isValidCacheKey(cached, this.stdTTL)
       ? cached.value
@@ -38,10 +42,10 @@ export default class Cache {
   }
 
   set(key, value) {
-    this.db.get(COLLECTION_ID).push(new CacheKey(key, value)).write();
+    this.collection.push(new CacheKey(key, value)).write();
   }
 
   invalidate(key) {
-    this.db.get(COLLECTION_ID).remove({ key }).write();
+    this.collection.remove({ key }).write();
   }
 }
