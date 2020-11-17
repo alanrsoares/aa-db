@@ -69,6 +69,11 @@ var Cache = function () {
     value: function invalidate(key) {
       this.db.get(COLLECTION_ID).remove({ key: key }).write();
     }
+  }, {
+    key: "length",
+    get: function get() {
+      return this.db.get(COLLECTION_ID).value().length;
+    }
   }]);
 
   return Cache;
