@@ -13,9 +13,25 @@ const isValidCacheKey = (key, ttl) =>
   Math.floor((Date.now() - key.created) / 1000) <= ttl;
 
 class CacheKey {
+  /**
+   * Creates a new instance of CacheKey
+   *
+   * @param {string} key
+   * @param {*} value
+   */
   constructor(key, value) {
     this.created = Date.now();
     Object.assign(this, { key, value });
+  }
+
+  /**
+   * Creates a new instance of CacheKey
+   *
+   * @param {string} key
+   * @param {*} value
+   */
+  static make(key, value) {
+    return new CacheKey(key, value);
   }
 }
 
@@ -33,6 +49,11 @@ export default class Cache {
     return this.collection.value().length;
   }
 
+  /**
+   * Retrieves a value for a key
+   *
+   * @param {string} key
+   */
   get(key) {
     const cached = this.collection.find({ key }).value();
 
@@ -41,10 +62,21 @@ export default class Cache {
       : this.invalidate(key);
   }
 
+  /**
+   * Stores a value for a key
+   * @param {string} key
+   * @param {*} value
+   */
   set(key, value) {
-    this.collection.push(new CacheKey(key, value)).write();
+    const item = CacheKey.make(key, value);
+    this.collection.push(item).write();
   }
 
+  /**
+   * Removes a key from the cache
+   *
+   * @param {string} key
+   */
   invalidate(key) {
     this.collection.remove({ key }).write();
   }
