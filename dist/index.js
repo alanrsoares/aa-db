@@ -1,15 +1,11 @@
 "use strict";
-
-require("babel-polyfill");
-
-var Cache = require("./Cache");
-var Questions = require("./Questions");
-
-var _require = require("./constants"),
-    ONE_WEEK = _require.ONE_WEEK;
-
-var db = new Questions({
-  cache: new Cache({ stdTTL: ONE_WEEK })
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var Cache_1 = tslib_1.__importDefault(require("./Cache"));
+var Questions_1 = tslib_1.__importDefault(require("./Questions"));
+var constants_1 = require("./constants");
+var db = new Questions_1.default({
+    cache: new Cache_1.default({ stdTTL: constants_1.ONE_WEEK }),
 });
-
 module.exports = db;
+//# sourceMappingURL=index.js.map

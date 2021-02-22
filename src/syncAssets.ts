@@ -1,7 +1,8 @@
-const fetch = require("isomorphic-fetch");
-const fs = require("fs");
+import fetch from "node-fetch";
+import fs from "fs";
 
-const { IMAGE_PREFIX } = require("./constants");
+import { IMAGE_PREFIX } from "./constants";
+import { CacheKey, Question } from "./Cache";
 
 const ROOT_DIR = `${__dirname}/..`;
 const ASSETS_DIR = `${ROOT_DIR}/db/assets`;
@@ -22,10 +23,10 @@ function downloadFromUrl(url = "", verbose = false) {
   });
 }
 
-async function syncAssets(items = []) {
+export default async function syncAssets(items: CacheKey<Question>[] = []) {
   const IMG_URLS = items.map((item) => item.value.image.uri);
 
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     try {
       const downloads = IMG_URLS.map((url) =>
         downloadFromUrl(`${IMAGE_PREFIX}/${url}`)

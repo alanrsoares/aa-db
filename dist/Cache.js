@@ -1,123 +1,91 @@
 "use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var lowdb = require("lowdb");
-var FileSync = require("lowdb/adapters/FileSync");
-
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CacheKey = void 0;
+var tslib_1 = require("tslib");
+var lowdb_1 = tslib_1.__importDefault(require("lowdb"));
+var FileSync_1 = tslib_1.__importDefault(require("lowdb/adapters/FileSync"));
 var STD_TTL = 600;
 var COLLECTION_ID = "cache";
-
-var adapter = new FileSync(__dirname + "/../db/db.json");
-var DB = lowdb(adapter);
-
-DB.defaults(_defineProperty({}, COLLECTION_ID, [])).write();
-
-var isValidCacheKey = function isValidCacheKey(key, ttl) {
-  return Math.floor((Date.now() - key.created) / 1000) <= ttl;
+var adapter = new FileSync_1.default(__dirname + "/../db/db.json");
+var DB = lowdb_1.default(adapter);
+DB.defaults((_a = {}, _a[COLLECTION_ID] = [], _a)).write();
+var isValidCacheKey = function (key, ttl) {
+    return Math.floor((Date.now() - key.created) / 1000) <= ttl;
 };
-
-var CacheKey = function () {
-  /**
-   * Creates a new instance of CacheKey
-   *
-   * @param {string} key
-   * @param {*} value
-   */
-  function CacheKey(key, value) {
-    _classCallCheck(this, CacheKey);
-
-    this.created = Date.now();
-    Object.assign(this, { key: key, value: value });
-  }
-
-  /**
-   * Creates a new instance of CacheKey
-   *
-   * @param {string} key
-   * @param {*} value
-   */
-
-
-  _createClass(CacheKey, null, [{
-    key: "make",
-    value: function make(key, value) {
-      return new CacheKey(key, value);
+var CacheKey = /** @class */ (function () {
+    /**
+     * Creates a new instance of CacheKey
+     *
+     * @param {string} key
+     * @param {*} value
+     */
+    function CacheKey(key, value) {
+        this.created = Date.now();
+        this.key = key;
+        this.value = value;
     }
-  }]);
-
-  return CacheKey;
-}();
-
-var Cache = function () {
-  function Cache(_ref) {
-    var _ref$stdTTL = _ref.stdTTL,
-        stdTTL = _ref$stdTTL === undefined ? STD_TTL : _ref$stdTTL,
-        _ref$db = _ref.db,
-        db = _ref$db === undefined ? DB : _ref$db;
-
-    _classCallCheck(this, Cache);
-
-    this.stdTTL = stdTTL;
-    this.db = db;
-  }
-
-  _createClass(Cache, [{
-    key: "get",
-
-
+    /**
+     * Creates a new instance of CacheKey
+     *
+     * @param {string} key
+     * @param {*} value
+     */
+    CacheKey.make = function (key, value) {
+        return new CacheKey(key, value);
+    };
+    return CacheKey;
+}());
+exports.CacheKey = CacheKey;
+var Cache = /** @class */ (function () {
+    function Cache(_a) {
+        var _b = _a.stdTTL, stdTTL = _b === void 0 ? STD_TTL : _b, _c = _a.db, db = _c === void 0 ? DB : _c;
+        this.stdTTL = stdTTL;
+        this.db = db;
+    }
+    Object.defineProperty(Cache.prototype, "collection", {
+        get: function () {
+            return this.db.get(COLLECTION_ID);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Cache.prototype, "length", {
+        get: function () {
+            return this.collection.value().length;
+        },
+        enumerable: false,
+        configurable: true
+    });
     /**
      * Retrieves a value for a key
      *
      * @param {string} key
      */
-    value: function get(key) {
-      var cached = this.collection.find({ key: key }).value();
-
-      return cached && isValidCacheKey(cached, this.stdTTL) ? cached.value : this.invalidate(key);
-    }
-
+    Cache.prototype.get = function (key) {
+        var cached = this.collection.find({ key: key }).value();
+        return cached && isValidCacheKey(cached, this.stdTTL)
+            ? cached.value
+            : this.invalidate(key);
+    };
     /**
      * Stores a value for a key
      * @param {string} key
      * @param {*} value
      */
-
-  }, {
-    key: "set",
-    value: function set(key, value) {
-      var item = CacheKey.make(key, value);
-      this.collection.push(item).write();
-    }
-
+    Cache.prototype.set = function (key, value) {
+        var item = CacheKey.make(key, value);
+        this.collection.push(item).write();
+    };
     /**
      * Removes a key from the cache
      *
      * @param {string} key
      */
-
-  }, {
-    key: "invalidate",
-    value: function invalidate(key) {
-      this.collection.remove({ key: key }).write();
-    }
-  }, {
-    key: "collection",
-    get: function get() {
-      return this.db.get(COLLECTION_ID);
-    }
-  }, {
-    key: "length",
-    get: function get() {
-      return this.collection.value().length;
-    }
-  }]);
-
-  return Cache;
-}();
-
-module.exports = Cache;
+    Cache.prototype.invalidate = function (key) {
+        this.collection.remove({ key: key }).write();
+    };
+    return Cache;
+}());
+exports.default = Cache;
+//# sourceMappingURL=Cache.js.map

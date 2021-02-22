@@ -1,15 +1,16 @@
-const chalk = require("chalk");
-const fetch = require("isomorphic-fetch");
-const Cache = require("./Cache");
+import chalk from "chalk";
+import fetch from "node-fetch";
 
-const { ENDPOINT_HOST, IMAGE_PREFIX } = require("./constants");
-const { parseProp, parseTags } = require("./parsers");
-const syncAssets = require("./syncAssets");
-const { uncapitalizeKeys, removeQueryString, randomInt } = require("./utils");
+import Cache from "./Cache";
+
+import { ENDPOINT_HOST, IMAGE_PREFIX } from "./constants";
+import { parseProp, parseTags } from "./parsers";
+import syncAssets from "./syncAssets";
+import { uncapitalizeKeys, removeQueryString, randomInt } from "./utils";
 
 const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
 
-const parseAnswers = (answers) => {
+const parseAnswers = (answers = "") => {
   const links = parseTags("a", "g")(answers);
   const contents = links.map(parseTags("a"));
   const spans = contents.map(parseTags("span", "g"));
@@ -24,23 +25,23 @@ const parseAnswers = (answers) => {
   );
 };
 
-const parseImage = (image) => {
+function parseImage(image = "") {
   const uri = removeQueryString(
     `${ENDPOINT_HOST}${parseProp("src")(image)}`
   ).replace(IMAGE_PREFIX, "");
 
   return { uri };
-};
+}
 
 const makeKey = ({ Question, RoadCodePage, CorrectAnswer }) =>
   `${Question}/${RoadCodePage}/${CorrectAnswer}`;
 
-const clearLine = () => {
-  process.stdout.clearLine();
+function clearLine() {
+  process.stdout.clearLine(-1);
   process.stdout.cursorTo(0);
-};
+}
 
-const refineQuestion = (question) =>
+const refineQuestion = (question = {}) =>
   uncapitalizeKeys({
     ...question,
     key: makeKey(question),
@@ -52,7 +53,7 @@ const unwrap = (res) => res.json();
 
 const refine = (data) => Promise.resolve(data.map(refineQuestion));
 
-module.exports = class Questions {
+export default class Questions {
   constructor({
     cache,
     endpoint = QUESTIONS_ENDPOINT,
@@ -147,4 +148,4 @@ module.exports = class Questions {
       }
     });
   }
-};
+}

@@ -1,35 +1,32 @@
 "use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var propPattern = function propPattern(prop) {
-  return new RegExp(prop + "=([\"'])(.*?)\\1");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseTags = exports.parseProps = exports.parseProp = exports.propPattern = void 0;
+var tslib_1 = require("tslib");
+var propPattern = function (prop) {
+    return new RegExp(prop + "=([\"'])(.*?)\\1");
 };
-
-var parseProp = function parseProp(prop) {
-  return function (subject) {
-    return propPattern(prop).exec(subject)[2];
-  };
-};
-
-var parseProps = function parseProps(props) {
-  return function (subject) {
+exports.propPattern = propPattern;
+var parseProp = function (prop) { return function (subject) {
+    var match = exports.propPattern(prop).exec(subject);
+    if (match) {
+        return match[2];
+    }
+    return null;
+}; };
+exports.parseProp = parseProp;
+var parseProps = function (props) { return function (subject) {
     return props.reduce(function (acc, prop) {
-      return _extends({}, acc, _defineProperty({}, prop, parseProp(prop)(subject)));
+        var _a;
+        return (tslib_1.__assign(tslib_1.__assign({}, acc), (_a = {}, _a[prop] = exports.parseProp(prop)(subject), _a)));
     }, {});
-  };
-};
-
-var parseTags = function parseTags(tag, opts) {
-  return function (subject) {
-    return opts ? subject.match(new RegExp("<" + tag + ".*?>(.*?)</" + tag + ">", opts)) : subject.match(new RegExp("<" + tag + ".*?>(.*?)</" + tag + ">"))[1];
-  };
-};
-
-module.exports = {
-  parseProp: parseProp,
-  parseProps: parseProps,
-  parseTags: parseTags
-};
+}; };
+exports.parseProps = parseProps;
+var parseTags = function (tag, opts) { return function (subject) {
+    var _a;
+    var pattern = "<" + tag + ".*?>(.*?)</" + tag + ">";
+    return (opts
+        ? subject.match(new RegExp(pattern, opts))
+        : ((_a = subject.match(new RegExp(pattern))) !== null && _a !== void 0 ? _a : [])[1]);
+}; };
+exports.parseTags = parseTags;
+//# sourceMappingURL=parsers.js.map
