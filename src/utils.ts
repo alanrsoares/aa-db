@@ -11,6 +11,3 @@ export const uncapitalizeKeys = (obj: Record<string, string | {}>) =>
   );
 
 export const removeQueryString = (uri: string) => uri.split("?")[0];
-
-export const randomInt = ({ min = 0, max }: { min?: number; max: number }) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;

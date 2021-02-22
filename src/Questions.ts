@@ -6,7 +6,7 @@ import Cache, { Question } from "./Cache";
 import { ENDPOINT_HOST, IMAGE_PREFIX } from "./constants";
 import { parseProp, parseTag, parseTags } from "./parsers";
 import syncAssets from "./syncAssets";
-import { uncapitalizeKeys, removeQueryString, randomInt } from "./utils";
+import { uncapitalizeKeys, removeQueryString } from "./utils";
 
 const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
 
@@ -112,18 +112,6 @@ export default class Questions {
     this.endpoint = endpoint;
     this.maximumEmptyAttempts = maximumEmptyAttempts;
     this.emptyAttempts = 0;
-  }
-
-  random(length = 30) {
-    const result = [];
-    const questions = this.cache.collection.value();
-
-    for (let i = 0; i < length; i++) {
-      const index = randomInt({ max: questions.length - 1 });
-      result.push(...questions.splice(index, 1));
-    }
-
-    return result;
   }
 
   store = (questions: Question[]) => {

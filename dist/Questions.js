@@ -92,16 +92,6 @@ var Questions = /** @class */ (function () {
         this.maximumEmptyAttempts = maximumEmptyAttempts;
         this.emptyAttempts = 0;
     }
-    Questions.prototype.random = function (length) {
-        if (length === void 0) { length = 30; }
-        var result = [];
-        var questions = this.cache.collection.value();
-        for (var i = 0; i < length; i++) {
-            var index = utils_1.randomInt({ max: questions.length - 1 });
-            result.push.apply(result, questions.splice(index, 1));
-        }
-        return result;
-    };
     Questions.prototype.fetchQuestions = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var res, questions;

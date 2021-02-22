@@ -10,7 +10,6 @@ export default class Questions {
     maximumEmptyAttempts: number;
     emptyAttempts: number;
     constructor({ cache, endpoint, maximumEmptyAttempts, }: QuestionsConfig);
-    random(length?: number): import("./Cache").CacheKey<Question>[];
     store: (questions: Question[]) => void;
     fetchQuestions(): Promise<Question[]>;
     sync(): Promise<unknown>;
