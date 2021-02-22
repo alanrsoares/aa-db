@@ -4,6 +4,7 @@ const Cache = require("./Cache");
 
 const { ENDPOINT_HOST, IMAGE_PREFIX } = require("./constants");
 const { parseProp, parseTags } = require("./parsers");
+const syncAssets = require("./syncAssets");
 const { uncapitalizeKeys, removeQueryString, randomInt } = require("./utils");
 
 const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
@@ -81,7 +82,7 @@ module.exports = class Questions {
     return result;
   }
 
-  store(questions) {
+  store(questions = []) {
     const uncachedQuestions = questions.filter((q) => !this.cache.get(q.key));
 
     clearLine();
@@ -119,22 +120,31 @@ module.exports = class Questions {
   }
 
   sync() {
-    if (this.emptyAttempts >= this.maximumEmptyAttempts) {
-      clearLine();
+    return new Promise((resolve, reject) => {
+      if (this.emptyAttempts >= this.maximumEmptyAttempts) {
+        clearLine();
 
-      console.log(
-        `Operation cancelled after ${chalk.bold.red(
-          this.maximumEmptyAttempts
-        )} empty attempts.`
-      );
-      console.log(
-        `Total questions cached: ${chalk.bold.cyan(this.cache.length)}.`
-      );
-      return;
-    }
+        console.log(
+          `Operation cancelled after ${chalk.bold.red(
+            this.maximumEmptyAttempts
+          )} empty attempts.`
+        );
+        console.log(
+          `Total questions cached: ${chalk.bold.cyan(this.cache.length)}.`
+        );
+        const cached = this.cache.collection.value();
 
-    return this.fetchQuestions()
-      .then(this.store)
-      .catch((e) => console.error(e));
+        syncAssets(cached);
+
+        resolve(cached);
+      } else {
+        this.fetchQuestions()
+          .then(this.store)
+          .catch((e) => {
+            console.error(e);
+            reject(e);
+          });
+      }
+    });
   }
 };

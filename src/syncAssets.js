@@ -1,12 +1,10 @@
 const fetch = require("isomorphic-fetch");
 const fs = require("fs");
-const db = require("../db/db.json");
+
 const { IMAGE_PREFIX } = require("./constants");
 
 const ROOT_DIR = `${__dirname}/..`;
 const ASSETS_DIR = `${ROOT_DIR}/db/assets`;
-
-const IMG_URLS = db.cache.map((item) => item.value.image.uri);
 
 function downloadFromUrl(url = "", verbose = false) {
   return new Promise(async (resolve) => {
@@ -24,14 +22,25 @@ function downloadFromUrl(url = "", verbose = false) {
   });
 }
 
-try {
-  const downloads = IMG_URLS.map((url) => downloadFromUrl(url));
-  fs.mkdir(ASSETS_DIR, () => {
-    console.log("Downloading assets");
-    Promise.all(downloads).then(() => {
-      console.log(`Finished downloading assets!`);
-    });
+async function syncAssets(items = []) {
+  const IMG_URLS = items.map((item) => item.value.image.uri);
+
+  return new Promise((resolve, reject) => {
+    try {
+      const downloads = IMG_URLS.map((url) =>
+        downloadFromUrl(`${IMAGE_PREFIX}/${url}`)
+      );
+      fs.mkdir(ASSETS_DIR, async () => {
+        console.log("Downloading assets");
+        await Promise.all(downloads);
+        console.log(`Finished downloading assets!`);
+      });
+      resolve();
+    } catch (e) {
+      console.log("Failed to sync assets:", e);
+      reject(e);
+    }
   });
-} catch (e) {
-  console.log("Failed to sync assets:", e);
 }
+
+module.exports = syncAssets;

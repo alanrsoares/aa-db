@@ -26,6 +26,8 @@ var _require2 = require("./parsers"),
     parseProp = _require2.parseProp,
     parseTags = _require2.parseTags;
 
+var syncAssets = require("./syncAssets");
+
 var _require3 = require("./utils"),
     uncapitalizeKeys = _require3.uncapitalizeKeys,
     removeQueryString = _require3.removeQueryString,
@@ -123,8 +125,10 @@ module.exports = function () {
     }
   }, {
     key: "store",
-    value: function store(questions) {
+    value: function store() {
       var _this = this;
+
+      var questions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
       var uncachedQuestions = questions.filter(function (q) {
         return !_this.cache.get(q.key);
@@ -188,16 +192,25 @@ module.exports = function () {
   }, {
     key: "sync",
     value: function sync() {
-      if (this.emptyAttempts >= this.maximumEmptyAttempts) {
-        clearLine();
+      var _this2 = this;
 
-        console.log("Operation cancelled after " + chalk.bold.red(this.maximumEmptyAttempts) + " empty attempts.");
-        console.log("Total questions cached: " + chalk.bold.cyan(this.cache.length) + ".");
-        return;
-      }
+      return new Promise(function (resolve, reject) {
+        if (_this2.emptyAttempts >= _this2.maximumEmptyAttempts) {
+          clearLine();
 
-      return this.fetchQuestions().then(this.store).catch(function (e) {
-        return console.error(e);
+          console.log("Operation cancelled after " + chalk.bold.red(_this2.maximumEmptyAttempts) + " empty attempts.");
+          console.log("Total questions cached: " + chalk.bold.cyan(_this2.cache.length) + ".");
+          var cached = _this2.cache.collection.value();
+
+          syncAssets(cached);
+
+          resolve(cached);
+        } else {
+          _this2.fetchQuestions().then(_this2.store).catch(function (e) {
+            console.error(e);
+            reject(e);
+          });
+        }
       });
     }
   }]);
