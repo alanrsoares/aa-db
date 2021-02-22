@@ -7,5 +7,5 @@ var constants_1 = require("./constants");
 var db = new Questions_1.default({
     cache: new Cache_1.default({ stdTTL: constants_1.ONE_WEEK }),
 });
-module.exports = db;
+exports.default = db;
 //# sourceMappingURL=index.js.map

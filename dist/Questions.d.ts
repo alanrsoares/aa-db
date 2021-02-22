@@ -7,6 +7,6 @@ export default class Questions {
     random(length?: number): any[];
     store(questions?: any[]): void;
     emptyAttempts: number | undefined;
-    fetchQuestions(): Promise<any>;
+    fetchQuestions(): Promise<{}[]>;
     sync(): Promise<any>;
 }

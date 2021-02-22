@@ -1,1 +1,1 @@
-{"version":3,"file":"sync.js","sourceRoot":"","sources":["../src/sync.js"],"names":[],"mappings":";AAAA,IAAM,EAAE,GAAG,OAAO,CAAC,IAAI,CAAC,CAAC;AAEzB,EAAE,CAAC,IAAI,EAAE,CAAC"}
+{"version":3,"file":"sync.js","sourceRoot":"","sources":["../src/sync.ts"],"names":[],"mappings":";;;AAAA,+CAAmB;AAEnB,UAAE,CAAC,IAAI,EAAE,CAAC"}

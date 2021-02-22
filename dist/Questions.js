@@ -9,7 +9,12 @@ var parsers_1 = require("./parsers");
 var syncAssets_1 = tslib_1.__importDefault(require("./syncAssets"));
 var utils_1 = require("./utils");
 var QUESTIONS_ENDPOINT = constants_1.ENDPOINT_HOST + "/RoadCodeQuizController/getSet";
-var parseAnswers = function (answers) {
+/**
+ *
+ * @param {string} answers
+ * @returns {Record<string,string>} parsed
+ */
+function parseAnswers(answers) {
     if (answers === void 0) { answers = ""; }
     var links = parsers_1.parseTags("a", "g")(answers);
     var contents = links.map(parsers_1.parseTags("a"));
@@ -20,12 +25,16 @@ var parseAnswers = function (answers) {
         var option = _a[0], content = _a[1];
         return (tslib_1.__assign(tslib_1.__assign({}, acc), (_b = {}, _b[spanContent(option)] = spanContent(content).trim(), _b)));
     }, {});
-};
+}
 function parseImage(image) {
     if (image === void 0) { image = ""; }
     var uri = utils_1.removeQueryString("" + constants_1.ENDPOINT_HOST + parsers_1.parseProp("src")(image)).replace(constants_1.IMAGE_PREFIX, "");
     return { uri: uri };
 }
+/**
+ *
+ * @param {{ Question: string; RoadCodePage: string: CorrectAnswer: string; }} data
+ */
 var makeKey = function (_a) {
     var Question = _a.Question, RoadCodePage = _a.RoadCodePage, CorrectAnswer = _a.CorrectAnswer;
     return Question + "/" + RoadCodePage + "/" + CorrectAnswer;
@@ -34,11 +43,25 @@ function clearLine() {
     process.stdout.clearLine(-1);
     process.stdout.cursorTo(0);
 }
+/**
+ *
+ * @param {{ Image: string, Answers: string }} question
+ */
 var refineQuestion = function (question) {
     if (question === void 0) { question = {}; }
     return utils_1.uncapitalizeKeys(tslib_1.__assign(tslib_1.__assign({}, question), { key: makeKey(question), Image: parseImage(question.Image), Answers: parseAnswers(question.Answers) }));
 };
+/**
+ * unwrap
+ *
+ * @param {Response} res
+ */
 var unwrap = function (res) { return res.json(); };
+/**
+ * refine
+ *
+ * @param {Record<string,string>[]} data
+ */
 var refine = function (data) { return Promise.resolve(data.map(refineQuestion)); };
 var Questions = /** @class */ (function () {
     function Questions(_a) {

@@ -10,7 +10,12 @@ import { uncapitalizeKeys, removeQueryString, randomInt } from "./utils";
 
 const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
 
-const parseAnswers = (answers = "") => {
+/**
+ *
+ * @param {string} answers
+ * @returns {Record<string,string>} parsed
+ */
+function parseAnswers(answers = "") {
   const links = parseTags("a", "g")(answers);
   const contents = links.map(parseTags("a"));
   const spans = contents.map(parseTags("span", "g"));
@@ -23,7 +28,7 @@ const parseAnswers = (answers = "") => {
     }),
     {}
   );
-};
+}
 
 function parseImage(image = "") {
   const uri = removeQueryString(
@@ -33,6 +38,10 @@ function parseImage(image = "") {
   return { uri };
 }
 
+/**
+ *
+ * @param {{ Question: string; RoadCodePage: string: CorrectAnswer: string; }} data
+ */
 const makeKey = ({ Question, RoadCodePage, CorrectAnswer }) =>
   `${Question}/${RoadCodePage}/${CorrectAnswer}`;
 
@@ -41,6 +50,10 @@ function clearLine() {
   process.stdout.cursorTo(0);
 }
 
+/**
+ *
+ * @param {{ Image: string, Answers: string }} question
+ */
 const refineQuestion = (question = {}) =>
   uncapitalizeKeys({
     ...question,
@@ -49,8 +62,18 @@ const refineQuestion = (question = {}) =>
     Answers: parseAnswers(question.Answers),
   });
 
+/**
+ * unwrap
+ *
+ * @param {Response} res
+ */
 const unwrap = (res) => res.json();
 
+/**
+ * refine
+ *
+ * @param {Record<string,string>[]} data
+ */
 const refine = (data) => Promise.resolve(data.map(refineQuestion));
 
 export default class Questions {

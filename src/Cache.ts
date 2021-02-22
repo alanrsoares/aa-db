@@ -1,4 +1,4 @@
-import lowdb from "lowdb";
+import lowdb, { LowdbSync } from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 
 const STD_TTL = 600;
@@ -58,7 +58,7 @@ export interface Question {
 
 export default class Cache {
   stdTTL: number;
-  db: lowdb.LowdbSync<Database<Question>>;
+  db: LowdbSync<Database<Question>>;
   constructor({ stdTTL = STD_TTL, db = DB }) {
     this.stdTTL = stdTTL;
     this.db = db;
