@@ -113,7 +113,6 @@ var Questions = /** @class */ (function () {
                         return [4 /*yield*/, unwrap(res)];
                     case 2:
                         questions = (_a.sent());
-                        console.log({ questions: questions });
                         return [2 /*return*/, refine(questions)];
                 }
             });
