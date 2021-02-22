@@ -1,3 +1,5 @@
 import db from ".";
 
-db.sync();
+import syncAssets from "./syncAssets";
+
+db.sync().then(syncAssets);

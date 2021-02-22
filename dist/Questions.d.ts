@@ -11,7 +11,7 @@ export default class Questions {
     emptyAttempts: number;
     constructor({ cache, endpoint, maximumEmptyAttempts, }: QuestionsConfig);
     store: (questions: Question[]) => void;
-    fetchQuestions(): Promise<Question[]>;
-    sync(): Promise<unknown>;
+    fetchQuestions: () => Promise<Question[]>;
+    sync: () => Promise<import("./Cache").CacheKey<Question>[]>;
 }
 export {};

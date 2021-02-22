@@ -6,7 +6,6 @@ var node_fetch_1 = tslib_1.__importDefault(require("node-fetch"));
 var Cache_1 = tslib_1.__importDefault(require("./Cache"));
 var constants_1 = require("./constants");
 var parsers_1 = require("./parsers");
-var syncAssets_1 = tslib_1.__importDefault(require("./syncAssets"));
 var utils_1 = require("./utils");
 var QUESTIONS_ENDPOINT = constants_1.ENDPOINT_HOST + "/RoadCodeQuizController/getSet";
 /**
@@ -82,18 +81,8 @@ var Questions = /** @class */ (function () {
                 clearLine();
                 process.stdout.write("Empty attempt: " + chalk_1.default.bold.red(_this.emptyAttempts + "/" + _this.maximumEmptyAttempts) + ".");
             }
-            _this.sync();
         };
-        if (!(cache instanceof Cache_1.default)) {
-            throw new Error("Invalid argument 'cache'");
-        }
-        this.cache = cache;
-        this.endpoint = endpoint;
-        this.maximumEmptyAttempts = maximumEmptyAttempts;
-        this.emptyAttempts = 0;
-    }
-    Questions.prototype.fetchQuestions = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        this.fetchQuestions = function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
             var res, questions;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
@@ -106,29 +95,44 @@ var Questions = /** @class */ (function () {
                         return [2 /*return*/, refine(questions)];
                 }
             });
-        });
-    };
-    Questions.prototype.sync = function () {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            if (_this.emptyAttempts >= _this.maximumEmptyAttempts) {
-                clearLine();
-                console.log("Operation cancelled after " + chalk_1.default.bold.red(_this.maximumEmptyAttempts) + " empty attempts.");
-                console.log("Total questions cached: " + chalk_1.default.bold.cyan(_this.cache.length) + ".");
-                var cached = _this.cache.collection.value();
-                syncAssets_1.default(cached);
-                resolve(cached);
-            }
-            else {
-                _this.fetchQuestions()
-                    .then(_this.store)
-                    .catch(function (e) {
-                    console.error(e);
-                    reject(e);
-                });
-            }
-        });
-    };
+        }); };
+        this.sync = function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+            var error_1, cached;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(this.emptyAttempts !== this.maximumEmptyAttempts)) return [3 /*break*/, 5];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.fetchQuestions().then(this.store)];
+                    case 2:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        {
+                            console.error(error_1);
+                            return [2 /*return*/, Promise.reject(error_1)];
+                        }
+                        return [3 /*break*/, 4];
+                    case 4: return [3 /*break*/, 0];
+                    case 5:
+                        clearLine();
+                        console.log("Operation cancelled after " + chalk_1.default.bold.red(this.maximumEmptyAttempts) + " empty attempts.", "Total questions cached: " + chalk_1.default.bold.cyan(this.cache.length) + ".");
+                        cached = this.cache.collection.value();
+                        return [2 /*return*/, cached];
+                }
+            });
+        }); };
+        if (!(cache instanceof Cache_1.default)) {
+            throw new Error("Invalid argument 'cache'");
+        }
+        this.cache = cache;
+        this.endpoint = endpoint;
+        this.maximumEmptyAttempts = maximumEmptyAttempts;
+        this.emptyAttempts = 0;
+    }
     return Questions;
 }());
 exports.default = Questions;

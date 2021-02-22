@@ -5,7 +5,7 @@ import Cache, { Question } from "./Cache";
 
 import { ENDPOINT_HOST, IMAGE_PREFIX } from "./constants";
 import { parseProp, parseTag, parseTags } from "./parsers";
-import syncAssets from "./syncAssets";
+
 import { uncapitalizeKeys, removeQueryString } from "./utils";
 
 const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
@@ -131,6 +131,7 @@ export default class Questions {
         uncachedQuestions.length
       )}. Total: ${chalk.bold.cyan(this.cache.length)}.`
     );
+
     if (this.emptyAttempts) {
       clearLine();
 
@@ -140,43 +141,38 @@ export default class Questions {
         )}.`
       );
     }
-
-    this.sync();
   };
 
-  async fetchQuestions() {
+  fetchQuestions = async () => {
     const res = await fetch(this.endpoint);
     const questions = (await unwrap(res)) as QuestionDTO[];
 
     return refine(questions);
-  }
+  };
 
-  sync() {
-    return new Promise((resolve, reject) => {
-      if (this.emptyAttempts >= this.maximumEmptyAttempts) {
-        clearLine();
-
-        console.log(
-          `Operation cancelled after ${chalk.bold.red(
-            this.maximumEmptyAttempts
-          )} empty attempts.`
-        );
-        console.log(
-          `Total questions cached: ${chalk.bold.cyan(this.cache.length)}.`
-        );
-        const cached = this.cache.collection.value();
-
-        syncAssets(cached);
-
-        resolve(cached);
-      } else {
-        this.fetchQuestions()
-          .then(this.store)
-          .catch((e) => {
-            console.error(e);
-            reject(e);
-          });
+  sync = async () => {
+    while (this.emptyAttempts !== this.maximumEmptyAttempts) {
+      try {
+        await this.fetchQuestions().then(this.store);
+      } catch (error) {
+        {
+          console.error(error);
+          return Promise.reject(error);
+        }
       }
-    });
-  }
+    }
+
+    clearLine();
+
+    console.log(
+      `Operation cancelled after ${chalk.bold.red(
+        this.maximumEmptyAttempts
+      )} empty attempts.`,
+      `Total questions cached: ${chalk.bold.cyan(this.cache.length)}.`
+    );
+
+    const cached = this.cache.collection.value();
+
+    return cached;
+  };
 }
