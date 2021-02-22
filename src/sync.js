@@ -1,3 +1,3 @@
-const db = require("./");
+import db from "./";
 
 db.sync();

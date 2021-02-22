@@ -6,4 +6,4 @@ const db = new Questions({
   cache: new Cache({ stdTTL: ONE_WEEK }),
 });
 
-module.exports = db;
+export default db;
