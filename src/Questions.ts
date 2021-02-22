@@ -1,10 +1,10 @@
 import chalk from "chalk";
-import fetch from "node-fetch";
+import fetch, { Response } from "node-fetch";
 
-import Cache from "./Cache";
+import Cache, { Question } from "./Cache";
 
 import { ENDPOINT_HOST, IMAGE_PREFIX } from "./constants";
-import { parseProp, parseTags } from "./parsers";
+import { parseProp, parseTag, parseTags } from "./parsers";
 import syncAssets from "./syncAssets";
 import { uncapitalizeKeys, removeQueryString, randomInt } from "./utils";
 
@@ -15,11 +15,14 @@ const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
  * @param {string} answers
  * @returns {Record<string,string>} parsed
  */
-function parseAnswers(answers = "") {
-  const links = parseTags("a", "g")(answers);
-  const contents = links.map(parseTags("a"));
-  const spans = contents.map(parseTags("span", "g"));
-  const spanContent = parseTags("span");
+function parseAnswers(answers: string = ""): Record<string, string> {
+  const links = parseTags("a")(answers) as string[];
+
+  const contents = links.map(parseTag("a"));
+
+  const spans = contents.map(parseTags("span")) as [string, string][];
+
+  const spanContent = parseTag("span");
 
   return spans.reduce(
     (acc, [option, content]) => ({
@@ -38,12 +41,20 @@ function parseImage(image = "") {
   return { uri };
 }
 
+interface QuestionDTO {
+  Question: string;
+  Answers: string;
+  CorrectAnswer: string;
+  RoadCodePage: string;
+  Image: string;
+}
+
 /**
  *
- * @param {{ Question: string; RoadCodePage: string: CorrectAnswer: string; }} data
+ * @param {QuestionDTO} data
  */
-const makeKey = ({ Question, RoadCodePage, CorrectAnswer }) =>
-  `${Question}/${RoadCodePage}/${CorrectAnswer}`;
+const makeKey = (data: QuestionDTO) =>
+  `${data.Question}/${data.RoadCodePage}/${data.CorrectAnswer}`;
 
 function clearLine() {
   process.stdout.clearLine(-1);
@@ -54,49 +65,58 @@ function clearLine() {
  *
  * @param {{ Image: string, Answers: string }} question
  */
-const refineQuestion = (question = {}) =>
+const refineQuestion = (question: QuestionDTO) =>
   uncapitalizeKeys({
     ...question,
     key: makeKey(question),
     Image: parseImage(question.Image),
     Answers: parseAnswers(question.Answers),
-  });
+  }) as Question;
 
 /**
  * unwrap
  *
  * @param {Response} res
  */
-const unwrap = (res) => res.json();
+const unwrap = (res: Response) => res.json();
 
 /**
  * refine
  *
  * @param {Record<string,string>[]} data
  */
-const refine = (data) => Promise.resolve(data.map(refineQuestion));
+const refine = (data: QuestionDTO[]) =>
+  Promise.resolve(data.map(refineQuestion));
+
+interface QuestionsConfig {
+  cache: Cache;
+  endpoint?: string;
+  maximumEmptyAttempts?: number;
+}
 
 export default class Questions {
+  cache: Cache;
+  endpoint: string;
+  maximumEmptyAttempts: number;
+  emptyAttempts: number;
+
   constructor({
     cache,
     endpoint = QUESTIONS_ENDPOINT,
     maximumEmptyAttempts = 20,
-  }) {
+  }: QuestionsConfig) {
     if (!(cache instanceof Cache)) {
       throw new Error("Invalid argument 'cache'");
     }
-    Object.assign(this, {
-      endpoint,
-      cache,
-      maximumEmptyAttempts,
-      emptyAttempts: 0,
-      store: this.store.bind(this),
-    });
+    this.cache = cache;
+    this.endpoint = endpoint;
+    this.maximumEmptyAttempts = maximumEmptyAttempts;
+    this.emptyAttempts = 0;
   }
 
   random(length = 30) {
     const result = [];
-    const questions = this.cache.db.toJSON().map((x) => x.value);
+    const questions = this.cache.collection.value();
 
     for (let i = 0; i < length; i++) {
       const index = randomInt({ max: questions.length - 1 });
@@ -106,7 +126,7 @@ export default class Questions {
     return result;
   }
 
-  store(questions = []) {
+  store = (questions: Question[]) => {
     const uncachedQuestions = questions.filter((q) => !this.cache.get(q.key));
 
     clearLine();
@@ -134,13 +154,13 @@ export default class Questions {
     }
 
     this.sync();
-  }
+  };
 
   async fetchQuestions() {
     const res = await fetch(this.endpoint);
-    const data = await unwrap(res);
+    const questions = (await unwrap(res)) as QuestionDTO[];
 
-    return refine(data);
+    return refine(questions);
   }
 
   sync() {

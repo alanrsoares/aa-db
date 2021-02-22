@@ -18,10 +18,20 @@ export const parseProps = (props: string[]) => (subject: string) =>
     {}
   );
 
-export const parseTags = (tag: string, opts?: string) => (subject: string) => {
-  const pattern = `<${tag}.*?>(.*?)<\/${tag}>`;
+export function parseTag(tag: string) {
+  return (subject: string) => {
+    const pattern = `<${tag}.*?>(.*?)<\/${tag}>`;
+    const match = subject.match(new RegExp(pattern)) ?? ["", ""];
 
-  return (opts
-    ? subject.match(new RegExp(pattern, opts))
-    : (subject.match(new RegExp(pattern)) ?? [])[1]) as string[];
-};
+    return match[1] as string;
+  };
+}
+
+export function parseTags(tag: string) {
+  return (subject: string) => {
+    const pattern = `<${tag}.*?>(.*?)<\/${tag}>`;
+    const match = subject.match(new RegExp(pattern, global ? "g" : undefined));
+
+    return match as string[];
+  };
+}

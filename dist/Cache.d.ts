@@ -1,5 +1,6 @@
 /// <reference types="lodash" />
 import lowdb, { LowdbSync } from "lowdb";
+declare const DB: lowdb.LowdbSync<any>;
 export declare class CacheKey<T> {
     created: number;
     key: string;
@@ -35,9 +36,9 @@ export interface Question {
 export default class Cache {
     stdTTL: number;
     db: LowdbSync<Database<Question>>;
-    constructor({ stdTTL, db }: {
-        stdTTL?: number | undefined;
-        db?: lowdb.LowdbSync<any> | undefined;
+    constructor({ stdTTL, db, }: {
+        stdTTL?: number;
+        db?: typeof DB;
     });
     get collection(): import("lodash").CollectionChain<CacheKey<Question>>;
     get length(): number;
@@ -60,3 +61,4 @@ export default class Cache {
      */
     invalidate(key: string): void;
 }
+export {};

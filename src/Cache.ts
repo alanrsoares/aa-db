@@ -59,7 +59,13 @@ export interface Question {
 export default class Cache {
   stdTTL: number;
   db: LowdbSync<Database<Question>>;
-  constructor({ stdTTL = STD_TTL, db = DB }) {
+  constructor({
+    stdTTL = STD_TTL,
+    db = DB,
+  }: {
+    stdTTL?: number;
+    db?: typeof DB;
+  }) {
     this.stdTTL = stdTTL;
     this.db = db;
   }
