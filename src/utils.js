@@ -1,6 +1,6 @@
-export const uncapitalize = (x) => x.replace(/^\w/, (y) => y.toLowerCase());
+const uncapitalize = (x) => x.replace(/^\w/, (y) => y.toLowerCase());
 
-export const uncapitalizeKeys = (obj) =>
+const uncapitalizeKeys = (obj) =>
   Object.keys(obj).reduce(
     (acc, key) => ({
       ...acc,
@@ -9,7 +9,14 @@ export const uncapitalizeKeys = (obj) =>
     {}
   );
 
-export const removeQueryString = (uri) => uri.split("?")[0];
+const removeQueryString = (uri) => uri.split("?")[0];
 
-export const randomInt = ({ min = 0, max }) =>
+const randomInt = ({ min = 0, max }) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
+module.exports = {
+  uncapitalize,
+  uncapitalizeKeys,
+  removeQueryString,
+  randomInt,
+};

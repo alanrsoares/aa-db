@@ -1,5 +1,5 @@
-import lowdb from "lowdb";
-import FileSync from "lowdb/adapters/FileSync";
+const lowdb = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
 
 const STD_TTL = 600;
 const COLLECTION_ID = "cache";
@@ -35,7 +35,7 @@ class CacheKey {
   }
 }
 
-export default class Cache {
+class Cache {
   constructor({ stdTTL = STD_TTL, db = DB }) {
     this.stdTTL = stdTTL;
     this.db = db;
@@ -81,3 +81,5 @@ export default class Cache {
     this.collection.remove({ key }).write();
   }
 }
+
+module.exports = Cache;

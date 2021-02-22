@@ -1,11 +1,10 @@
-import chalk from "chalk";
-import fetch from "isomorphic-fetch";
-import Cache from "./Cache";
+const chalk = require("chalk");
+const fetch = require("isomorphic-fetch");
+const Cache = require("./Cache");
 
-import { parseProp, parseTags } from "./parsers";
-import { uncapitalizeKeys, removeQueryString, randomInt } from "./utils";
-
-const ENDPOINT_HOST = "http://www.aa.co.nz";
+const { ENDPOINT_HOST, IMAGE_PREFIX } = require("./constants");
+const { parseProp, parseTags } = require("./parsers");
+const { uncapitalizeKeys, removeQueryString, randomInt } = require("./utils");
 
 const QUESTIONS_ENDPOINT = `${ENDPOINT_HOST}/RoadCodeQuizController/getSet`;
 
@@ -24,9 +23,13 @@ const parseAnswers = (answers) => {
   );
 };
 
-const parseImage = (image) => ({
-  uri: removeQueryString(`${ENDPOINT_HOST}${parseProp("src")(image)}`),
-});
+const parseImage = (image) => {
+  const uri = removeQueryString(
+    `${ENDPOINT_HOST}${parseProp("src")(image)}`
+  ).replace(IMAGE_PREFIX, "");
+
+  return { uri };
+};
 
 const makeKey = ({ Question, RoadCodePage, CorrectAnswer }) =>
   `${Question}/${RoadCodePage}/${CorrectAnswer}`;
@@ -48,7 +51,7 @@ const unwrap = (res) => res.json();
 
 const refine = (data) => Promise.resolve(data.map(refineQuestion));
 
-export default class Questions {
+module.exports = class Questions {
   constructor({
     cache,
     endpoint = QUESTIONS_ENDPOINT,
@@ -111,6 +114,7 @@ export default class Questions {
   async fetchQuestions() {
     const res = await fetch(this.endpoint);
     const data = await unwrap(res);
+
     return refine(data);
   }
 
@@ -129,8 +133,8 @@ export default class Questions {
       return;
     }
 
-    this.fetchQuestions()
+    return this.fetchQuestions()
       .then(this.store)
       .catch((e) => console.error(e));
   }
-}
+};

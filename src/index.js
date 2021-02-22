@@ -1,11 +1,11 @@
-import "babel-polyfill";
+require("babel-polyfill");
 
-import Cache from "./Cache";
-import Questions from "./Questions";
-import { ONE_WEEK } from "./constants";
+const Cache = require("./Cache");
+const Questions = require("./Questions");
+const { ONE_WEEK } = require("./constants");
 
 const db = new Questions({
   cache: new Cache({ stdTTL: ONE_WEEK }),
 });
 
-export default db;
+module.exports = db;
