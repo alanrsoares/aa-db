@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import fetch, { Response } from "node-fetch";
+import fetch, { Response, FetchError } from "node-fetch";
 
 import Cache, { Question } from "./Cache";
 
@@ -154,11 +154,13 @@ export default class Questions {
     while (this.emptyAttempts !== this.maximumEmptyAttempts) {
       try {
         await this.fetchQuestions().then(this.store);
-      } catch (error) {
-        {
-          console.error(error);
+      } catch (error: unknown) {
+        if (error instanceof FetchError || error instanceof Error) {
+          console.log(chalk.bold.red(error.message));
           return Promise.reject(error);
         }
+
+        return Promise.reject(error);
       }
     }
 
