@@ -7,8 +7,8 @@ var lowdb_1 = tslib_1.__importDefault(require("lowdb"));
 var FileSync_1 = tslib_1.__importDefault(require("lowdb/adapters/FileSync"));
 var STD_TTL = 600;
 var COLLECTION_ID = "cache";
-var adapter = new FileSync_1.default(__dirname + "/../db/db.json");
-var DB = lowdb_1.default(adapter);
+var adapter = new FileSync_1.default("".concat(__dirname, "/../db/db.json"));
+var DB = (0, lowdb_1.default)(adapter);
 DB.defaults((_a = {}, _a[COLLECTION_ID] = [], _a)).write();
 var isValidCacheKey = function (key, ttl) {
     return Math.floor((Date.now() - key.created) / 1000) <= ttl;

@@ -1,4 +1,10 @@
 /// <reference types="lodash" />
+/// <reference types="lodash" />
+/// <reference types="lodash" />
+/// <reference types="lodash" />
+/// <reference types="lodash" />
+/// <reference types="lodash" />
+/// <reference types="lodash" />
 import lowdb, { LowdbSync } from "lowdb";
 declare const DB: lowdb.LowdbSync<any>;
 export declare class CacheKey<T> {

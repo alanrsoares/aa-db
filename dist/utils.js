@@ -9,7 +9,7 @@ exports.uncapitalize = uncapitalize;
 var uncapitalizeKeys = function (obj) {
     return Object.keys(obj).reduce(function (acc, key) {
         var _a;
-        return (tslib_1.__assign(tslib_1.__assign({}, acc), (_a = {}, _a[exports.uncapitalize(key)] = obj[key], _a)));
+        return (tslib_1.__assign(tslib_1.__assign({}, acc), (_a = {}, _a[(0, exports.uncapitalize)(key)] = obj[key], _a)));
     }, {});
 };
 exports.uncapitalizeKeys = uncapitalizeKeys;

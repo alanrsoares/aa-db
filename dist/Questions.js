@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var chalk_1 = tslib_1.__importDefault(require("chalk"));
-var node_fetch_1 = tslib_1.__importDefault(require("node-fetch"));
+var node_fetch_1 = tslib_1.__importStar(require("node-fetch"));
 var Cache_1 = tslib_1.__importDefault(require("./Cache"));
 var constants_1 = require("./constants");
 var parsers_1 = require("./parsers");
 var utils_1 = require("./utils");
-var QUESTIONS_ENDPOINT = constants_1.ENDPOINT_HOST + "/RoadCodeQuizController/getSet";
+var QUESTIONS_ENDPOINT = "".concat(constants_1.ENDPOINT_HOST, "/RoadCodeQuizController/getSet");
 /**
  *
  * @param {string} answers
@@ -15,10 +15,10 @@ var QUESTIONS_ENDPOINT = constants_1.ENDPOINT_HOST + "/RoadCodeQuizController/ge
  */
 function parseAnswers(answers) {
     if (answers === void 0) { answers = ""; }
-    var links = parsers_1.parseTags("a")(answers);
-    var contents = links.map(parsers_1.parseTag("a"));
-    var spans = contents.map(parsers_1.parseTags("span"));
-    var spanContent = parsers_1.parseTag("span");
+    var links = (0, parsers_1.parseTags)("a")(answers);
+    var contents = links.map((0, parsers_1.parseTag)("a"));
+    var spans = contents.map((0, parsers_1.parseTags)("span"));
+    var spanContent = (0, parsers_1.parseTag)("span");
     return spans.reduce(function (acc, _a) {
         var _b;
         var option = _a[0], content = _a[1];
@@ -27,7 +27,7 @@ function parseAnswers(answers) {
 }
 function parseImage(image) {
     if (image === void 0) { image = ""; }
-    var uri = utils_1.removeQueryString("" + constants_1.ENDPOINT_HOST + parsers_1.parseProp("src")(image)).replace(constants_1.IMAGE_PREFIX, "");
+    var uri = (0, utils_1.removeQueryString)("".concat(constants_1.ENDPOINT_HOST).concat((0, parsers_1.parseProp)("src")(image))).replace(constants_1.IMAGE_PREFIX, "");
     return { uri: uri };
 }
 /**
@@ -35,7 +35,7 @@ function parseImage(image) {
  * @param {QuestionDTO} data
  */
 var makeKey = function (data) {
-    return data.Question + "/" + data.RoadCodePage + "/" + data.CorrectAnswer;
+    return "".concat(data.Question, "/").concat(data.RoadCodePage, "/").concat(data.CorrectAnswer);
 };
 function clearLine() {
     process.stdout.clearLine(-1);
@@ -46,7 +46,7 @@ function clearLine() {
  * @param {{ Image: string, Answers: string }} question
  */
 var refineQuestion = function (question) {
-    return utils_1.uncapitalizeKeys(tslib_1.__assign(tslib_1.__assign({}, question), { key: makeKey(question), Image: parseImage(question.Image), Answers: parseAnswers(question.Answers) }));
+    return (0, utils_1.uncapitalizeKeys)(tslib_1.__assign(tslib_1.__assign({}, question), { key: makeKey(question), Image: parseImage(question.Image), Answers: parseAnswers(question.Answers) }));
 };
 /**
  * unwrap
@@ -64,8 +64,8 @@ var refine = function (data) {
 };
 var Questions = /** @class */ (function () {
     function Questions(_a) {
-        var _this = this;
         var cache = _a.cache, _b = _a.endpoint, endpoint = _b === void 0 ? QUESTIONS_ENDPOINT : _b, _c = _a.maximumEmptyAttempts, maximumEmptyAttempts = _c === void 0 ? 20 : _c;
+        var _this = this;
         this.store = function (questions) {
             var uncachedQuestions = questions.filter(function (q) { return !_this.cache.get(q.key); });
             clearLine();
@@ -76,17 +76,17 @@ var Questions = /** @class */ (function () {
                 _this.emptyAttempts = 0;
                 uncachedQuestions.forEach(function (q) { return _this.cache.set(q.key, q); });
             }
-            process.stdout.write("New questions cached: " + chalk_1.default.bold.green(uncachedQuestions.length) + ". Total: " + chalk_1.default.bold.cyan(_this.cache.length) + ".");
+            process.stdout.write("New questions cached: ".concat(chalk_1.default.bold.green(uncachedQuestions.length), ". Total: ").concat(chalk_1.default.bold.cyan(_this.cache.length), "."));
             if (_this.emptyAttempts) {
                 clearLine();
-                process.stdout.write("Empty attempt: " + chalk_1.default.bold.red(_this.emptyAttempts + "/" + _this.maximumEmptyAttempts) + ".");
+                process.stdout.write("Empty attempt: ".concat(chalk_1.default.bold.red("".concat(_this.emptyAttempts, "/").concat(_this.maximumEmptyAttempts)), "."));
             }
         };
         this.fetchQuestions = function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
             var res, questions;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, node_fetch_1.default(this.endpoint)];
+                    case 0: return [4 /*yield*/, (0, node_fetch_1.default)(this.endpoint)];
                     case 1:
                         res = _a.sent();
                         return [4 /*yield*/, unwrap(res)];
@@ -111,15 +111,15 @@ var Questions = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         error_1 = _a.sent();
-                        {
-                            console.error(error_1);
+                        if (error_1 instanceof node_fetch_1.FetchError || error_1 instanceof Error) {
+                            console.log(chalk_1.default.bold.red(error_1.message));
                             return [2 /*return*/, Promise.reject(error_1)];
                         }
-                        return [3 /*break*/, 4];
+                        return [2 /*return*/, Promise.reject(error_1)];
                     case 4: return [3 /*break*/, 0];
                     case 5:
                         clearLine();
-                        console.log("Operation cancelled after " + chalk_1.default.bold.red(this.maximumEmptyAttempts) + " empty attempts.", "Total questions cached: " + chalk_1.default.bold.cyan(this.cache.length) + ".");
+                        console.log("Operation cancelled after ".concat(chalk_1.default.bold.red(this.maximumEmptyAttempts), " empty attempts."), "Total questions cached: ".concat(chalk_1.default.bold.cyan(this.cache.length), "."));
                         cached = this.cache.collection.value();
                         return [2 /*return*/, cached];
                 }

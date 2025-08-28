@@ -4,8 +4,8 @@ var tslib_1 = require("tslib");
 var node_fetch_1 = tslib_1.__importDefault(require("node-fetch"));
 var fs_1 = tslib_1.__importDefault(require("fs"));
 var constants_1 = require("./constants");
-var ROOT_DIR = __dirname + "/..";
-var ASSETS_DIR = ROOT_DIR + "/db/assets";
+var ROOT_DIR = "".concat(__dirname, "/..");
+var ASSETS_DIR = "".concat(ROOT_DIR, "/db/assets");
 function downloadFromUrl(url, verbose) {
     var _this = this;
     if (url === void 0) { url = ""; }
@@ -14,18 +14,18 @@ function downloadFromUrl(url, verbose) {
         var response, buffer, fileName;
         return tslib_1.__generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, node_fetch_1.default(url)];
+                case 0: return [4 /*yield*/, (0, node_fetch_1.default)(url)];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.buffer()];
                 case 2:
                     buffer = _a.sent();
                     fileName = url.replace(constants_1.IMAGE_PREFIX, "");
-                    fs_1.default.writeFile(ASSETS_DIR + "/" + fileName, buffer, function () {
+                    fs_1.default.writeFile("".concat(ASSETS_DIR, "/").concat(fileName), buffer, function () {
                         if (verbose) {
-                            console.log("Downloaded: " + fileName);
+                            console.log("Downloaded: ".concat(fileName));
                         }
-                        resolve("" + fileName);
+                        resolve("".concat(fileName));
                     });
                     return [2 /*return*/];
             }
@@ -42,7 +42,7 @@ function syncAssets(items) {
             return [2 /*return*/, new Promise(function (resolve, reject) {
                     try {
                         var downloads_1 = IMG_URLS.map(function (url) {
-                            return downloadFromUrl(constants_1.IMAGE_PREFIX + "/" + url);
+                            return downloadFromUrl("".concat(constants_1.IMAGE_PREFIX, "/").concat(url));
                         });
                         fs_1.default.mkdir(ASSETS_DIR, function () { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                             return tslib_1.__generator(this, function (_a) {
