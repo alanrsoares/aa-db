@@ -1,0 +1,74 @@
+import chalk from "chalk";
+import DrivingTestsQuestions from "./DrivingTestsQuestions";
+import Cache from "../Cache";
+import { CATEGORIES, ONE_WEEK, Subcategory, type Category } from "../constants";
+import { Command } from "commander";
+import { select } from "@inquirer/prompts";
+
+const program = new Command();
+
+await program
+  .command("sync")
+  .description("Sync driving test questions")
+  .option(
+    "-c, --category <category>",
+    "The category of the driving test questions"
+  )
+  .option(
+    "-s, --subcategory <subcategory>",
+    "The subcategory of the driving test questions"
+  )
+  .option("-h, --headless", "Run the browser in headless mode", false)
+  .action(async () => {
+    let { category, subcategory, headless } = program.opts();
+
+    if (!category || !subcategory) {
+      category = await select({
+        message: "Select the category of the driving test questions",
+        choices: Object.keys(CATEGORIES),
+      });
+
+      if (!category) {
+        console.log(chalk.bold.red("No category selected"));
+        process.exit(1);
+      }
+
+      subcategory = await select({
+        message: "Select the subcategory of the driving test questions",
+        choices: CATEGORIES[category as Category],
+      });
+
+      if (!subcategory) {
+        console.log(chalk.bold.red("No subcategory selected"));
+        process.exit(1);
+      }
+    }
+
+    const db = new DrivingTestsQuestions({
+      cache: new Cache({ stdTTL: ONE_WEEK }),
+      maximumEmptyAttempts: 50, // Higher limit since we're scraping a website
+      headless,
+      timeout: 15_000,
+      maxAttempts: 10,
+      waitTime: 1_000,
+      category: category as Category,
+      subcategory: subcategory as Subcategory<Category>,
+    });
+
+    try {
+      const questions = await db.sync();
+      console.log(
+        chalk.bold.green(
+          `\n✅ Successfully synced ${questions.length} driving test questions!`
+        )
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(chalk.bold.red(error.message));
+      } else {
+        console.log(chalk.bold.red("An unknown error occurred"));
+      }
+      process.exit(1);
+    }
+  })
+  .parseAsync(process.argv);

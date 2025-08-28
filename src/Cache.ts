@@ -47,13 +47,13 @@ export interface Database<T> {
 
 export interface Question {
   question: string;
-  answers: Record<string, string>;
-  correctAnswer: string;
-  roadCodePage: string;
-  image: {
-    uri: string;
-  };
+  options: Record<string, string>;
+  answer: string | string[];
+  category: string;
+  subcategory: string;
+  imageUrl?: string;
   key: string;
+  explanation?: string;
 }
 
 export default class Cache {
