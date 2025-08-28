@@ -1,16 +1,11 @@
 import chalk from "chalk";
 import puppeteer, { Browser, Page } from "puppeteer";
-import invariant from "tiny-invariant";
 
 import Cache, { Question } from "~/Cache";
 import { Category, ENDPOINT_HOST, Subcategory } from "~/constants";
 
-import {
-  DrivingTestQuestion,
-  DrivingTestsQuestionsConfig,
-  EndpointInfo,
-} from "./types";
-import { clearLine, delay, parseEndpoint, toDBQuestion } from "./utils";
+import { DrivingTestQuestion, DrivingTestsQuestionsConfig } from "./types";
+import { clearLine, delay, toDBQuestion } from "./utils";
 
 export default class DrivingTestsQuestions<T extends Category> {
   cache: Cache;
@@ -22,9 +17,11 @@ export default class DrivingTestsQuestions<T extends Category> {
   emptyAttempts: number;
   category: T;
   subcategory: Subcategory<T>;
-  private browser: Browser | null = null;
-  private page: Page | null = null;
-  private endpointInfo: EndpointInfo | null = null;
+  quizLength: number;
+
+  #browser: Browser | null = null;
+  #page: Page | null = null;
+  #fullUrl: string;
 
   constructor({
     cache,
@@ -35,6 +32,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     timeout = 10_000,
     maxAttempts = 20,
     waitTime = 1_000,
+    quizLength = 35,
   }: DrivingTestsQuestionsConfig<T>) {
     if (!(cache instanceof Cache)) {
       throw new Error("Invalid argument 'cache'");
@@ -48,9 +46,8 @@ export default class DrivingTestsQuestions<T extends Category> {
     this.emptyAttempts = 0;
     this.category = category;
     this.subcategory = subcategory;
-    this.endpointInfo = parseEndpoint(
-      `${ENDPOINT_HOST}/${category}/${subcategory}/35/`
-    );
+    this.quizLength = quizLength;
+    this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
   }
 
   async initialize(): Promise<void> {
@@ -67,19 +64,19 @@ export default class DrivingTestsQuestions<T extends Category> {
       ],
     };
 
-    this.browser = await puppeteer.launch(launchOptions);
-    this.page = await this.browser.newPage();
+    this.#browser = await puppeteer.launch(launchOptions);
+    this.#page = await this.#browser.newPage();
 
     // Set user agent
-    await this.page.setUserAgent(
+    await this.#page.setUserAgent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     );
 
     // Set viewport
-    await this.page.setViewport({ width: 1280, height: 720 });
+    await this.#page.setViewport({ width: 1280, height: 720 });
 
     // Set extra headers
-    await this.page.setExtraHTTPHeaders({
+    await this.#page.setExtraHTTPHeaders({
       "Accept-Language": "en-US,en;q=0.9",
       "Accept-Encoding": "gzip, deflate, br",
       Accept:
@@ -88,15 +85,15 @@ export default class DrivingTestsQuestions<T extends Category> {
   }
 
   async close(): Promise<void> {
-    if (this.browser) {
-      await this.browser.close();
-      this.browser = null;
-      this.page = null;
+    if (this.#browser) {
+      await this.#browser.close();
+      this.#browser = null;
+      this.#page = null;
     }
   }
 
   private async waitForQuestionToLoad(): Promise<void> {
-    if (!this.page) return;
+    if (!this.#page) return;
 
     // Wait for initial load
     await delay(this.waitTime || 1_000);
@@ -106,7 +103,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     let attempts = 0;
 
     while (!questionsLoaded && attempts < this.maxAttempts) {
-      const questionCount = await this.page.evaluate(() => {
+      const questionCount = await this.#page.evaluate(() => {
         const quizContainer = document.getElementById("quiz");
         if (!quizContainer) return 0;
 
@@ -141,9 +138,9 @@ export default class DrivingTestsQuestions<T extends Category> {
   }
 
   private async extractQuestion(): Promise<DrivingTestQuestion | null> {
-    if (!this.page) return null;
+    if (!this.#page) return null;
 
-    return await this.page.evaluate(() => {
+    return await this.#page.evaluate(() => {
       const quizContainer = document.getElementById("quiz");
 
       if (!quizContainer) {
@@ -199,7 +196,7 @@ export default class DrivingTestsQuestions<T extends Category> {
   private async getCorrectAnswer(
     question: DrivingTestQuestion
   ): Promise<{ correctAnswer: string | string[]; explanation: string }> {
-    if (!this.page) {
+    if (!this.#page) {
       throw new Error("Page not initialized");
     }
 
@@ -211,18 +208,18 @@ export default class DrivingTestsQuestions<T extends Category> {
       const labelSelector = `label[for="${option.id}"]`;
 
       // Wait for label to appear
-      await this.page.waitForSelector(labelSelector, { timeout: 5_000 });
-      await this.page.click(labelSelector);
+      await this.#page.waitForSelector(labelSelector, { timeout: 5_000 });
+      await this.#page.click(labelSelector);
 
       // Wait for submit button to appear
-      await this.page.waitForSelector("#quiz .button", { timeout: 5_000 });
-      await this.page.click("#quiz .button");
+      await this.#page.waitForSelector("#quiz .button", { timeout: 5_000 });
+      await this.#page.click("#quiz .button");
 
       // Wait for result to appear
-      await this.page.waitForSelector("#questionresult", { timeout: 5_000 });
+      await this.#page.waitForSelector("#questionresult", { timeout: 5_000 });
 
       // Extract the result information
-      const result = await this.page.evaluate(() => {
+      const result = await this.#page.evaluate(() => {
         const resultElement = document.querySelector("#questionresult");
         if (!resultElement) return null;
 
@@ -290,26 +287,24 @@ export default class DrivingTestsQuestions<T extends Category> {
   }
 
   async fetchQuestion(): Promise<Question> {
-    if (!this.page) {
+    if (!this.#page) {
       throw new Error("Scraper not initialized. Call initialize() first.");
     }
 
     try {
-      invariant(this.endpointInfo, "Endpoint info is required");
-
-      const { category, subcategory, quizLength } = this.endpointInfo;
+      const { category, subcategory, quizLength } = this;
 
       console.log(
         `\n🔗 Scraping from: ${category}/${subcategory} (${quizLength} questions)`
       );
 
-      await this.page.goto(this.endpointInfo.fullUrl, {
+      await this.#page.goto(this.#fullUrl, {
         waitUntil: "domcontentloaded",
         timeout: this.timeout,
       });
 
       // Wait for the quiz container to be present
-      await this.page.waitForSelector("#quiz", {
+      await this.#page.waitForSelector("#quiz", {
         timeout: this.timeout,
       });
 
@@ -328,7 +323,7 @@ export default class DrivingTestsQuestions<T extends Category> {
       );
 
       return {
-        ...toDBQuestion(question, this.endpointInfo),
+        ...toDBQuestion(question, { category, subcategory }),
         answer: correctAnswer,
         explanation,
       };
@@ -339,8 +334,6 @@ export default class DrivingTestsQuestions<T extends Category> {
   }
 
   store = (question: Question) => {
-    invariant(this.endpointInfo, "Endpoint info is required");
-
     const isCached = Boolean(this.cache.get(question.key));
 
     clearLine();
@@ -352,10 +345,10 @@ export default class DrivingTestsQuestions<T extends Category> {
       this.cache.set(question.key, question);
     }
 
+    const { category, subcategory } = this;
+
     process.stdout.write(
-      `New ${this.endpointInfo.category}/${
-        this.endpointInfo.subcategory
-      } questions cached: ${chalk.bold.green(
+      `New ${category}/${subcategory} questions cached: ${chalk.bold.green(
         isCached ? 1 : 0
       )}. Total: ${chalk.bold.cyan(this.cache.length)}.`
     );
@@ -372,7 +365,7 @@ export default class DrivingTestsQuestions<T extends Category> {
   };
 
   async sync(): Promise<Question[]> {
-    if (!this.browser) {
+    if (!this.#browser) {
       await this.initialize();
     }
 
@@ -397,13 +390,15 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       clearLine();
 
+      const { category, subcategory } = this;
+
       console.log(
         `Operation cancelled after ${chalk.bold.red(
           this.maximumEmptyAttempts
         )} empty attempts.`,
-        `Total ${this.endpointInfo.category}/${
-          this.endpointInfo.subcategory
-        } questions cached: ${chalk.bold.cyan(this.cache.length)}.`
+        `Total ${category}/${subcategory}: ${chalk.bold.cyan(
+          this.cache.length
+        )}.`
       );
 
       return this.cache.collection.value().map((q) => q.value);

@@ -25,11 +25,10 @@ export interface DrivingTestsQuestionsConfig<T extends Category> {
   waitTime?: number;
   category: T;
   subcategory: Subcategory<T>;
+  quizLength?: number;
 }
 
 export interface EndpointInfo {
   category: string;
   subcategory: string;
-  quizLength: string;
-  fullUrl: string;
 }

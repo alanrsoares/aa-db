@@ -27,27 +27,6 @@ export function makeKey(question: DrivingTestQuestion) {
 }
 
 /**
- * Parses the driving tests URL to extract category information
- */
-export function parseEndpoint(url: string): EndpointInfo {
-  const urlPattern = /\/roadcode\/([^\/]+)\/([^\/]+)\/([^\/]+)\/?$/;
-  const match = url.match(urlPattern);
-
-  if (!match) {
-    throw new Error(`Invalid driving tests URL format: ${url}`);
-  }
-
-  const [, category, subcategory, quizLength] = match;
-
-  return {
-    category,
-    subcategory,
-    quizLength,
-    fullUrl: url,
-  };
-}
-
-/**
  * Converts a driving test question to the cache format
  */
 export function toDBQuestion(
