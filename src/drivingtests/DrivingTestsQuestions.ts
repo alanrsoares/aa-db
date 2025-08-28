@@ -7,6 +7,14 @@ import { Category, ENDPOINT_HOST, Subcategory } from "~/constants";
 import { DrivingTestQuestion, DrivingTestsQuestionsConfig } from "./types";
 import { clearLine, delay, toDBQuestion } from "./utils";
 
+const SELECTORS = {
+  QUESTION_WRAPPER: "#quiz .question-wrapper",
+  QUESTION_TEXT: ".question-text",
+  OPTIONS: "ul#questions > li",
+  LETTER: ".letter",
+  TEXT: ".text span:last-child",
+} as const;
+
 export default class DrivingTestsQuestions<T extends Category> {
   cache: Cache;
   maximumEmptyAttempts: number;
@@ -96,40 +104,25 @@ export default class DrivingTestsQuestions<T extends Category> {
     if (!this.#page) return;
 
     // Wait for initial load
-    await delay(this.waitTime || 1_000);
+    await delay(this.waitTime);
 
     // Check if questions are loaded
     let questionsLoaded = false;
     let attempts = 0;
 
     while (!questionsLoaded && attempts < this.maxAttempts) {
-      const questionCount = await this.#page.evaluate(() => {
-        const quizContainer = document.getElementById("quiz");
-        if (!quizContainer) return 0;
+      const hasQuestionWrapper = await this.#page.evaluate(() =>
+        Boolean(document.querySelector(SELECTORS.QUESTION_WRAPPER))
+      );
 
-        // Try multiple selectors
-        const selectors = [
-          ".question-wrapper",
-          ".question",
-          '[class*="question"]',
-        ];
-        for (const selector of selectors) {
-          const elements = quizContainer.querySelectorAll(selector);
-          if (elements.length > 0) {
-            return elements.length;
-          }
-        }
-        return 0;
-      });
-
-      if (questionCount > 0) {
+      if (hasQuestionWrapper) {
         questionsLoaded = true;
         // Wait a bit more to ensure all questions are fully loaded
-        await delay(2_000);
       } else {
-        await delay(1_000);
         attempts++;
       }
+
+      await delay(this.waitTime);
     }
 
     if (!questionsLoaded) {
@@ -141,55 +134,40 @@ export default class DrivingTestsQuestions<T extends Category> {
     if (!this.#page) return null;
 
     return await this.#page.evaluate(() => {
-      const quizContainer = document.getElementById("quiz");
-
-      if (!quizContainer) {
-        return null;
-      }
-
-      const selector = ".question-wrapper";
-
-      const wrapper = quizContainer.querySelector(selector);
+      const wrapper = document.querySelector(SELECTORS.QUESTION_WRAPPER);
       if (!wrapper) {
         return null;
       }
 
-      const questionTextElement = wrapper.querySelector(".question-text");
-      const questionImgElement = wrapper.querySelector("img");
+      const textElement = wrapper.querySelector(SELECTORS.QUESTION_TEXT);
+      const imgElement = wrapper.querySelector("img");
+      const optionsList = wrapper.querySelectorAll(SELECTORS.OPTIONS);
 
-      // Try different selectors for options
-      const optionsSelector = "ul#questions > li";
-
-      const optionsList = wrapper.querySelectorAll(optionsSelector);
-
-      if (questionTextElement && optionsList) {
-        const questionText = questionTextElement.textContent?.trim() || "";
-        const options: { letter: string; text: string; id: string }[] = [];
-
-        optionsList.forEach((option, optIndex) => {
-          const letterElement = option.querySelector(".letter");
-          const textElement = option.querySelector(".text span:last-child");
-          const inputElement = option.querySelector("input");
-
-          if (letterElement && textElement) {
-            const letter = letterElement.textContent?.trim() || "";
-            const text = textElement.textContent?.trim() || "";
-            const id = inputElement?.id || `option_${optIndex}`;
-
-            options.push({ letter, text, id });
-          }
-        });
-
-        if (questionText && options.length > 1) {
-          return {
-            question: questionText,
-            options,
-            imageUrl: questionImgElement?.src,
-          } as DrivingTestQuestion;
-        }
+      if (!textElement || !optionsList.length) {
+        return null;
       }
 
-      return null;
+      const options: { letter: string; text: string; id: string }[] = [];
+
+      optionsList.forEach((option, optIndex) => {
+        const letterElement = option.querySelector(SELECTORS.LETTER);
+        const textElement = option.querySelector(SELECTORS.TEXT);
+        const inputElement = option.querySelector("input");
+
+        if (letterElement && textElement) {
+          const letter = letterElement.textContent?.trim() || "";
+          const text = textElement.textContent?.trim() || "";
+          const id = inputElement?.id || `option_${optIndex}`;
+
+          options.push({ letter, text, id });
+        }
+      });
+
+      return {
+        options,
+        question: textElement.textContent?.trim() || "",
+        imageUrl: imgElement?.src,
+      };
     });
   }
 
