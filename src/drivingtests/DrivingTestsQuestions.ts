@@ -7,14 +7,6 @@ import { Category, ENDPOINT_HOST, Subcategory } from "~/constants";
 import { DrivingTestQuestion, DrivingTestsQuestionsConfig } from "./types";
 import { clearLine, delay, toDBQuestion } from "./utils";
 
-const SELECTORS = {
-  QUESTION_WRAPPER: "#quiz .question-wrapper",
-  QUESTION_TEXT: ".question-text",
-  OPTIONS: "ul#questions > li",
-  LETTER: ".letter",
-  TEXT: ".text span:last-child",
-} as const;
-
 export default class DrivingTestsQuestions<T extends Category> {
   cache: Cache;
   maximumEmptyAttempts: number;
@@ -58,8 +50,8 @@ export default class DrivingTestsQuestions<T extends Category> {
     this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
   }
 
-  async #initialize(): Promise<void> {
-    const launchOptions = {
+  async initialize(): Promise<void> {
+    this.#browser = await puppeteer.launch({
       headless: this.headless,
       args: [
         "--no-sandbox",
@@ -70,9 +62,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         "--no-zygote",
         "--disable-gpu",
       ],
-    };
-
-    this.#browser = await puppeteer.launch(launchOptions);
+    });
     this.#page = await this.#browser.newPage();
 
     // Set user agent
@@ -92,7 +82,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   }
 
-  async #close(): Promise<void> {
+  async close(): Promise<void> {
     if (this.#browser) {
       await this.#browser.close();
       this.#browser = null;
@@ -100,7 +90,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  async #waitForQuestionToLoad(): Promise<void> {
+  private async waitForQuestionToLoad(): Promise<void> {
     if (!this.#page) return;
 
     // Wait for initial load
@@ -112,7 +102,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     while (!questionsLoaded && attempts < this.maxAttempts) {
       const hasQuestionWrapper = await this.#page.evaluate(() =>
-        Boolean(document.querySelector(SELECTORS.QUESTION_WRAPPER))
+        Boolean(document.querySelector("#quiz .question-wrapper"))
       );
 
       if (hasQuestionWrapper) {
@@ -130,48 +120,55 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  async #extractQuestion(): Promise<DrivingTestQuestion | null> {
+  private async extractQuestion(): Promise<DrivingTestQuestion | null> {
     if (!this.#page) return null;
 
     return await this.#page.evaluate(() => {
-      const wrapper = document.querySelector(SELECTORS.QUESTION_WRAPPER);
+      const wrapper = document.querySelector("#quiz .question-wrapper");
       if (!wrapper) {
         return null;
       }
 
-      const textElement = wrapper.querySelector(SELECTORS.QUESTION_TEXT);
+      const textElement = wrapper.querySelector(".question-text");
       const imgElement = wrapper.querySelector("img");
-      const optionsList = wrapper.querySelectorAll(SELECTORS.OPTIONS);
 
-      if (!textElement || !optionsList.length) {
-        return null;
+      // Try different selectors for options
+      const optionsSelector = "ul#questions > li";
+
+      const optionsList = wrapper.querySelectorAll(optionsSelector);
+
+      if (textElement && optionsList) {
+        const questionText = textElement.textContent?.trim() || "";
+        const options: { letter: string; text: string; id: string }[] = [];
+
+        optionsList.forEach((option, optIndex) => {
+          const letterElement = option.querySelector(".letter");
+          const textElement = option.querySelector(".text span:last-child");
+          const inputElement = option.querySelector("input");
+
+          if (letterElement && textElement) {
+            const letter = letterElement.textContent?.trim() || "";
+            const text = textElement.textContent?.trim() || "";
+            const id = inputElement?.id || `option_${optIndex}`;
+
+            options.push({ letter, text, id });
+          }
+        });
+
+        if (questionText && options.length > 1) {
+          return {
+            question: questionText,
+            options,
+            imageUrl: imgElement?.src,
+          } satisfies DrivingTestQuestion;
+        }
       }
 
-      const options: { letter: string; text: string; id: string }[] = [];
-
-      optionsList.forEach((option, optIndex) => {
-        const letterElement = option.querySelector(SELECTORS.LETTER);
-        const textElement = option.querySelector(SELECTORS.TEXT);
-        const inputElement = option.querySelector("input");
-
-        if (letterElement && textElement) {
-          const letter = letterElement.textContent?.trim() || "";
-          const text = textElement.textContent?.trim() || "";
-          const id = inputElement?.id || `option_${optIndex}`;
-
-          options.push({ letter, text, id });
-        }
-      });
-
-      return {
-        options,
-        question: textElement.textContent?.trim() || "",
-        imageUrl: imgElement?.src,
-      };
+      return null;
     });
   }
 
-  async #getCorrectAnswer(
+  private async getCorrectAnswer(
     question: DrivingTestQuestion
   ): Promise<{ correctAnswer: string | string[]; explanation: string }> {
     if (!this.#page) {
@@ -264,7 +261,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     };
   }
 
-  async #fetchQuestion(): Promise<Question> {
+  async fetchQuestion(): Promise<Question> {
     if (!this.#page) {
       throw new Error("Scraper not initialized. Call initialize() first.");
     }
@@ -287,16 +284,16 @@ export default class DrivingTestsQuestions<T extends Category> {
       });
 
       // Wait for question to load and stabilize
-      await this.#waitForQuestionToLoad();
+      await this.waitForQuestionToLoad();
 
       // Extract question from the page
-      const question = await this.#extractQuestion();
+      const question = await this.extractQuestion();
 
       if (!question) {
         throw new Error("No question found");
       }
 
-      const { correctAnswer, explanation } = await this.#getCorrectAnswer(
+      const { correctAnswer, explanation } = await this.getCorrectAnswer(
         question
       );
 
@@ -311,7 +308,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  #store = (question: Question) => {
+  store = (question: Question) => {
     const isCached = Boolean(this.cache.get(question.key));
 
     clearLine();
@@ -327,7 +324,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     process.stdout.write(
       `New ${category}/${subcategory} questions cached: ${chalk.bold.green(
-        isCached ? 1 : 0
+        isCached ? 0 : 1
       )}. Total: ${chalk.bold.cyan(this.cache.length)}.`
     );
 
@@ -344,13 +341,13 @@ export default class DrivingTestsQuestions<T extends Category> {
 
   async sync(): Promise<Question[]> {
     if (!this.#browser) {
-      await this.#initialize();
+      await this.initialize();
     }
 
     try {
       while (this.emptyAttempts !== this.maximumEmptyAttempts) {
         try {
-          await this.#fetchQuestion().then(this.#store);
+          await this.fetchQuestion().then(this.store);
           await delay(1_000);
         } catch (error: unknown) {
           if (error instanceof Error) {
@@ -381,7 +378,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       return this.cache.collection.value().map((q) => q.value);
     } finally {
-      await this.#close();
+      await this.close();
     }
   }
 }
