@@ -4,7 +4,11 @@ import puppeteer, { Browser, Page } from "puppeteer";
 import Cache, { Question } from "~/Cache";
 import { Category, ENDPOINT_HOST, Subcategory } from "~/constants";
 
-import { DrivingTestQuestion, DrivingTestsQuestionsConfig } from "./types";
+import {
+  DrivingTestQuestion,
+  DrivingTestsQuestionsConfig,
+  Option,
+} from "./types";
 import { clearLine, delay, toDBQuestion } from "./utils";
 
 export default class DrivingTestsQuestions<T extends Category> {
@@ -131,40 +135,33 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       const textElement = wrapper.querySelector(".question-text");
       const imgElement = wrapper.querySelector("img");
+      const optionsList = wrapper.querySelectorAll("ul#questions > li");
 
-      // Try different selectors for options
-      const optionsSelector = "ul#questions > li";
-
-      const optionsList = wrapper.querySelectorAll(optionsSelector);
-
-      if (textElement && optionsList) {
-        const questionText = textElement.textContent?.trim() || "";
-        const options: { letter: string; text: string; id: string }[] = [];
-
-        optionsList.forEach((option, optIndex) => {
-          const letterElement = option.querySelector(".letter");
-          const textElement = option.querySelector(".text span:last-child");
-          const inputElement = option.querySelector("input");
-
-          if (letterElement && textElement) {
-            const letter = letterElement.textContent?.trim() || "";
-            const text = textElement.textContent?.trim() || "";
-            const id = inputElement?.id || `option_${optIndex}`;
-
-            options.push({ letter, text, id });
-          }
-        });
-
-        if (questionText && options.length > 1) {
-          return {
-            question: questionText,
-            options,
-            imageUrl: imgElement?.src,
-          } satisfies DrivingTestQuestion;
-        }
+      if (!textElement || !optionsList?.length) {
+        return null;
       }
 
-      return null;
+      const options: Option[] = [];
+
+      optionsList.forEach((option, optIndex) => {
+        const letterElement = option.querySelector(".letter");
+        const textElement = option.querySelector(".text span:last-child");
+        const inputElement = option.querySelector("input");
+
+        if (letterElement && textElement) {
+          options.push({
+            letter: letterElement.textContent?.trim() || "",
+            text: textElement.textContent?.trim() || "",
+            id: inputElement?.id || `option_${optIndex}`,
+          });
+        }
+      });
+
+      return {
+        options,
+        question: textElement.textContent?.trim() || "",
+        imageUrl: imgElement?.src,
+      } satisfies DrivingTestQuestion;
     });
   }
 
