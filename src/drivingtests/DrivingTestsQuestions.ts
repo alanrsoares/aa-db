@@ -58,7 +58,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
   }
 
-  async initialize(): Promise<void> {
+  async #initialize(): Promise<void> {
     const launchOptions = {
       headless: this.headless,
       args: [
@@ -92,7 +92,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   }
 
-  async close(): Promise<void> {
+  async #close(): Promise<void> {
     if (this.#browser) {
       await this.#browser.close();
       this.#browser = null;
@@ -100,7 +100,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  private async waitForQuestionToLoad(): Promise<void> {
+  async #waitForQuestionToLoad(): Promise<void> {
     if (!this.#page) return;
 
     // Wait for initial load
@@ -130,7 +130,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  private async extractQuestion(): Promise<DrivingTestQuestion | null> {
+  async #extractQuestion(): Promise<DrivingTestQuestion | null> {
     if (!this.#page) return null;
 
     return await this.#page.evaluate(() => {
@@ -171,7 +171,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   }
 
-  private async getCorrectAnswer(
+  async #getCorrectAnswer(
     question: DrivingTestQuestion
   ): Promise<{ correctAnswer: string | string[]; explanation: string }> {
     if (!this.#page) {
@@ -264,7 +264,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     };
   }
 
-  async fetchQuestion(): Promise<Question> {
+  async #fetchQuestion(): Promise<Question> {
     if (!this.#page) {
       throw new Error("Scraper not initialized. Call initialize() first.");
     }
@@ -287,16 +287,16 @@ export default class DrivingTestsQuestions<T extends Category> {
       });
 
       // Wait for question to load and stabilize
-      await this.waitForQuestionToLoad();
+      await this.#waitForQuestionToLoad();
 
       // Extract question from the page
-      const question = await this.extractQuestion();
+      const question = await this.#extractQuestion();
 
       if (!question) {
         throw new Error("No question found");
       }
 
-      const { correctAnswer, explanation } = await this.getCorrectAnswer(
+      const { correctAnswer, explanation } = await this.#getCorrectAnswer(
         question
       );
 
@@ -311,7 +311,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  store = (question: Question) => {
+  #store = (question: Question) => {
     const isCached = Boolean(this.cache.get(question.key));
 
     clearLine();
@@ -344,13 +344,13 @@ export default class DrivingTestsQuestions<T extends Category> {
 
   async sync(): Promise<Question[]> {
     if (!this.#browser) {
-      await this.initialize();
+      await this.#initialize();
     }
 
     try {
       while (this.emptyAttempts !== this.maximumEmptyAttempts) {
         try {
-          await this.fetchQuestion().then(this.store);
+          await this.#fetchQuestion().then(this.#store);
           await delay(1_000);
         } catch (error: unknown) {
           if (error instanceof Error) {
@@ -381,7 +381,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       return this.cache.collection.value().map((q) => q.value);
     } finally {
-      await this.close();
+      await this.#close();
     }
   }
 }
