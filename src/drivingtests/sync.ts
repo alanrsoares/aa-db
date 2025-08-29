@@ -1,10 +1,9 @@
-import { select } from "@inquirer/prompts";
 import chalk from "chalk";
-import { Command } from "commander";
-
+import DrivingTestsQuestions from "./DrivingTestsQuestions";
 import Cache from "../Cache";
 import { CATEGORIES, ONE_WEEK, Subcategory, type Category } from "../constants";
-import DrivingTestsQuestions from "./DrivingTestsQuestions";
+import { Command } from "commander";
+import { select } from "@inquirer/prompts";
 
 const program = new Command();
 
@@ -13,11 +12,11 @@ await program
   .description("Sync driving test questions")
   .option(
     "-c, --category <category>",
-    "The category of the driving test questions",
+    "The category of the driving test questions"
   )
   .option(
     "-s, --subcategory <subcategory>",
-    "The subcategory of the driving test questions",
+    "The subcategory of the driving test questions"
   )
   .option("-h, --headless", "Run the browser in headless mode", false)
   .action(async () => {
@@ -60,8 +59,8 @@ await program
       const questions = await db.sync();
       console.log(
         chalk.bold.green(
-          `\n✅ Successfully synced ${questions.length} driving test questions!`,
-        ),
+          `\n✅ Successfully synced ${questions.length} driving test questions!`
+        )
       );
     } catch (error) {
       if (error instanceof Error) {

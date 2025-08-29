@@ -1,5 +1,5 @@
-import type { Question } from "../Cache";
-import type { DrivingTestQuestion, EndpointInfo } from "./types";
+import { Question } from "../Cache";
+import { DrivingTestQuestion, EndpointInfo } from "./types";
 
 export function clearLine() {
   process.stdout.clearLine(-1);
@@ -31,13 +31,13 @@ export function makeKey(question: DrivingTestQuestion) {
  */
 export function toDBQuestion(
   question: DrivingTestQuestion,
-  endpointInfo: EndpointInfo,
+  endpointInfo: EndpointInfo
 ): Question {
   const options = Object.fromEntries(
     question.options.map((option) => [
       option.letter.replace(".", ""),
       option.text,
-    ]),
+    ])
   );
 
   return {
@@ -54,13 +54,3 @@ export function toDBQuestion(
 
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
-
-export const $ = <T extends Element>(
-  selector: string,
-  root: Document | Element = document,
-) => root.querySelector(selector) as T | null;
-
-export const $$ = <T extends Element>(
-  selector: string,
-  root: Document | Element = document,
-) => root.querySelectorAll(selector) as NodeListOf<T>;

@@ -15,7 +15,7 @@ export const parseProps = (props: string[]) => (subject: string) =>
       ...acc,
       [prop]: parseProp(prop)(subject),
     }),
-    {},
+    {}
   );
 
 export function parseTag(tag: string) {
