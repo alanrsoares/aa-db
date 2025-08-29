@@ -7,7 +7,7 @@ export const uncapitalizeKeys = (obj: Record<string, string | {}>) =>
       ...acc,
       [uncapitalize(key)]: obj[key],
     }),
-    {}
+    {},
   );
 
 export const removeQueryString = (uri: string) => uri.split("?")[0];

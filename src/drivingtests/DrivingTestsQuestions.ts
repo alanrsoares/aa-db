@@ -3,7 +3,6 @@ import puppeteer, { Browser, Page } from "puppeteer";
 
 import Cache, { Question } from "~/Cache";
 import { Category, ENDPOINT_HOST, Subcategory } from "~/constants";
-
 import {
   DrivingTestQuestion,
   DrivingTestsQuestionsConfig,
@@ -71,7 +70,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     // Set user agent
     await this.#page.setUserAgent(
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     );
 
     // Set viewport
@@ -106,7 +105,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     while (!questionsLoaded && attempts < this.maxAttempts) {
       const hasQuestionWrapper = await this.#page.evaluate(() =>
-        Boolean(document.querySelector("#quiz .question-wrapper"))
+        Boolean(document.querySelector("#quiz .question-wrapper")),
       );
 
       if (hasQuestionWrapper) {
@@ -166,7 +165,7 @@ export default class DrivingTestsQuestions<T extends Category> {
   }
 
   private async getCorrectAnswer(
-    question: DrivingTestQuestion
+    question: DrivingTestQuestion,
   ): Promise<{ correctAnswer: string | string[]; explanation: string }> {
     if (!this.#page) {
       throw new Error("Page not initialized");
@@ -223,7 +222,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         } else {
           // If we got it wrong, extract from "the correct answer was X"
           const correctAnswerMatch = result.resultBold.match(
-            /the correct answer was (([A-Z],?)+)/
+            /the correct answer was (([A-Z],?)+)/,
           );
 
           if (correctAnswerMatch) {
@@ -246,8 +245,8 @@ export default class DrivingTestsQuestions<T extends Category> {
       console.log(
         `Error getting answer for question: ${question.question.substring(
           0,
-          50
-        )}... - ${errorMessage}`
+          50,
+        )}... - ${errorMessage}`,
       );
     }
 
@@ -267,7 +266,7 @@ export default class DrivingTestsQuestions<T extends Category> {
       const { category, subcategory, quizLength } = this;
 
       console.log(
-        `\n🔗 Scraping from: ${category}/${subcategory} (${quizLength} questions)`
+        `\n🔗 Scraping from: ${category}/${subcategory} (${quizLength} questions)`,
       );
 
       await this.#page.goto(this.#fullUrl, {
@@ -290,9 +289,8 @@ export default class DrivingTestsQuestions<T extends Category> {
         throw new Error("No question found");
       }
 
-      const { correctAnswer, explanation } = await this.getCorrectAnswer(
-        question
-      );
+      const { correctAnswer, explanation } =
+        await this.getCorrectAnswer(question);
 
       return {
         ...toDBQuestion(question, { category, subcategory }),
@@ -321,8 +319,8 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     process.stdout.write(
       `New ${category}/${subcategory} questions cached: ${chalk.bold.green(
-        isCached ? 0 : 1
-      )}. Total: ${chalk.bold.cyan(this.cache.length)}.`
+        isCached ? 0 : 1,
+      )}. Total: ${chalk.bold.cyan(this.cache.length)}.`,
     );
 
     if (this.emptyAttempts) {
@@ -330,8 +328,8 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       process.stdout.write(
         `Empty attempt: ${chalk.bold.red(
-          `${this.emptyAttempts}/${this.maximumEmptyAttempts}`
-        )}.`
+          `${this.emptyAttempts}/${this.maximumEmptyAttempts}`,
+        )}.`,
       );
     }
   };
@@ -366,11 +364,11 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       console.log(
         `Operation cancelled after ${chalk.bold.red(
-          this.maximumEmptyAttempts
+          this.maximumEmptyAttempts,
         )} empty attempts.`,
         `Total ${category}/${subcategory}: ${chalk.bold.cyan(
-          this.cache.length
-        )}.`
+          this.cache.length,
+        )}.`,
       );
 
       return this.cache.collection.value().map((q) => q.value);

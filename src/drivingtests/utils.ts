@@ -31,13 +31,13 @@ export function makeKey(question: DrivingTestQuestion) {
  */
 export function toDBQuestion(
   question: DrivingTestQuestion,
-  endpointInfo: EndpointInfo
+  endpointInfo: EndpointInfo,
 ): Question {
   const options = Object.fromEntries(
     question.options.map((option) => [
       option.letter.replace(".", ""),
       option.text,
-    ])
+    ]),
   );
 
   return {

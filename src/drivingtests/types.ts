@@ -1,5 +1,4 @@
 import Cache from "~/Cache";
-
 import type { Category, Subcategory } from "~/constants";
 
 export interface Option {
