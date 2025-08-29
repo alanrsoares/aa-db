@@ -1,11 +1,11 @@
 import Cache from "~/Cache";
-
 import type { Category, Subcategory } from "~/constants";
 
 export interface Option {
   letter: string;
   text: string;
   id: string;
+  imageUrl?: string;
 }
 
 export interface DrivingTestQuestion {
