@@ -97,19 +97,15 @@ export default class DrivingTestsQuestions<T extends Category> {
   private async waitForQuestionToLoad(): Promise<void> {
     if (!this.#page) return;
 
-    // Wait for initial load
-    await delay(this.waitTime);
-
-    // Check if questions are loaded
     let questionsLoaded = false;
     let attempts = 0;
 
     while (!questionsLoaded && attempts < this.maxAttempts) {
-      const hasQuestionWrapper = await this.#page.evaluate(() =>
-        Boolean(document.querySelector("#quiz .question-wrapper")),
+      const wrapper = await this.#page.evaluate(() =>
+        document.querySelector("#quiz .question-wrapper"),
       );
 
-      if (hasQuestionWrapper) {
+      if (wrapper) {
         questionsLoaded = true;
         // Wait a bit more to ensure all questions are fully loaded
       } else {
@@ -196,16 +192,14 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       // Extract the result information
       const result = await this.#page.evaluate(() => {
-        const resultElement = document.querySelector("#questionresult");
-        if (!resultElement) return null;
+        const $result = document.querySelector("#questionresult");
+        if (!$result) return null;
 
-        const isCorrect = resultElement.querySelector(".correct") !== null;
+        const isCorrect = $result.querySelector(".correct") !== null;
         const resultBold =
-          resultElement.querySelector(".result-bold")?.textContent?.trim() ||
-          "";
+          $result.querySelector(".result-bold")?.textContent?.trim() || "";
         const resultNormal =
-          resultElement.querySelector(".result-normal")?.textContent?.trim() ||
-          "";
+          $result.querySelector(".result-normal")?.textContent?.trim() || "";
 
         return {
           isCorrect,
@@ -349,17 +343,14 @@ export default class DrivingTestsQuestions<T extends Category> {
       while (this.emptyAttempts !== this.maximumEmptyAttempts) {
         try {
           await this.fetchQuestion().then(this.store);
-          await delay(1_000);
         } catch (error: unknown) {
           if (error instanceof Error) {
             console.log(chalk.bold.red(error.message));
             // Continue trying instead of breaking on error
             this.emptyAttempts++;
-            await delay(1_000);
           } else {
             console.log(chalk.bold.red("Unknown error occurred"));
             this.emptyAttempts++;
-            await delay(1_000);
           }
         }
       }
