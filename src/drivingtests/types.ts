@@ -5,6 +5,7 @@ export interface Option {
   letter: string;
   text: string;
   id: string;
+  imageUrl?: string;
 }
 
 export interface DrivingTestQuestion {
@@ -15,8 +16,12 @@ export interface DrivingTestQuestion {
   imageUrl?: string;
 }
 
+export type DrivingTestQuestionWithKey = DrivingTestQuestion & {
+  key: string;
+};
+
 export interface DrivingTestsQuestionsConfig<T extends Category> {
-  cache: Cache;
+  cache: Cache<DrivingTestQuestion>;
   maximumEmptyAttempts?: number;
   headless?: boolean;
   timeout?: number;

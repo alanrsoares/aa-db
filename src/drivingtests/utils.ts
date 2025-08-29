@@ -1,5 +1,4 @@
-import { Question } from "../Cache";
-import { DrivingTestQuestion, EndpointInfo } from "./types";
+import type { DrivingTestQuestion } from "./types";
 
 export function clearLine() {
   process.stdout.clearLine(-1);
@@ -17,39 +16,13 @@ function quickHash(str: string) {
 /**
  * Creates a unique key for a driving test question
  */
-export function makeKey(question: DrivingTestQuestion) {
+export function makeKey(question: Omit<DrivingTestQuestion, "key">) {
   const questionText = question.question.trim();
   const optionsText = question.options
     .map((opt) => `${opt.letter}${opt.text}`)
     .join("|");
 
   return quickHash(`${questionText}/${optionsText}`).toString(36).slice(0, 10);
-}
-
-/**
- * Converts a driving test question to the cache format
- */
-export function toDBQuestion(
-  question: DrivingTestQuestion,
-  endpointInfo: EndpointInfo,
-): Question {
-  const options = Object.fromEntries(
-    question.options.map((option) => [
-      option.letter.replace(".", ""),
-      option.text,
-    ]),
-  );
-
-  return {
-    options,
-    key: makeKey(question),
-    question: question.question,
-    answer: question.answer ?? "",
-    category: endpointInfo.category,
-    subcategory: endpointInfo.subcategory,
-    imageUrl: question.imageUrl ?? "",
-    explanation: question.explanation,
-  };
 }
 
 export const delay = (ms: number) =>
