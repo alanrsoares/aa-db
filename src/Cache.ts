@@ -45,17 +45,6 @@ export interface Database<T> {
   cache: CacheKey<T>[];
 }
 
-// export interface Question {
-//   question: string;
-//   options: Record<string, string>;
-//   answer: string | string[];
-//   category: string;
-//   subcategory: string;
-//   imageUrl?: string;
-//   key: string;
-//   explanation?: string;
-// }
-
 export default class Cache<T> {
   stdTTL: number;
   db: LowdbSync<Database<T>>;
