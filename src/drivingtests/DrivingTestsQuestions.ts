@@ -36,7 +36,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     timeout = 10_000,
     maxAttempts = 20,
     waitTime = 1_000,
-    quizLength = 35,
+    quizLength = 1,
   }: DrivingTestsQuestionsConfig<T>) {
     if (!(cache instanceof Cache)) {
       throw new Error("Invalid argument 'cache'");
@@ -262,11 +262,9 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
 
     try {
-      const { category, subcategory, quizLength } = this;
+      const { category, subcategory } = this;
 
-      console.log(
-        `\n🔗 Scraping from: ${category}/${subcategory} (${quizLength} questions)`,
-      );
+      console.log(`\n🔗 Scraping from: ${category}/${subcategory}`);
 
       await this.#page.goto(this.#fullUrl, {
         waitUntil: "domcontentloaded",

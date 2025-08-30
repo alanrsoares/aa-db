@@ -3,7 +3,12 @@ import chalk from "chalk";
 import { Command } from "commander";
 
 import Cache from "../Cache";
-import { CATEGORIES, ONE_WEEK, Subcategory, type Category } from "../constants";
+import {
+  CATEGORIES,
+  ONE_WEEK,
+  type Category,
+  type Subcategory,
+} from "../constants";
 import DrivingTestsQuestions from "./DrivingTestsQuestions";
 
 const program = new Command();
@@ -20,8 +25,8 @@ await program
     "The subcategory of the driving test questions",
   )
   .option("-h, --headless", "Run the browser in headless mode", false)
-  .action(async () => {
-    let { category, subcategory, headless } = program.opts();
+  .action(async (args) => {
+    let { category, subcategory, headless } = args;
 
     if (!category || !subcategory) {
       category = await select({
@@ -47,11 +52,11 @@ await program
 
     const db = new DrivingTestsQuestions({
       cache: new Cache({ stdTTL: ONE_WEEK }),
-      maximumEmptyAttempts: 50, // Higher limit since we're scraping a website
+      maximumEmptyAttempts: 25, // Higher limit since we're scraping a website
       headless,
-      timeout: 15_000,
+      timeout: 10_000,
       maxAttempts: 10,
-      waitTime: 1_000,
+      waitTime: 300,
       category: category as Category,
       subcategory: subcategory as Subcategory<Category>,
     });
