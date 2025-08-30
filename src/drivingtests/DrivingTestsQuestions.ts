@@ -2,7 +2,14 @@ import chalk from "chalk";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 import Cache from "~/Cache";
-import { ENDPOINT_HOST, type Category, type Subcategory } from "~/config";
+import {
+  ENDPOINT_HOST,
+  EXTRA_HEADERS,
+  PUPPETEER_ARGS,
+  USER_AGENT,
+  type Category,
+  type Subcategory,
+} from "~/config";
 import type {
   DrivingTestQuestion,
   DrivingTestQuestionWithKey,
@@ -54,39 +61,19 @@ export default class DrivingTestsQuestions<T extends Category> {
     this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
   }
 
-  async initialize(): Promise<void> {
+  async #initialize(): Promise<void> {
     this.#browser = await puppeteer.launch({
       headless: this.headless,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-accelerated-2d-canvas",
-        "--no-first-run",
-        "--no-zygote",
-        "--disable-gpu",
-      ],
+      args: PUPPETEER_ARGS,
     });
     this.#page = await this.#browser.newPage();
 
-    // Set user agent
-    await this.#page.setUserAgent(
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    );
-
-    // Set viewport
+    await this.#page.setUserAgent(USER_AGENT);
     await this.#page.setViewport({ width: 1280, height: 720 });
-
-    // Set extra headers
-    await this.#page.setExtraHTTPHeaders({
-      "Accept-Language": "en-US,en;q=0.9",
-      "Accept-Encoding": "gzip, deflate, br",
-      Accept:
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    });
+    await this.#page.setExtraHTTPHeaders(EXTRA_HEADERS);
   }
 
-  async close(): Promise<void> {
+  async #close(): Promise<void> {
     if (this.#browser) {
       await this.#browser.close();
       this.#browser = null;
@@ -94,7 +81,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  private async waitForQuestionToLoad(): Promise<void> {
+  async #waitForQuestionToLoad(): Promise<void> {
     if (!this.#page) return;
 
     let questionsLoaded = false;
@@ -120,7 +107,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  private async extractQuestion(): Promise<DrivingTestQuestion | null> {
+  async #extractQuestion(): Promise<DrivingTestQuestion | null> {
     if (!this.#page) return null;
 
     return await this.#page.evaluate(() => {
@@ -165,7 +152,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   }
 
-  private async getCorrectAnswer(
+  async #getCorrectAnswer(
     question: DrivingTestQuestion,
   ): Promise<{ correctAnswer: string | string[]; explanation: string }> {
     if (!this.#page) {
@@ -256,7 +243,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     };
   }
 
-  async fetchQuestion(): Promise<DrivingTestQuestionWithKey> {
+  async #fetchQuestion(): Promise<DrivingTestQuestionWithKey> {
     if (!this.#page) {
       throw new Error("Scraper not initialized. Call initialize() first.");
     }
@@ -277,17 +264,17 @@ export default class DrivingTestsQuestions<T extends Category> {
       });
 
       // Wait for question to load and stabilize
-      await this.waitForQuestionToLoad();
+      await this.#waitForQuestionToLoad();
 
       // Extract question from the page
-      const question = await this.extractQuestion();
+      const question = await this.#extractQuestion();
 
       if (!question) {
         throw new Error("No question found");
       }
 
       const { correctAnswer, explanation } =
-        await this.getCorrectAnswer(question);
+        await this.#getCorrectAnswer(question);
 
       return {
         ...question,
@@ -301,7 +288,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  store = (question: DrivingTestQuestionWithKey) => {
+  #store = (question: DrivingTestQuestionWithKey) => {
     const isCached = Boolean(this.cache.get(question.key));
 
     clearLine();
@@ -334,13 +321,13 @@ export default class DrivingTestsQuestions<T extends Category> {
 
   async sync(): Promise<DrivingTestQuestion[]> {
     if (!this.#browser) {
-      await this.initialize();
+      await this.#initialize();
     }
 
     try {
       while (this.emptyAttempts !== this.maximumEmptyAttempts) {
         try {
-          await this.fetchQuestion().then(this.store);
+          await this.#fetchQuestion().then(this.#store);
         } catch (error: unknown) {
           if (error instanceof Error) {
             console.log(chalk.bold.red(error.message));
@@ -368,7 +355,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       return this.cache.collection.value().map((q) => q.value);
     } finally {
-      await this.close();
+      await this.#close();
     }
   }
 }
