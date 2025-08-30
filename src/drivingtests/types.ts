@@ -1,5 +1,5 @@
 import Cache from "~/Cache";
-import type { Category, Subcategory } from "~/constants";
+import type { Category, Subcategory } from "~/config";
 
 export interface Option {
   letter: string;

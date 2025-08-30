@@ -8,7 +8,7 @@ import {
   ONE_WEEK,
   type Category,
   type Subcategory,
-} from "../constants";
+} from "../config";
 import DrivingTestsQuestions from "./DrivingTestsQuestions";
 
 const program = new Command();

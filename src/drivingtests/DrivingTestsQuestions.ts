@@ -2,7 +2,7 @@ import chalk from "chalk";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 import Cache from "~/Cache";
-import { ENDPOINT_HOST, type Category, type Subcategory } from "~/constants";
+import { ENDPOINT_HOST, type Category, type Subcategory } from "~/config";
 import type {
   DrivingTestQuestion,
   DrivingTestQuestionWithKey,
