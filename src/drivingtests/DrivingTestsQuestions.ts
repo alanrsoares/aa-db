@@ -99,12 +99,12 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       if (wrapper) {
         questionsLoaded = true;
-        // Wait a bit more to ensure all questions are fully loaded
       } else {
         attempts++;
       }
 
-      await delay(this.waitTime);
+      // progressively increase wait time to ensure all questions are fully loaded
+      await delay(this.waitTime + attempts * 10);
     }
 
     if (!questionsLoaded) {
