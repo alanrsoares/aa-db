@@ -5,8 +5,13 @@ import Cache from "~/Cache";
 import {
   ENDPOINT_HOST,
   EXTRA_HEADERS,
+  MAX_ATTEMPTS,
+  MAX_EMPTY_ATTEMPTS,
   PUPPETEER_ARGS,
+  TIMEOUT,
   USER_AGENT,
+  VIEWPORT,
+  WAIT_TIME,
   type Category,
   type Subcategory,
 } from "~/config";
@@ -38,11 +43,11 @@ export default class DrivingTestsQuestions<T extends Category> {
     cache,
     category,
     subcategory,
-    maximumEmptyAttempts = 25,
+    maximumEmptyAttempts = MAX_EMPTY_ATTEMPTS,
     headless = false,
-    timeout = 10_000,
-    maxAttempts = 20,
-    waitTime = 1_000,
+    timeout = TIMEOUT,
+    maxAttempts = MAX_ATTEMPTS,
+    waitTime = WAIT_TIME,
     quizLength = 1,
   }: DrivingTestsQuestionsConfig<T>) {
     if (!(cache instanceof Cache)) {
@@ -69,7 +74,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     this.#page = await this.#browser.newPage();
 
     await this.#page.setUserAgent(USER_AGENT);
-    await this.#page.setViewport({ width: 1280, height: 720 });
+    await this.#page.setViewport(VIEWPORT);
     await this.#page.setExtraHTTPHeaders(EXTRA_HEADERS);
   }
 

@@ -45,6 +45,16 @@ export const EXTRA_HEADERS = {
     "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
 };
 
+export const VIEWPORT = {
+  width: 1280,
+  height: 720,
+};
+
+export const TIMEOUT = 10_000;
+export const MAX_ATTEMPTS = 20;
+export const WAIT_TIME = 1_000;
+export const MAX_EMPTY_ATTEMPTS = 25;
+
 type Categories = typeof CATEGORIES;
 
 export type Category = keyof Categories;
