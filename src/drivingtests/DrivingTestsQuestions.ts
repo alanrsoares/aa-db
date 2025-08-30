@@ -141,7 +141,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
         if ($letter && $text) {
           options.push({
-            letter: $letter.textContent?.trim().replace(/\.$/, "") || "",
+            letter: $letter.textContent?.trim().replace(".", "") || "",
             text: $text.textContent?.trim() || "",
             id: $input?.id || `option_${optIndex}`,
             imageUrl: $img?.src || "",
@@ -209,7 +209,7 @@ export default class DrivingTestsQuestions<T extends Category> {
             result.resultBold.match(/You selected ([A-Z])/);
           answer = correctAnswerMatch
             ? correctAnswerMatch[1] || ""
-            : option?.letter.replace(".", "") || "";
+            : option?.letter || "";
         } else {
           // If we got it wrong, extract from "the correct answer was X"
           const correctAnswerMatch = result.resultBold.match(
