@@ -157,9 +157,9 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   }
 
-  async #getCorrectAnswer(
+  async #inferAnswer(
     question: DrivingTestQuestion,
-  ): Promise<{ correctAnswer: string | string[]; explanation: string }> {
+  ): Promise<{ answer: string | string[]; explanation: string }> {
     if (!this.#page) {
       throw new Error("Page not initialized");
     }
@@ -201,13 +201,13 @@ export default class DrivingTestsQuestions<T extends Category> {
       });
 
       if (result) {
-        let correctAnswer: string | string[] = "";
+        let answer: string | string[] = "";
 
         if (result.isCorrect) {
           // If we got it right, extract from "You selected X"
           const correctAnswerMatch =
             result.resultBold.match(/You selected ([A-Z])/);
-          correctAnswer = correctAnswerMatch
+          answer = correctAnswerMatch
             ? correctAnswerMatch[1] || ""
             : option?.letter.replace(".", "") || "";
         } else {
@@ -218,7 +218,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
           if (correctAnswerMatch) {
             const split = correctAnswerMatch[1]?.split(",") || [];
-            correctAnswer =
+            answer =
               split.length > 1
                 ? split.map((letter) => letter.trim())
                 : split[0]?.trim() || "";
@@ -226,7 +226,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         }
 
         return {
-          correctAnswer,
+          answer,
           explanation: result.resultNormal,
         };
       }
@@ -234,17 +234,16 @@ export default class DrivingTestsQuestions<T extends Category> {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
       console.log(
-        `Error getting answer for question: ${question.question.substring(
+        `Error inferring answer for question: ${question.question.substring(
           0,
           50,
         )}... - ${errorMessage}`,
       );
     }
 
-    // If we get here, we couldn't determine the correct answer
     return {
-      correctAnswer: "",
-      explanation: "Could not determine correct answer",
+      answer: "",
+      explanation: "Could not determine answer",
     };
   }
 
@@ -278,12 +277,11 @@ export default class DrivingTestsQuestions<T extends Category> {
         throw new Error("No question found");
       }
 
-      const { correctAnswer, explanation } =
-        await this.#getCorrectAnswer(question);
+      const { answer, explanation } = await this.#inferAnswer(question);
 
       return {
         ...question,
-        answer: correctAnswer,
+        answer,
         explanation,
         key: makeKey(question),
       };
