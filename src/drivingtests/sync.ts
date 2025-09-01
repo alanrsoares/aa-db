@@ -56,7 +56,7 @@ await program
       headless,
       timeout: 10_000,
       maxAttempts: 10,
-      waitTime: 300,
+      waitTime: 500,
       category: category as Category,
       subcategory: subcategory as Subcategory<Category>,
     });
