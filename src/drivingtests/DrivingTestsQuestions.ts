@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import puppeteer, { Browser, Page } from "puppeteer";
 
-import Cache from "~/Cache";
+import Cache, { CacheKey } from "~/Cache";
 import {
   ENDPOINT_HOST,
   EXTRA_HEADERS,
@@ -356,7 +356,9 @@ export default class DrivingTestsQuestions<T extends Category> {
         )}.`,
       );
 
-      return this.cache.collection.value().map((q) => q.value);
+      return this.cache.collection.map(
+        (q: CacheKey<DrivingTestQuestion>) => q.value,
+      );
     } finally {
       await this.#close();
     }

@@ -1,14 +1,15 @@
-import lowdb, { type LowdbSync } from "lowdb";
-import FileSync from "lowdb/adapters/FileSync";
+import { LowSync } from "lowdb";
+import { JSONFileSyncPreset } from "lowdb/node";
 
 const STD_TTL = 600;
 const COLLECTION_ID = "cache";
 
-const adapter = new FileSync(`${__dirname}/../db/db.json`);
-
-const DB = lowdb(adapter);
-
-DB.defaults({ [COLLECTION_ID]: [] }).write();
+// Initialize database with proper default data structure
+const defaultData: Database<any> = { [COLLECTION_ID]: [] };
+const DB = JSONFileSyncPreset<Database<any>>(
+  `${__dirname}/../db/db.json`,
+  defaultData,
+);
 
 const isValidCacheKey = (key: { created: number }, ttl: number) =>
   Math.floor((Date.now() - key.created) / 1000) <= ttl;
@@ -47,7 +48,8 @@ export interface Database<T> {
 
 export default class Cache<T> {
   stdTTL: number;
-  db: LowdbSync<Database<T>>;
+  db: LowSync<Database<T>>;
+
   constructor({
     stdTTL = STD_TTL,
     db = DB,
@@ -60,11 +62,15 @@ export default class Cache<T> {
   }
 
   get collection() {
-    return this.db.get(COLLECTION_ID);
+    // Ensure data is properly initialized
+    if (!this.db.data) {
+      this.db.data = { [COLLECTION_ID]: [] };
+    }
+    return this.db.data[COLLECTION_ID];
   }
 
   get length() {
-    return this.collection.value().length;
+    return this.collection.length;
   }
 
   /**
@@ -73,7 +79,9 @@ export default class Cache<T> {
    * @param {string} key
    */
   get(key: string) {
-    const cached = this.collection.find({ key }).value();
+    const cached = this.collection.find(
+      (item: CacheKey<T>) => item.key === key,
+    );
 
     return cached && isValidCacheKey(cached, this.stdTTL)
       ? cached.value
@@ -87,7 +95,8 @@ export default class Cache<T> {
    */
   set(key: string, value: any) {
     const item = CacheKey.make(key, value);
-    this.collection.push(item).write();
+    this.collection.push(item);
+    this.db.write();
   }
 
   /**
@@ -96,6 +105,12 @@ export default class Cache<T> {
    * @param {string} key
    */
   invalidate(key: string) {
-    this.collection.remove({ key }).write();
+    const index = this.collection.findIndex(
+      (item: CacheKey<T>) => item.key === key,
+    );
+    if (index !== -1) {
+      this.collection.splice(index, 1);
+      this.db.write();
+    }
   }
 }
