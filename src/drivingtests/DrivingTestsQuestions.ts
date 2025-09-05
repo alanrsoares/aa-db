@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import puppeteer, { Browser, Page } from "puppeteer";
 
-import Cache, { CacheKey } from "~/Cache";
+import Cache from "~/Cache";
 import {
   ENDPOINT_HOST,
   EXTRA_HEADERS,
