@@ -18,6 +18,7 @@ import {
 import type {
   Answer,
   DrivingTestsQuestionsConfig,
+  Explanation,
   Option,
   Question,
   DrivingTestQuestionWithKey as QuestionWithKey,
@@ -226,8 +227,10 @@ export default class DrivingTestsQuestions<T extends Category> {
 
         return {
           answer,
-          explanation: result.resultNormal,
-          imageUrl: result.imageUrl,
+          explanation: {
+            text: result.resultNormal,
+            imageUrl: result.imageUrl,
+          } as Explanation,
         };
       }
     } catch (error) {
@@ -243,7 +246,9 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     return {
       answer: "",
-      explanation: "Could not determine answer",
+      explanation: {
+        text: "Could not determine answer",
+      } as Explanation,
     };
   }
 

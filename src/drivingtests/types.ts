@@ -8,17 +8,21 @@ export interface Option {
   imageUrl?: string;
 }
 
+export interface Explanation {
+  text: string;
+  imageUrl?: string;
+}
+
 export interface Answer {
   answer: string | string[];
-  explanation: string;
-  imageUrl?: string;
+  explanation: Explanation;
 }
 
 export interface Question {
   question: string;
   options: Option[];
   answer?: string | string[];
-  explanation?: string;
+  explanation?: Explanation;
   imageUrl?: string;
 }
 
