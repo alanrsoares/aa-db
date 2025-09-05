@@ -26,8 +26,10 @@ export interface Question {
   imageUrl?: string;
 }
 
-export type DrivingTestQuestionWithKey = Question & {
+export type DrivingTestQuestionWithKey<T extends Category> = Question & {
   key: string;
+  category: T;
+  subcategory: Subcategory<T>;
 };
 
 export interface DrivingTestsQuestionsConfig<T extends Category> {
@@ -36,13 +38,8 @@ export interface DrivingTestsQuestionsConfig<T extends Category> {
   headless?: boolean;
   timeout?: number;
   maxAttempts?: number;
-  waitTime?: number;
   category: T;
   subcategory: Subcategory<T>;
+  waitTime?: number;
   quizLength?: number;
-}
-
-export interface EndpointInfo {
-  category: string;
-  subcategory: string;
 }

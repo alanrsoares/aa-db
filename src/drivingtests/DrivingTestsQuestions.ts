@@ -27,17 +27,18 @@ import { clearLine, delay, makeKey } from "./utils";
 
 export default class DrivingTestsQuestions<T extends Category> {
   #cache: Cache<Question>;
-  #maximumEmptyAttempts: number;
-  #headless: boolean;
-  #timeout: number;
-  #maxAttempts: number;
-  #waitTime: number;
-  #emptyAttempts: number;
-  #category: T;
-  #subcategory: Subcategory<T>;
   #browser: Browser | null = null;
   #page: Page | null = null;
   #fullUrl: string;
+
+  maximumEmptyAttempts: number;
+  headless: boolean;
+  timeout: number;
+  maxAttempts: number;
+  waitTime: number;
+  emptyAttempts: number;
+  category: T;
+  subcategory: Subcategory<T>;
 
   constructor({
     cache,
@@ -54,20 +55,20 @@ export default class DrivingTestsQuestions<T extends Category> {
       throw new Error("Invalid argument 'cache'");
     }
     this.#cache = cache;
-    this.#maximumEmptyAttempts = maximumEmptyAttempts;
-    this.#headless = headless;
-    this.#timeout = timeout;
-    this.#maxAttempts = maxAttempts;
-    this.#waitTime = waitTime;
-    this.#emptyAttempts = 0;
-    this.#category = category;
-    this.#subcategory = subcategory;
+    this.maximumEmptyAttempts = maximumEmptyAttempts;
+    this.headless = headless;
+    this.timeout = timeout;
+    this.maxAttempts = maxAttempts;
+    this.waitTime = waitTime;
+    this.emptyAttempts = 0;
+    this.category = category;
+    this.subcategory = subcategory;
     this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
   }
 
   async #initialize(): Promise<void> {
     this.#browser = await puppeteer.launch({
-      headless: this.#headless,
+      headless: this.headless,
       args: PUPPETEER_ARGS,
     });
     this.#page = await this.#browser.newPage();
@@ -91,7 +92,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     let questionsLoaded = false;
     let attempts = 0;
 
-    while (!questionsLoaded && attempts < this.#maxAttempts) {
+    while (!questionsLoaded && attempts < this.maxAttempts) {
       const wrapper = await this.#page.evaluate(() =>
         document.querySelector("#quiz .question-wrapper"),
       );
@@ -103,7 +104,7 @@ export default class DrivingTestsQuestions<T extends Category> {
       }
 
       // progressively increase wait time to ensure all questions are fully loaded
-      await delay(this.#waitTime + attempts * 10);
+      await delay(this.waitTime + attempts * 10);
     }
 
     if (!questionsLoaded) {
@@ -252,22 +253,22 @@ export default class DrivingTestsQuestions<T extends Category> {
     };
   }
 
-  async #fetchQuestion(): Promise<QuestionWithKey> {
+  async #fetchQuestion(): Promise<QuestionWithKey<T>> {
     if (!this.#page) {
       throw new Error("Scraper not initialized. Call initialize() first.");
     }
 
     try {
-      console.log(`\n🔗 Scraping from: ${this.#category}/${this.#subcategory}`);
+      console.log(`\n🔗 Scraping from: ${this.category}/${this.subcategory}`);
 
       await this.#page.goto(this.#fullUrl, {
         waitUntil: "domcontentloaded",
-        timeout: this.#timeout,
+        timeout: this.timeout,
       });
 
       // Wait for the quiz container to be present
       await this.#page.waitForSelector("#quiz", {
-        timeout: this.#timeout,
+        timeout: this.timeout,
       });
 
       // Wait for question to load and stabilize
@@ -287,6 +288,8 @@ export default class DrivingTestsQuestions<T extends Category> {
         answer,
         explanation,
         key: makeKey(question),
+        category: this.category,
+        subcategory: this.subcategory,
       };
     } catch (error) {
       console.error("Error during scraping:", error);
@@ -294,30 +297,30 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   }
 
-  #store = (question: QuestionWithKey) => {
+  #store = (question: QuestionWithKey<T>) => {
     const isCached = Boolean(this.#cache.get(question.key));
 
     clearLine();
 
     if (isCached) {
-      this.#emptyAttempts++;
+      this.emptyAttempts++;
     } else {
-      this.#emptyAttempts = 0;
+      this.emptyAttempts = 0;
       this.#cache.set(question.key, question);
     }
 
     process.stdout.write(
-      `New ${this.#category}/${this.#subcategory} questions cached: ${chalk.bold.green(
+      `New ${this.category}/${this.subcategory} questions cached: ${chalk.bold.green(
         isCached ? 0 : 1,
       )}. Total: ${chalk.bold.cyan(this.#cache.length)}.`,
     );
 
-    if (this.#emptyAttempts) {
+    if (this.emptyAttempts) {
       clearLine();
 
       process.stdout.write(
         `Empty attempt: ${chalk.bold.red(
-          `${this.#emptyAttempts}/${this.#maximumEmptyAttempts}`,
+          `${this.emptyAttempts}/${this.maximumEmptyAttempts}`,
         )}.`,
       );
     }
@@ -329,17 +332,17 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
 
     try {
-      while (this.#emptyAttempts !== this.#maximumEmptyAttempts) {
+      while (this.emptyAttempts !== this.maximumEmptyAttempts) {
         try {
           await this.#fetchQuestion().then(this.#store);
         } catch (error: unknown) {
           if (error instanceof Error) {
             console.log(chalk.bold.red(error.message));
             // Continue trying instead of breaking on error
-            this.#emptyAttempts++;
+            this.emptyAttempts++;
           } else {
             console.log(chalk.bold.red("Unknown error occurred"));
-            this.#emptyAttempts++;
+            this.emptyAttempts++;
           }
         }
       }
@@ -348,14 +351,14 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       console.log(
         `Operation cancelled after ${chalk.bold.red(
-          this.#maximumEmptyAttempts,
+          this.maximumEmptyAttempts,
         )} empty attempts.`,
-        `Total ${this.#category}/${this.#subcategory}: ${chalk.bold.cyan(
+        `Total ${this.category}/${this.subcategory}: ${chalk.bold.cyan(
           this.#cache.length,
         )}.`,
       );
 
-      return this.#cache.collection.map((q: CacheKey<Question>) => q.value);
+      return this.#cache.collection.map((q) => q.value);
     } finally {
       await this.#close();
     }
