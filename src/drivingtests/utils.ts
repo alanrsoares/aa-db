@@ -1,4 +1,4 @@
-import type { DrivingTestQuestion } from "./types";
+import type { Question } from "./types";
 
 export function clearLine() {
   process.stdout.clearLine(-1);
@@ -16,7 +16,7 @@ function quickHash(str: string) {
 /**
  * Creates a unique key for a driving test question
  */
-export function makeKey(question: Omit<DrivingTestQuestion, "key">) {
+export function makeKey(question: Omit<Question, "key">) {
   const questionText = question.question.trim();
   const optionsText = question.options
     .map((opt) => `${opt.letter}${opt.text}`)

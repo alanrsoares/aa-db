@@ -8,7 +8,13 @@ export interface Option {
   imageUrl?: string;
 }
 
-export interface DrivingTestQuestion {
+export interface Answer {
+  answer: string | string[];
+  explanation: string;
+  imageUrl?: string;
+}
+
+export interface Question {
   question: string;
   options: Option[];
   answer?: string | string[];
@@ -16,12 +22,12 @@ export interface DrivingTestQuestion {
   imageUrl?: string;
 }
 
-export type DrivingTestQuestionWithKey = DrivingTestQuestion & {
+export type DrivingTestQuestionWithKey = Question & {
   key: string;
 };
 
 export interface DrivingTestsQuestionsConfig<T extends Category> {
-  cache: Cache<DrivingTestQuestion>;
+  cache: Cache<Question>;
   maximumEmptyAttempts?: number;
   headless?: boolean;
   timeout?: number;
