@@ -5,6 +5,7 @@ import { Command } from "commander";
 import Cache from "../Cache";
 import {
   CATEGORIES,
+  COMMON_SUBCATEGORIES,
   ONE_WEEK,
   type Category,
   type Subcategory,
@@ -39,9 +40,11 @@ await program
         process.exit(1);
       }
 
+      const subCategories = CATEGORIES[category as Category];
+
       subcategory = await select({
         message: "Select the subcategory of the driving test questions",
-        choices: CATEGORIES[category as Category],
+        choices: ["all", ...subCategories],
       });
 
       if (!subcategory) {

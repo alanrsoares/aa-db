@@ -4,7 +4,7 @@ export const ONE_WEEK = 7 * ONE_DAY;
 export const COLLECTION_ID = "cache";
 export const ENDPOINT_HOST = "https://www.drivingtests.co.nz/roadcode";
 
-const BASE_SUBCATEGORIES = [
+export const COMMON_SUBCATEGORIES = [
   "core",
   "behaviour",
   "parking",
@@ -16,12 +16,12 @@ const BASE_SUBCATEGORIES = [
 ] as const;
 
 export const CATEGORIES = {
-  motorbike: ["motorbike-specific-questions", ...BASE_SUBCATEGORIES],
-  car: [...BASE_SUBCATEGORIES],
+  motorbike: ["motorbike-specific-questions", ...COMMON_SUBCATEGORIES],
+  car: [...COMMON_SUBCATEGORIES],
   heavy_vehicle: [
     "heavy-vehicle-specific-questions-class-2",
     "heavy-vehicle-specific-questions-class-3-5",
-    ...BASE_SUBCATEGORIES,
+    ...COMMON_SUBCATEGORIES,
   ],
 } as const;
 

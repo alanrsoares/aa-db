@@ -3,6 +3,7 @@ import puppeteer, { Browser, Page } from "puppeteer";
 
 import Cache from "~/Cache";
 import {
+  CATEGORIES,
   ENDPOINT_HOST,
   EXTRA_HEADERS,
   MAX_ATTEMPTS,
@@ -23,7 +24,7 @@ import type {
   Question,
   DrivingTestQuestionWithKey as QuestionWithKey,
 } from "./types";
-import { clearLine, delay, makeKey } from "./utils";
+import { clearLine, delay, makeKey, writeLine } from "./utils";
 
 export default class DrivingTestsQuestions<T extends Category> {
   #cache: Cache<Question>;
@@ -37,8 +38,8 @@ export default class DrivingTestsQuestions<T extends Category> {
   maxAttempts: number;
   waitTime: number;
   emptyAttempts: number;
-  category: T;
-  subcategory: Subcategory<T>;
+  category: T | "all";
+  subcategory: Subcategory<T> | "all";
 
   constructor({
     cache,
@@ -237,7 +238,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      console.log(
+      writeLine(
         `Error inferring answer for question: ${question.question.substring(
           0,
           50,
@@ -259,7 +260,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
 
     try {
-      console.log(`\n🔗 Scraping from: ${this.category}/${this.subcategory}`);
+      writeLine(`\n🔗 Scraping: ${this.category}/${this.subcategory}`);
 
       await this.#page.goto(this.#fullUrl, {
         waitUntil: "domcontentloaded",
@@ -288,8 +289,8 @@ export default class DrivingTestsQuestions<T extends Category> {
         answer,
         explanation,
         key: makeKey(question),
-        category: this.category,
-        subcategory: this.subcategory,
+        category: this.category as T,
+        subcategory: this.subcategory as Subcategory<T>,
       };
     } catch (error) {
       console.error("Error during scraping:", error);
@@ -317,7 +318,6 @@ export default class DrivingTestsQuestions<T extends Category> {
 
     if (this.emptyAttempts) {
       clearLine();
-
       process.stdout.write(
         `Empty attempt: ${chalk.bold.red(
           `${this.emptyAttempts}/${this.maximumEmptyAttempts}`,
@@ -326,10 +326,8 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
   };
 
-  async sync(): Promise<Question[]> {
-    if (!this.#browser) {
-      await this.#initialize();
-    }
+  process = async (): Promise<Question[]> => {
+    await this.#initialize();
 
     try {
       while (this.emptyAttempts !== this.maximumEmptyAttempts) {
@@ -337,11 +335,11 @@ export default class DrivingTestsQuestions<T extends Category> {
           await this.#fetchQuestion().then(this.#store);
         } catch (error: unknown) {
           if (error instanceof Error) {
-            console.log(chalk.bold.red(error.message));
+            writeLine(chalk.bold.red(error.message));
             // Continue trying instead of breaking on error
             this.emptyAttempts++;
           } else {
-            console.log(chalk.bold.red("Unknown error occurred"));
+            writeLine(chalk.bold.red("Unknown error occurred"));
             this.emptyAttempts++;
           }
         }
@@ -349,7 +347,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       clearLine();
 
-      console.log(
+      writeLine(
         `Operation cancelled after ${chalk.bold.red(
           this.maximumEmptyAttempts,
         )} empty attempts.`,
@@ -362,5 +360,21 @@ export default class DrivingTestsQuestions<T extends Category> {
     } finally {
       await this.#close();
     }
+  };
+
+  async sync(): Promise<Question[]> {
+    // syncing all subcategories for a specific category
+    if (this.subcategory === "all") {
+      const questions: Question[] = [];
+      const subcategories = CATEGORIES[this.category as Category];
+      for (const subcategory of subcategories) {
+        this.subcategory = subcategory as Subcategory<T>;
+        const newQuestions = await this.process();
+        questions.push(...newQuestions);
+      }
+      return questions;
+    }
+
+    return this.process();
   }
 }
