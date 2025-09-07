@@ -435,7 +435,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   };
 
-  process = async (): Promise<DrivingTestQuestionWithKey<T>[]> => {
+  process = async (): Promise<State<T>> => {
     await this.#initialize();
 
     try {
@@ -487,7 +487,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         },
       });
 
-      return this.#cache.collection.map((q) => q.value);
+      return this.#state;
     } finally {
       await this.#close();
     }
@@ -549,7 +549,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     console.log(chalk.gray("\n" + "=".repeat(50)));
   }
 
-  async sync(): Promise<DrivingTestQuestionWithKey<T>[]> {
+  async sync(): Promise<State<T>> {
     // syncing all subcategories for a specific category
     if (this.subcategory === "all") {
       const questions: DrivingTestQuestionWithKey<T>[] = [];
@@ -557,11 +557,14 @@ export default class DrivingTestsQuestions<T extends Category> {
       for (const subcategory of subcategories) {
         this.subcategory = subcategory as Subcategory<T>;
         const newQuestions = await this.process();
-        questions.push(...newQuestions);
+        questions.push(...newQuestions.questions);
       }
-      return questions;
+      return {
+        ...this.#state,
+        questions: [...this.#state.questions, ...questions],
+      };
     }
 
-    return this.process();
+    return await this.process();
   }
 }

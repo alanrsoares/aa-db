@@ -70,7 +70,7 @@ await program
       const questions = await db.sync();
       console.log(
         chalk.bold.green(
-          `\n✅ Successfully synced ${questions.length} driving test questions!`,
+          `\n✅ Successfully synced ${questions.stats.totalQuestions} driving test questions!`,
         ),
       );
     } catch (error) {
