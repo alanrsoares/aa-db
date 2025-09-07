@@ -1,6 +1,5 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 
-import Cache from "~/Cache";
 import {
   CATEGORIES,
   ENDPOINT_HOST,
@@ -15,6 +14,7 @@ import {
   type Category,
   type Subcategory,
 } from "~/config";
+import Cache from "~/lib/Cache";
 import { DrivingTestStateModel, type DrivingTestState } from "./models";
 import { ReactiveRenderer } from "./ReactiveRenderer";
 import type {

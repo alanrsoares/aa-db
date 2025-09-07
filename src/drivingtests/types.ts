@@ -1,5 +1,5 @@
-import Cache from "~/Cache";
 import type { Category, Subcategory } from "~/config";
+import Cache from "~/lib/Cache";
 
 // DeepPartial utility type for nested partial updates
 export type DeepPartial<T> = {

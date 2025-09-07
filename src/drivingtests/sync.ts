@@ -2,13 +2,13 @@ import { select } from "@inquirer/prompts";
 import chalk from "chalk";
 import { Command } from "commander";
 
-import Cache from "../Cache";
 import {
   CATEGORIES,
   ONE_WEEK,
   type Category,
   type Subcategory,
 } from "../config";
+import Cache from "../lib/Cache";
 import DrivingTestsQuestions from "./DrivingTestsQuestions";
 import type { DrivingTestQuestionWithKey } from "./types";
 
