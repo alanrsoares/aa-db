@@ -13,7 +13,7 @@ import {
   WAIT_TIME,
   type Category,
   type Subcategory,
-} from "~/config";
+} from "~/drivingtests/config";
 import Cache from "~/lib/Cache";
 import { DrivingTestStateModel, type DrivingTestState } from "./models";
 import { ReactiveRenderer } from "./ReactiveRenderer";

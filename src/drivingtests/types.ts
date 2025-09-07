@@ -1,4 +1,4 @@
-import type { Category, Subcategory } from "~/config";
+import type { Category, Subcategory } from "~/drivingtests/config";
 import Cache from "~/lib/Cache";
 
 // DeepPartial utility type for nested partial updates
