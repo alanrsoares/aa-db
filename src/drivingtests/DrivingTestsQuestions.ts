@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import puppeteer, { Browser, Page } from "puppeteer";
 
 import Cache from "~/Cache";
@@ -16,72 +15,28 @@ import {
   type Category,
   type Subcategory,
 } from "~/config";
+import { DrivingTestStateModel, type DrivingTestState } from "./models";
+import { ReactiveRenderer } from "./ReactiveRenderer";
 import type {
   Answer,
+  DeepPartial,
   DrivingTestQuestionWithKey,
   DrivingTestsQuestionsConfig,
   Explanation,
   Option,
   Question,
 } from "./types";
-import { clearConsole, delay, makeKey } from "./utils";
+import { delay, makeKey } from "./utils";
 
-type State<T extends Category> = {
-  questions: DrivingTestQuestionWithKey<T>[];
-  currentQuestionIndex: number;
-  currentQuestion: DrivingTestQuestionWithKey<T> | null;
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  isFinished: boolean;
-  // Rendering state
-  status: string;
-  progress: {
-    current: number;
-    total: number;
-    percentage: number;
-  };
-  stats: {
-    newQuestions: number;
-    totalQuestions: number;
-    questionsByCategory: number;
-    emptyAttempts: number;
-    maxEmptyAttempts: number;
-  };
-  lastError: string | null;
-  currentUrl: string;
-};
+// Type for state updates derived from the actual state type
 
 export default class DrivingTestsQuestions<T extends Category> {
   #cache: Cache<DrivingTestQuestionWithKey<T>>;
   #browser: Browser | null = null;
   #page: Page | null = null;
   #fullUrl: string;
-  #state: State<T> = {
-    questions: [],
-    currentQuestionIndex: 0,
-    currentQuestion: null,
-    isLoading: false,
-    isError: false,
-    isSuccess: false,
-    isFinished: false,
-    // Rendering state
-    status: "Initializing...",
-    progress: {
-      current: 0,
-      total: 0,
-      percentage: 0,
-    },
-    stats: {
-      newQuestions: 0,
-      totalQuestions: 0,
-      questionsByCategory: 0,
-      emptyAttempts: 0,
-      maxEmptyAttempts: 0,
-    },
-    lastError: null,
-    currentUrl: "",
-  };
+  #state: DrivingTestState;
+  #renderer: ReactiveRenderer;
 
   maximumEmptyAttempts: number;
   headless: boolean;
@@ -117,9 +72,17 @@ export default class DrivingTestsQuestions<T extends Category> {
     this.subcategory = subcategory;
     this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
 
-    // Initialize state with proper values
-    this.#state = {
-      ...this.#state,
+    // Initialize MST state for console UI only
+    this.#state = DrivingTestStateModel.create({
+      status: "Ready to start",
+      isLoading: false,
+      isError: false,
+      isFinished: false,
+      progress: {
+        current: 0,
+        total: 0,
+        percentage: 0,
+      },
       stats: {
         newQuestions: 0,
         totalQuestions: this.#cache.length,
@@ -127,13 +90,16 @@ export default class DrivingTestsQuestions<T extends Category> {
         emptyAttempts: 0,
         maxEmptyAttempts: this.maximumEmptyAttempts,
       },
+      lastError: null,
       currentUrl: this.#fullUrl,
-      status: "Ready to start",
-    };
+    });
+
+    // Initialize reactive renderer
+    this.#renderer = new ReactiveRenderer(this.#state);
   }
 
   async #initialize(): Promise<void> {
-    await this.#setState({
+    this.#setState({
       status: "Initializing browser...",
       isLoading: true,
     });
@@ -148,7 +114,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     await this.#page.setViewport(VIEWPORT);
     await this.#page.setExtraHTTPHeaders(EXTRA_HEADERS);
 
-    await this.#setState({
+    this.#setState({
       status: "Browser initialized",
       isLoading: false,
     });
@@ -156,7 +122,7 @@ export default class DrivingTestsQuestions<T extends Category> {
 
   async #close(): Promise<void> {
     if (this.#browser) {
-      await this.#setState({
+      this.#setState({
         status: "Closing browser...",
       });
 
@@ -164,16 +130,35 @@ export default class DrivingTestsQuestions<T extends Category> {
       this.#browser = null;
       this.#page = null;
 
-      await this.#setState({
+      this.#setState({
         status: "Browser closed",
       });
     }
   }
 
-  async #setState(state: Partial<State<T>>, render = true): Promise<void> {
-    this.#state = { ...this.#state, ...state };
-    if (render) {
-      await this.#render();
+  // MST actions are automatically reactive, no need for manual rendering
+  #setState(updates: DeepPartial<DrivingTestState>): void {
+    if (updates.status) this.#state.setStatus(updates.status);
+    if (updates.isLoading !== undefined)
+      this.#state.setLoading(updates.isLoading);
+    if (updates.isError !== undefined) this.#state.setError(updates.isError);
+    if (updates.isFinished !== undefined)
+      this.#state.setFinished(updates.isFinished);
+    if (updates.lastError !== undefined)
+      this.#state.setLastError(updates.lastError);
+    if (updates.currentUrl) this.#state.setCurrentUrl(updates.currentUrl);
+    if (updates.progress) {
+      const { current, total, percentage } = updates.progress;
+      if (
+        current !== undefined &&
+        total !== undefined &&
+        percentage !== undefined
+      ) {
+        this.#state.setProgress(current, total, percentage);
+      }
+    }
+    if (updates.stats) {
+      this.#state.updateStats(updates.stats);
     }
   }
 
@@ -328,7 +313,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      await this.#setState({
+      this.#setState({
         lastError: `Error inferring answer for question: ${question.question.substring(
           0,
           50,
@@ -350,7 +335,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     }
 
     try {
-      await this.#setState({
+      this.#setState({
         status: `Scraping: ${this.category}/${this.subcategory}`,
         isLoading: true,
       });
@@ -368,7 +353,7 @@ export default class DrivingTestsQuestions<T extends Category> {
       // Wait for question to load and stabilize
       await this.#waitForQuestionToLoad();
 
-      await this.#setState({
+      this.#setState({
         status: "Extracting question data...",
       });
 
@@ -379,7 +364,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         throw new Error("No question found");
       }
 
-      await this.#setState({
+      this.#setState({
         status: "Inferring answer...",
       });
 
@@ -407,7 +392,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     ).length;
   }
 
-  #store = async (question: DrivingTestQuestionWithKey<T>) => {
+  #store = (question: DrivingTestQuestionWithKey<T>) => {
     const isCached = Boolean(this.#cache.get(question.key));
 
     if (isCached) {
@@ -421,7 +406,7 @@ export default class DrivingTestsQuestions<T extends Category> {
     const questionsByCategory = this.questionsByCategory;
     const totalQuestions = this.#cache.length;
 
-    await this.#setState({
+    this.#setState({
       stats: {
         newQuestions: this.#state.stats.newQuestions + newQuestions,
         totalQuestions,
@@ -435,11 +420,11 @@ export default class DrivingTestsQuestions<T extends Category> {
     });
   };
 
-  process = async (): Promise<State<T>> => {
+  process = async (): Promise<DrivingTestQuestionWithKey<T>[]> => {
     await this.#initialize();
 
     try {
-      await this.#setState({
+      this.#setState({
         status: "Starting question processing...",
         progress: {
           current: 0,
@@ -450,14 +435,14 @@ export default class DrivingTestsQuestions<T extends Category> {
 
       while (this.emptyAttempts !== this.maximumEmptyAttempts) {
         try {
-          await this.#fetchQuestion().then(this.#store);
+          const question = await this.#fetchQuestion();
+          this.#store(question);
         } catch (error: unknown) {
           const errorMessage =
             error instanceof Error ? error.message : "Unknown error occurred";
-          await this.#setState({
+          this.#setState({
             lastError: errorMessage,
             stats: {
-              ...this.#state.stats,
               emptyAttempts: this.emptyAttempts + 1,
             },
           });
@@ -468,7 +453,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         // Update progress
         const progressPercentage =
           (this.emptyAttempts / this.maximumEmptyAttempts) * 100;
-        await this.#setState({
+        this.#setState({
           progress: {
             current: this.emptyAttempts,
             total: this.maximumEmptyAttempts,
@@ -477,7 +462,7 @@ export default class DrivingTestsQuestions<T extends Category> {
         });
       }
 
-      await this.#setState({
+      this.#setState({
         status: `Operation completed after ${this.maximumEmptyAttempts} empty attempts`,
         isFinished: true,
         progress: {
@@ -487,69 +472,13 @@ export default class DrivingTestsQuestions<T extends Category> {
         },
       });
 
-      return this.#state;
+      return this.#cache.collection.map((q) => q.value);
     } finally {
       await this.#close();
     }
   };
 
-  async #render(): Promise<void> {
-    clearConsole();
-
-    const { status, progress, stats, lastError, currentUrl } = this.#state;
-
-    // Header
-    console.log(chalk.bold.blue("🚗 Driving Test Questions Scraper"));
-    console.log(chalk.gray("=".repeat(50)));
-
-    // Status
-    console.log(chalk.bold.yellow(`Status: ${status}`));
-
-    // URL being scraped
-    if (currentUrl) {
-      console.log(chalk.cyan(`URL: ${currentUrl}`));
-    }
-
-    // Progress bar
-    if (progress.total > 0) {
-      const barLength = 30;
-      const filledLength = Math.round((progress.percentage / 100) * barLength);
-      const bar =
-        "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
-      console.log(
-        chalk.green(
-          `Progress: [${bar}] ${progress.percentage.toFixed(1)}% (${progress.current}/${progress.total})`,
-        ),
-      );
-    }
-
-    // Stats
-    console.log(chalk.bold.blue("\n📊 Statistics:"));
-    console.log(
-      chalk.green(`  New questions this session: ${stats.newQuestions}`),
-    );
-    console.log(
-      chalk.cyan(`  Questions in category: ${stats.questionsByCategory}`),
-    );
-    console.log(
-      chalk.blue(`  Total questions cached: ${stats.totalQuestions}`),
-    );
-    console.log(
-      chalk.yellow(
-        `  Empty attempts: ${stats.emptyAttempts}/${stats.maxEmptyAttempts}`,
-      ),
-    );
-
-    // Error display
-    if (lastError) {
-      console.log(chalk.bold.red(`\n❌ Last Error: ${lastError}`));
-    }
-
-    // Footer
-    console.log(chalk.gray("\n" + "=".repeat(50)));
-  }
-
-  async sync(): Promise<State<T>> {
+  async sync(): Promise<DrivingTestQuestionWithKey<T>[]> {
     // syncing all subcategories for a specific category
     if (this.subcategory === "all") {
       const questions: DrivingTestQuestionWithKey<T>[] = [];
@@ -557,14 +486,16 @@ export default class DrivingTestsQuestions<T extends Category> {
       for (const subcategory of subcategories) {
         this.subcategory = subcategory as Subcategory<T>;
         const newQuestions = await this.process();
-        questions.push(...newQuestions.questions);
+        questions.push(...newQuestions);
       }
-      return {
-        ...this.#state,
-        questions: [...this.#state.questions, ...questions],
-      };
+      return questions;
     }
 
     return await this.process();
+  }
+
+  // Cleanup method to dispose of the reactive renderer
+  dispose(): void {
+    this.#renderer.dispose();
   }
 }

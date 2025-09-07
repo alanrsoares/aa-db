@@ -1,6 +1,11 @@
 import Cache from "~/Cache";
 import type { Category, Subcategory } from "~/config";
 
+// DeepPartial utility type for nested partial updates
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
 export interface Option {
   letter: string;
   text: string;
