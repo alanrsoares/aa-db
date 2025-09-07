@@ -5,12 +5,12 @@ import { Command } from "commander";
 import Cache from "../Cache";
 import {
   CATEGORIES,
-  COMMON_SUBCATEGORIES,
   ONE_WEEK,
   type Category,
   type Subcategory,
 } from "../config";
 import DrivingTestsQuestions from "./DrivingTestsQuestions";
+import type { DrivingTestQuestionWithKey } from "./types";
 
 const program = new Command();
 
@@ -54,7 +54,9 @@ await program
     }
 
     const db = new DrivingTestsQuestions({
-      cache: new Cache({ stdTTL: ONE_WEEK }),
+      cache: new Cache<DrivingTestQuestionWithKey<Category>>({
+        stdTTL: ONE_WEEK,
+      }),
       maximumEmptyAttempts: 25, // Higher limit since we're scraping a website
       headless,
       timeout: 10_000,

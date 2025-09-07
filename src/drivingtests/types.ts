@@ -33,7 +33,7 @@ export type DrivingTestQuestionWithKey<T extends Category> = Question & {
 };
 
 export interface DrivingTestsQuestionsConfig<T extends Category> {
-  cache: Cache<Question>;
+  cache: Cache<DrivingTestQuestionWithKey<T>>;
   maximumEmptyAttempts?: number;
   headless?: boolean;
   timeout?: number;

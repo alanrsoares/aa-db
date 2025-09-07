@@ -3,14 +3,7 @@ import type { Question } from "./types";
 /**
  * Clear the current console output line
  */
-export function clearLine() {
-  process.stdout.clearLine(-1);
-  process.stdout.cursorTo(0);
-}
-
-export function writeLine(...line: string[]) {
-  process.stdout.write(line.join("\n"));
-}
+export const clearConsole = console.clear;
 
 function quickHash(str: string) {
   let hash = 0;
