@@ -7,7 +7,7 @@ const COLLECTION_ID = "cache";
 // Initialize database with proper default data structure
 const defaultData: Database<any> = { [COLLECTION_ID]: [] };
 const DB = JSONFileSyncPreset<Database<any>>(
-  `${__dirname}/../db/db.json`,
+  `${__dirname}/../../db/db.json`,
   defaultData,
 );
 
