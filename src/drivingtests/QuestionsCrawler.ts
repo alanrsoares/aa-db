@@ -19,7 +19,6 @@ import { DrivingTestStateModel, type DrivingTestState } from "./models";
 import { ReactiveRenderer } from "./ReactiveRenderer";
 import type {
   Answer,
-  DeepPartial,
   DrivingTestQuestionWithKey,
   DrivingTestsQuestionsConfig,
   Explanation,
@@ -99,10 +98,8 @@ export default class QuestionsCrawler<T extends Category> {
   }
 
   async #initialize(): Promise<void> {
-    this.#setState({
-      status: "Initializing browser...",
-      isLoading: true,
-    });
+    this.#state.setStatus("Initializing browser...");
+    this.#state.setLoading(true);
 
     this.#browser = await puppeteer.launch({
       headless: this.headless,
@@ -114,51 +111,19 @@ export default class QuestionsCrawler<T extends Category> {
     await this.#page.setViewport(VIEWPORT);
     await this.#page.setExtraHTTPHeaders(EXTRA_HEADERS);
 
-    this.#setState({
-      status: "Browser initialized",
-      isLoading: false,
-    });
+    this.#state.setStatus("Browser initialized");
+    this.#state.setLoading(false);
   }
 
   async #close(): Promise<void> {
     if (this.#browser) {
-      this.#setState({
-        status: "Closing browser...",
-      });
+      this.#state.setStatus("Closing browser...");
 
       await this.#browser.close();
       this.#browser = null;
       this.#page = null;
 
-      this.#setState({
-        status: "Browser closed",
-      });
-    }
-  }
-
-  // MST actions are automatically reactive, no need for manual rendering
-  #setState(updates: DeepPartial<DrivingTestState>): void {
-    if (updates.status) this.#state.setStatus(updates.status);
-    if (updates.isLoading !== undefined)
-      this.#state.setLoading(updates.isLoading);
-    if (updates.isError !== undefined) this.#state.setError(updates.isError);
-    if (updates.isFinished !== undefined)
-      this.#state.setFinished(updates.isFinished);
-    if (updates.lastError !== undefined)
-      this.#state.setLastError(updates.lastError);
-    if (updates.currentUrl) this.#state.setCurrentUrl(updates.currentUrl);
-    if (updates.progress) {
-      const { current, total, percentage } = updates.progress;
-      if (
-        current !== undefined &&
-        total !== undefined &&
-        percentage !== undefined
-      ) {
-        this.#state.setProgress(current, total, percentage);
-      }
-    }
-    if (updates.stats) {
-      this.#state.updateStats(updates.stats);
+      this.#state.setStatus("Browser closed");
     }
   }
 
@@ -313,12 +278,12 @@ export default class QuestionsCrawler<T extends Category> {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      this.#setState({
-        lastError: `Error inferring answer for question: ${question.question.substring(
+      this.#state.setLastError(
+        `Error inferring answer for question: ${question.question.substring(
           0,
           50,
         )}... - ${errorMessage}`,
-      });
+      );
     }
 
     return {
@@ -335,10 +300,8 @@ export default class QuestionsCrawler<T extends Category> {
     }
 
     try {
-      this.#setState({
-        status: `Scraping: ${this.category}/${this.subcategory}`,
-        isLoading: true,
-      });
+      this.#state.setStatus(`Scraping: ${this.category}/${this.subcategory}`);
+      this.#state.setLoading(true);
 
       await this.#page.goto(this.#fullUrl, {
         waitUntil: "domcontentloaded",
@@ -353,9 +316,7 @@ export default class QuestionsCrawler<T extends Category> {
       // Wait for question to load and stabilize
       await this.#waitForQuestionToLoad();
 
-      this.#setState({
-        status: "Extracting question data...",
-      });
+      this.#state.setStatus("Extracting question data...");
 
       // Extract question from the page
       const question = await this.#extractQuestion();
@@ -364,9 +325,7 @@ export default class QuestionsCrawler<T extends Category> {
         throw new Error("No question found");
       }
 
-      this.#setState({
-        status: "Inferring answer...",
-      });
+      this.#state.setStatus("Inferring answer...");
 
       const { answer, explanation } = await this.#inferAnswer(question);
 
@@ -406,92 +365,82 @@ export default class QuestionsCrawler<T extends Category> {
     const questionsByCategory = this.questionsByCategory;
     const totalQuestions = this.#cache.length;
 
-    this.#setState({
-      stats: {
-        newQuestions: this.#state.stats.newQuestions + newQuestions,
-        totalQuestions,
-        questionsByCategory,
-        emptyAttempts: this.emptyAttempts,
-        maxEmptyAttempts: this.maximumEmptyAttempts,
-      },
-      status: isCached
+    this.#state.updateStats({
+      newQuestions: this.#state.stats.newQuestions + newQuestions,
+      totalQuestions,
+      questionsByCategory,
+      emptyAttempts: this.emptyAttempts,
+      maxEmptyAttempts: this.maximumEmptyAttempts,
+    });
+
+    this.#state.setStatus(
+      isCached
         ? `Question already cached (${this.emptyAttempts}/${this.maximumEmptyAttempts} empty attempts)`
         : `New question cached! Total: ${questionsByCategory}/${totalQuestions}`,
-    });
+    );
   };
 
   process = async (): Promise<DrivingTestQuestionWithKey<T>[]> => {
     await this.#initialize();
 
-    try {
-      this.#setState({
-        status: "Starting question processing...",
-        progress: {
-          current: 0,
-          total: this.maximumEmptyAttempts,
-          percentage: 0,
-        },
-      });
+    this.#state.setStatus("Starting question processing...");
+    this.#state.setProgress(0, this.maximumEmptyAttempts, 0);
 
-      while (this.emptyAttempts !== this.maximumEmptyAttempts) {
-        try {
-          const question = await this.#fetchQuestion();
-          this.#store(question);
-        } catch (error: unknown) {
-          const errorMessage =
-            error instanceof Error ? error.message : "Unknown error occurred";
-          this.#setState({
-            lastError: errorMessage,
-            stats: {
-              emptyAttempts: this.emptyAttempts + 1,
-            },
-          });
-          // Continue trying instead of breaking on error
-          this.emptyAttempts++;
-        }
+    while (this.emptyAttempts !== this.maximumEmptyAttempts) {
+      try {
+        const question = await this.#fetchQuestion();
+        this.#store(question);
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error occurred";
 
-        // Update progress
-        const progressPercentage =
-          (this.emptyAttempts / this.maximumEmptyAttempts) * 100;
-        this.#setState({
-          progress: {
-            current: this.emptyAttempts,
-            total: this.maximumEmptyAttempts,
-            percentage: progressPercentage,
-          },
+        this.#state.setLastError(errorMessage);
+        this.#state.updateStats({
+          emptyAttempts: this.emptyAttempts + 1,
         });
+
+        // Continue trying instead of breaking on error
+        this.emptyAttempts++;
       }
 
-      this.#setState({
-        status: `Operation completed after ${this.maximumEmptyAttempts} empty attempts`,
-        isFinished: true,
-        progress: {
-          current: this.maximumEmptyAttempts,
-          total: this.maximumEmptyAttempts,
-          percentage: 100,
-        },
-      });
-
-      return this.#cache.collection.map((q) => q.value);
-    } finally {
-      await this.#close();
+      this.#state.setProgress(
+        this.emptyAttempts,
+        this.maximumEmptyAttempts,
+        (this.emptyAttempts / this.maximumEmptyAttempts) * 100,
+      );
     }
+
+    return this.#cache.collection.map((q) => q.value);
   };
 
   async sync(): Promise<DrivingTestQuestionWithKey<T>[]> {
     // syncing all subcategories for a specific category
+    const questions: DrivingTestQuestionWithKey<T>[] = [];
     if (this.subcategory === "all") {
-      const questions: DrivingTestQuestionWithKey<T>[] = [];
       const subcategories = CATEGORIES[this.category as Category];
       for (const subcategory of subcategories) {
         this.subcategory = subcategory as Subcategory<T>;
         const newQuestions = await this.process();
         questions.push(...newQuestions);
       }
-      return questions;
+    } else {
+      const newQuestions = await this.process();
+      questions.push(...newQuestions);
     }
 
-    return await this.process();
+    await this.#close();
+
+    this.#state.setStatus(
+      `Operation completed after ${this.maximumEmptyAttempts} empty attempts`,
+    );
+    this.#state.setFinished(true);
+    this.#state.setProgress(
+      this.maximumEmptyAttempts,
+      this.maximumEmptyAttempts,
+      100,
+    );
+
+    return questions;
   }
 
   // Cleanup method to dispose of the reactive renderer
