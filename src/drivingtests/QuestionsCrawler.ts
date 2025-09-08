@@ -30,7 +30,7 @@ import { delay, makeKey } from "./utils";
 
 // Type for state updates derived from the actual state type
 
-export default class DrivingTestsQuestions<T extends Category> {
+export default class QuestionsCrawler<T extends Category> {
   #cache: Cache<DrivingTestQuestionWithKey<T>>;
   #browser: Browser | null = null;
   #page: Page | null = null;

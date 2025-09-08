@@ -9,7 +9,7 @@ import {
   type Category,
   type Subcategory,
 } from "./config";
-import DrivingTestsQuestions from "./DrivingTestsQuestions";
+import QuestionsCrawler from "./QuestionsCrawler";
 import type { DrivingTestQuestionWithKey } from "./types";
 
 const program = new Command();
@@ -53,7 +53,7 @@ await program
       }
     }
 
-    const db = new DrivingTestsQuestions({
+    const db = new QuestionsCrawler({
       cache: new Cache<DrivingTestQuestionWithKey<Category>>({
         stdTTL: ONE_WEEK,
       }),
