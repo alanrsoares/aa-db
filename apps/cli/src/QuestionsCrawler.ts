@@ -19,22 +19,19 @@ import {
   type DrivingTestsQuestionsConfig,
   type DrivingTestState,
   type Explanation,
+  type IReactiveRenderer,
   type Option,
   type Question,
   type Subcategory,
 } from "@roadcodetests/core";
 import puppeteer, { Browser, Page } from "puppeteer";
 
-import { ReactiveRenderer } from "./ReactiveRenderer";
-
-// Type for state updates derived from the actual state type
-
 export default class QuestionsCrawler<T extends Category> {
   #cache: Cache<DrivingTestQuestionWithKey<T>>;
   #browser: Browser | null = null;
   #page: Page | null = null;
   #state: DrivingTestState;
-  #renderer: ReactiveRenderer;
+  #renderer: IReactiveRenderer<DrivingTestState>;
 
   maximumEmptyAttempts: number;
   headless: boolean;
@@ -56,6 +53,7 @@ export default class QuestionsCrawler<T extends Category> {
     maxAttempts = MAX_ATTEMPTS,
     waitTime = WAIT_TIME,
     quizLength = 1,
+    Renderer,
   }: DrivingTestsQuestionsConfig<T>) {
     if (!(cache instanceof Cache)) {
       throw new Error("Invalid argument 'cache'");
@@ -91,7 +89,7 @@ export default class QuestionsCrawler<T extends Category> {
     });
 
     // Initialize reactive renderer
-    this.#renderer = new ReactiveRenderer(this.#state);
+    this.#renderer = new Renderer(this.#state);
   }
 
   get #fullUrl() {

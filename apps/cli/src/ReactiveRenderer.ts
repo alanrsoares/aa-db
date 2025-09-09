@@ -1,4 +1,8 @@
-import type { DrivingTestState, StatusKind } from "@roadcodetests/core";
+import type {
+  DrivingTestState,
+  IReactiveRenderer,
+  StatusKind,
+} from "@roadcodetests/core";
 import chalk, { type Chalk } from "chalk";
 import { reaction, type IReactionDisposer } from "mobx";
 
@@ -16,7 +20,7 @@ const statusStyles = {
   ready: chalk.blue,
 } as const satisfies Record<StatusKind, Chalk>;
 
-export class ReactiveRenderer {
+export class ReactiveRenderer implements IReactiveRenderer<DrivingTestState> {
   #disposer: IReactionDisposer | null = null;
   #isRendering = false;
   #state: DrivingTestState;

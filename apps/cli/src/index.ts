@@ -13,11 +13,12 @@ import { Command } from "commander";
 import { JSONFileSyncPreset } from "lowdb/node";
 
 import QuestionsCrawler from "./QuestionsCrawler";
+import { ReactiveRenderer } from "./ReactiveRenderer";
 
 const program = new Command();
 
 const DB = JSONFileSyncPreset<Database<DrivingTestQuestionWithKey<Category>>>(
-  `${__dirname}/../db/db.json`,
+  `${__dirname}/../../../data/db/db.json`,
   { cache: [] },
 );
 
@@ -72,6 +73,7 @@ await program
       waitTime: 500,
       category: category as Category,
       subcategory: subcategory as Subcategory<Category>,
+      Renderer: ReactiveRenderer,
     });
 
     try {

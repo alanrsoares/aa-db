@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
-  "include": ["src", "types", "../../packages/core/src/models.ts"],
+  "include": ["src", "types"],
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
