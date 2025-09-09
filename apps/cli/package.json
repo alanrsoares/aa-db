@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
-    "sync": "bun ./src/sync.ts",
+    "sync": "bun ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write ."
   },
