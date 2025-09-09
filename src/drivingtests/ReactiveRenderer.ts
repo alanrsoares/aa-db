@@ -18,28 +18,30 @@ const statusStyles = {
 } as const satisfies Record<StatusKind, Chalk>;
 
 export class ReactiveRenderer {
-  private disposer: IReactionDisposer | null = null;
-  private isRendering = false;
+  #disposer: IReactionDisposer | null = null;
+  #isRendering = false;
+  #state: DrivingTestState;
 
-  constructor(private state: DrivingTestState) {
-    this.setupReactions();
+  constructor(state: DrivingTestState) {
+    this.#state = state;
+    this.#setupReactions();
   }
 
-  private setupReactions() {
+  #setupReactions() {
     // React to any state changes and re-render
-    this.disposer = reaction(
+    this.#disposer = reaction(
       () => ({
-        statusText: this.state.statusText,
-        status: this.state.status,
-        progress: this.state.progress,
-        stats: this.state.stats,
-        lastError: this.state.lastError,
-        currentUrl: this.state.currentUrl,
-        hasErrors: this.state.hasErrors,
-        isComplete: this.state.isComplete,
+        statusText: this.#state.statusText,
+        status: this.#state.status,
+        progress: this.#state.progress,
+        stats: this.#state.stats,
+        lastError: this.#state.lastError,
+        currentUrl: this.#state.currentUrl,
+        hasErrors: this.#state.hasErrors,
+        isComplete: this.#state.isComplete,
       }),
       () => {
-        this.render();
+        this.#render();
       },
       {
         fireImmediately: true,
@@ -47,9 +49,9 @@ export class ReactiveRenderer {
     );
   }
 
-  private render() {
-    if (this.isRendering) return;
-    this.isRendering = true;
+  #render() {
+    if (this.#isRendering) return;
+    this.#isRendering = true;
 
     // Clear console
     console.clear();
@@ -62,7 +64,7 @@ export class ReactiveRenderer {
       currentUrl,
       status: statusKind,
       hasErrors,
-    } = this.state;
+    } = this.#state;
 
     // Header
     console.log(chalk.bold.blue("🚗 Driving Test Questions Scraper"));
@@ -121,13 +123,13 @@ export class ReactiveRenderer {
     // Footer
     console.log(components.dividerLine(50));
 
-    this.isRendering = false;
+    this.#isRendering = false;
   }
 
   dispose() {
-    if (this.disposer) {
-      this.disposer();
-      this.disposer = null;
+    if (this.#disposer) {
+      this.#disposer();
+      this.#disposer = null;
     }
   }
 }
