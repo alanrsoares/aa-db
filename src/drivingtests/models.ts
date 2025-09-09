@@ -21,14 +21,22 @@ const StatsModel = types.model("Stats", {
   maxEmptyAttempts: types.number,
 });
 
+const StatusKindModel = types.union(
+  types.literal("initializing"),
+  types.literal("ready"),
+  types.literal("error"),
+  types.literal("finished"),
+  types.literal("loading"),
+);
+
+export type StatusKind = Instance<typeof StatusKindModel>;
+
 // Console UI state model - only essential data for rendering
 export const DrivingTestStateModel = types
   .model("DrivingTestState", {
     // UI state for console rendering
-    status: types.string,
-    isLoading: types.boolean,
-    isError: types.boolean,
-    isFinished: types.boolean,
+    statusText: types.string,
+    status: StatusKindModel,
     progress: types.optional(ProgressModel, {
       current: 0,
       total: 0,
@@ -45,36 +53,25 @@ export const DrivingTestStateModel = types
     currentUrl: types.string,
   })
   .actions((self) => ({
-    setStatus(status: string) {
-      self.status = status;
+    setStatus(kind: StatusKind, text: string) {
+      self.statusText = text;
+      self.status = kind;
+      return self;
     },
-
-    setLoading(loading: boolean) {
-      self.isLoading = loading;
-    },
-
-    setError(error: boolean) {
-      self.isError = error;
-    },
-
-    setFinished(finished: boolean) {
-      self.isFinished = finished;
-    },
-
     setLastError(error: string | null) {
       self.lastError = error;
+      return self;
     },
-
     setCurrentUrl(url: string) {
       self.currentUrl = url;
+      return self;
     },
-
-    setProgress(current: number, total: number, percentage: number) {
+    setProgress(current: number, total: number) {
       self.progress.current = current;
       self.progress.total = total;
-      self.progress.percentage = percentage;
+      self.progress.percentage = (current / total) * 100;
+      return self;
     },
-
     updateStats(
       updates: Partial<{
         newQuestions: number;
@@ -85,13 +82,11 @@ export const DrivingTestStateModel = types
       }>,
     ) {
       Object.assign(self.stats, updates);
+      return self;
     },
-
     reset() {
-      self.isLoading = false;
-      self.isError = false;
-      self.isFinished = false;
-      self.status = "Initializing...";
+      self.status = "initializing";
+      self.statusText = "Initializing...";
       self.progress.current = 0;
       self.progress.total = 0;
       self.progress.percentage = 0;
@@ -109,13 +104,11 @@ export const DrivingTestStateModel = types
       if (self.progress.total === 0) return 0;
       return (self.progress.current / self.progress.total) * 100;
     },
-
-    get isComplete() {
-      return self.isFinished && !self.isError;
-    },
-
     get hasErrors() {
-      return self.isError || self.lastError !== null;
+      return self.status === "error" || self.lastError !== null;
+    },
+    get isComplete() {
+      return self.status === "finished" || !this.hasErrors;
     },
   }));
 

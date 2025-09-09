@@ -33,7 +33,6 @@ export default class QuestionsCrawler<T extends Category> {
   #cache: Cache<DrivingTestQuestionWithKey<T>>;
   #browser: Browser | null = null;
   #page: Page | null = null;
-  #fullUrl: string;
   #state: DrivingTestState;
   #renderer: ReactiveRenderer;
 
@@ -45,6 +44,7 @@ export default class QuestionsCrawler<T extends Category> {
   emptyAttempts: number;
   category: T;
   subcategory: Subcategory<T> | "all";
+  quizLength: number;
 
   constructor({
     cache,
@@ -69,14 +69,11 @@ export default class QuestionsCrawler<T extends Category> {
     this.emptyAttempts = 0;
     this.category = category;
     this.subcategory = subcategory;
-    this.#fullUrl = `${ENDPOINT_HOST}/${category}/${subcategory}/${quizLength}/`;
-
+    this.quizLength = quizLength;
     // Initialize MST state for console UI only
     this.#state = DrivingTestStateModel.create({
-      status: "Ready to start",
-      isLoading: false,
-      isError: false,
-      isFinished: false,
+      statusText: "Ready to start",
+      status: "initializing",
       progress: {
         current: 0,
         total: 0,
@@ -97,9 +94,12 @@ export default class QuestionsCrawler<T extends Category> {
     this.#renderer = new ReactiveRenderer(this.#state);
   }
 
+  get #fullUrl() {
+    return `${ENDPOINT_HOST}/${this.category}/${this.subcategory}/${this.quizLength}/`;
+  }
+
   async #initialize(): Promise<void> {
-    this.#state.setStatus("Initializing browser...");
-    this.#state.setLoading(true);
+    this.#state.setStatus("loading", "Initializing browser...");
 
     this.#browser = await puppeteer.launch({
       headless: this.headless,
@@ -111,19 +111,18 @@ export default class QuestionsCrawler<T extends Category> {
     await this.#page.setViewport(VIEWPORT);
     await this.#page.setExtraHTTPHeaders(EXTRA_HEADERS);
 
-    this.#state.setStatus("Browser initialized");
-    this.#state.setLoading(false);
+    this.#state.setStatus("ready", "Browser initialized");
   }
 
   async #close(): Promise<void> {
     if (this.#browser) {
-      this.#state.setStatus("Closing browser...");
+      this.#state.setStatus("loading", "Closing browser...");
 
       await this.#browser.close();
       this.#browser = null;
       this.#page = null;
 
-      this.#state.setStatus("Browser closed");
+      this.#state.setStatus("finished", "Browser closed");
     }
   }
 
@@ -300,8 +299,10 @@ export default class QuestionsCrawler<T extends Category> {
     }
 
     try {
-      this.#state.setStatus(`Scraping: ${this.category}/${this.subcategory}`);
-      this.#state.setLoading(true);
+      this.#state.setStatus(
+        "loading",
+        `Scraping: ${this.category}/${this.subcategory}`,
+      );
 
       await this.#page.goto(this.#fullUrl, {
         waitUntil: "domcontentloaded",
@@ -316,7 +317,7 @@ export default class QuestionsCrawler<T extends Category> {
       // Wait for question to load and stabilize
       await this.#waitForQuestionToLoad();
 
-      this.#state.setStatus("Extracting question data...");
+      this.#state.setStatus("loading", "Extracting question data...");
 
       // Extract question from the page
       const question = await this.#extractQuestion();
@@ -325,7 +326,7 @@ export default class QuestionsCrawler<T extends Category> {
         throw new Error("No question found");
       }
 
-      this.#state.setStatus("Inferring answer...");
+      this.#state.setStatus("loading", "Inferring answer...");
 
       const { answer, explanation } = await this.#inferAnswer(question);
 
@@ -374,6 +375,7 @@ export default class QuestionsCrawler<T extends Category> {
     });
 
     this.#state.setStatus(
+      "loading",
       isCached
         ? `Question already cached (${this.emptyAttempts}/${this.maximumEmptyAttempts} empty attempts)`
         : `New question cached! Total: ${questionsByCategory}/${totalQuestions}`,
@@ -381,10 +383,12 @@ export default class QuestionsCrawler<T extends Category> {
   };
 
   process = async (): Promise<DrivingTestQuestionWithKey<T>[]> => {
-    await this.#initialize();
+    if (!this.#browser) {
+      await this.#initialize();
+    }
 
-    this.#state.setStatus("Starting question processing...");
-    this.#state.setProgress(0, this.maximumEmptyAttempts, 0);
+    this.#state.setStatus("loading", "Starting question processing...");
+    this.#state.setProgress(0, this.maximumEmptyAttempts);
 
     while (this.emptyAttempts !== this.maximumEmptyAttempts) {
       try {
@@ -403,12 +407,10 @@ export default class QuestionsCrawler<T extends Category> {
         this.emptyAttempts++;
       }
 
-      this.#state.setProgress(
-        this.emptyAttempts,
-        this.maximumEmptyAttempts,
-        (this.emptyAttempts / this.maximumEmptyAttempts) * 100,
-      );
+      this.#state.setProgress(this.emptyAttempts, this.maximumEmptyAttempts);
     }
+
+    this.emptyAttempts = 0;
 
     return this.#cache.collection.map((q) => q.value);
   };
@@ -420,6 +422,7 @@ export default class QuestionsCrawler<T extends Category> {
       const subcategories = CATEGORIES[this.category as Category];
       for (const subcategory of subcategories) {
         this.subcategory = subcategory as Subcategory<T>;
+        this.#state.setCurrentUrl(this.#fullUrl);
         const newQuestions = await this.process();
         questions.push(...newQuestions);
       }
@@ -431,13 +434,13 @@ export default class QuestionsCrawler<T extends Category> {
     await this.#close();
 
     this.#state.setStatus(
+      "finished",
       `Operation completed after ${this.maximumEmptyAttempts} empty attempts`,
     );
-    this.#state.setFinished(true);
+
     this.#state.setProgress(
       this.maximumEmptyAttempts,
       this.maximumEmptyAttempts,
-      100,
     );
 
     return questions;

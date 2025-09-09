@@ -1,7 +1,21 @@
-import chalk from "chalk";
+import chalk, { type Chalk } from "chalk";
 import { reaction, type IReactionDisposer } from "mobx";
 
-import type { DrivingTestState } from "./models";
+import type { DrivingTestState, StatusKind } from "./models";
+
+const components = {
+  dividerLine(length: number) {
+    return `\n${chalk.gray("=".repeat(length))}\n`;
+  },
+};
+
+const statusStyles = {
+  error: chalk.red,
+  loading: chalk.yellow,
+  finished: chalk.green,
+  initializing: chalk.blue,
+  ready: chalk.blue,
+} as const satisfies Record<StatusKind, Chalk>;
 
 export class ReactiveRenderer {
   private disposer: IReactionDisposer | null = null;
@@ -15,14 +29,14 @@ export class ReactiveRenderer {
     // React to any state changes and re-render
     this.disposer = reaction(
       () => ({
+        statusText: this.state.statusText,
         status: this.state.status,
         progress: this.state.progress,
         stats: this.state.stats,
         lastError: this.state.lastError,
         currentUrl: this.state.currentUrl,
-        isLoading: this.state.isLoading,
-        isError: this.state.isError,
-        isFinished: this.state.isFinished,
+        hasErrors: this.state.hasErrors,
+        isComplete: this.state.isComplete,
       }),
       () => {
         this.render();
@@ -41,29 +55,22 @@ export class ReactiveRenderer {
     console.clear();
 
     const {
-      status,
+      statusText: status,
       progress,
       stats,
       lastError,
       currentUrl,
-      isLoading,
-      isError,
-      isFinished,
+      status: statusKind,
+      hasErrors,
     } = this.state;
 
     // Header
     console.log(chalk.bold.blue("🚗 Driving Test Questions Scraper"));
-    console.log(chalk.gray("=".repeat(50)));
+    console.log(components.dividerLine(50));
 
     // Status with loading indicator
-    const statusColor = isError
-      ? chalk.red
-      : isLoading
-        ? chalk.yellow
-        : isFinished
-          ? chalk.green
-          : chalk.blue;
-    const loadingIndicator = isLoading ? " ⏳" : "";
+    const statusColor = statusStyles[statusKind];
+    const loadingIndicator = statusKind === "loading" ? " ⏳" : "";
     console.log(statusColor(`Status: ${status}${loadingIndicator}`));
 
     // URL being scraped
@@ -72,7 +79,7 @@ export class ReactiveRenderer {
     }
 
     // Progress bar
-    if (progress.total > 0) {
+    if (progress.total) {
       const barLength = 30;
       const filledLength = Math.round((progress.percentage / 100) * barLength);
       const bar =
@@ -87,17 +94,17 @@ export class ReactiveRenderer {
     // Stats
     console.log(chalk.bold.blue("\n📊 Statistics:"));
     console.log(
-      chalk.green(`  New questions this session: ${stats.newQuestions}`),
+      chalk.green(` * New questions this session: ${stats.newQuestions}`),
     );
     console.log(
-      chalk.cyan(`  Questions in category: ${stats.questionsByCategory}`),
+      chalk.cyan(` * Questions in category: ${stats.questionsByCategory}`),
     );
     console.log(
-      chalk.blue(`  Total questions cached: ${stats.totalQuestions}`),
+      chalk.blue(` * Total questions cached: ${stats.totalQuestions}`),
     );
     console.log(
       chalk.yellow(
-        `  Empty attempts: ${stats.emptyAttempts}/${stats.maxEmptyAttempts}`,
+        ` * Empty attempts: ${stats.emptyAttempts}/${stats.maxEmptyAttempts}`,
       ),
     );
 
@@ -107,12 +114,12 @@ export class ReactiveRenderer {
     }
 
     // Success message
-    if (isFinished && !isError) {
+    if (statusKind === "finished" && !hasErrors) {
       console.log(chalk.bold.green(`\n✅ Operation completed successfully!`));
     }
 
     // Footer
-    console.log(chalk.gray("\n" + "=".repeat(50)));
+    console.log(components.dividerLine(50));
 
     this.isRendering = false;
   }
