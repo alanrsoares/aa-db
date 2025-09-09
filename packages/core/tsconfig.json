@@ -1,5 +1,6 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
+  "include": ["src", "types", "lib"],
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
@@ -8,12 +9,18 @@
     "declaration": true,
     "sourceMap": true,
     "verbatimModuleSyntax": true,
+    "rootDir": "./src",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "outDir": "dist",
     "esModuleInterop": true,
     "allowJs": true
   }

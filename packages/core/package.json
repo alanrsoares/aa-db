@@ -1,0 +1,40 @@
+{
+  "name": "@roadcodetests/core",
+  "version": "2.0.0",
+  "description": "Core package for Roadcode Tests",
+  "packageManager": "bun@1.2.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "sync": "bun ./src/drivingtests/sync.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write ."
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  },
+  "repository": "git@github.com:alanrsoares/roadcodetests.git",
+  "author": "Alan Soares <alanrsoars@gmail.com> github.com/alanrsoares",
+  "license": "MIT",
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/bun": "^1.2.21",
+    "@types/puppeteer": "^7.0.4",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "lowdb": "^7.0.1",
+    "mobx": "^6.13.7",
+    "mobx-state-tree": "^7.0.2",
+    "tiny-invariant": "^1.3.3"
+  }
+}

@@ -1,5 +1,6 @@
-import type { Category, Subcategory } from "~/drivingtests/config";
-import Cache from "~/lib/Cache";
+import type { Category, Subcategory } from "@roadcodetests/core/src/config";
+
+import { Cache } from "~/lib/cache";
 
 // DeepPartial utility type for nested partial updates
 export type DeepPartial<T> = {
@@ -47,4 +48,8 @@ export interface DrivingTestsQuestionsConfig<T extends Category> {
   subcategory: Subcategory<T>;
   waitTime?: number;
   quizLength?: number;
+}
+
+export interface IReactiveRenderer {
+  dispose(): void;
 }

@@ -1,17 +1,9 @@
 import { LowSync } from "lowdb";
-import { JSONFileSyncPreset } from "lowdb/node";
 
 const STD_TTL = 600;
 const COLLECTION_ID = "cache";
 
-// Initialize database with proper default data structure
-const defaultData: Database<any> = { [COLLECTION_ID]: [] };
-const DB = JSONFileSyncPreset<Database<any>>(
-  `${__dirname}/../../db/db.json`,
-  defaultData,
-);
-
-const isValidCacheKey = (key: { created: number }, ttl: number) =>
+export const isValidCacheKey = (key: { created: number }, ttl: number) =>
   Math.floor((Date.now() - key.created) / 1000) <= ttl;
 
 export class CacheKey<T> {
@@ -46,19 +38,18 @@ export interface Database<T> {
   cache: CacheKey<T>[];
 }
 
-export default class Cache<T> {
+export interface CacheOptions<T> {
+  stdTTL?: number;
+  db: LowSync<Database<T>>;
+}
+
+export class Cache<T> {
   stdTTL: number;
   db: LowSync<Database<T>>;
 
-  constructor({
-    stdTTL = STD_TTL,
-    db = DB,
-  }: {
-    stdTTL?: number;
-    db?: typeof DB;
-  }) {
-    this.stdTTL = stdTTL;
+  constructor({ db, stdTTL = STD_TTL }: CacheOptions<T>) {
     this.db = db;
+    this.stdTTL = stdTTL;
   }
 
   get collection() {

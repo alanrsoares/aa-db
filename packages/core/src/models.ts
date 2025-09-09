@@ -31,6 +31,20 @@ const StatusKindModel = types.union(
 
 export type StatusKind = Instance<typeof StatusKindModel>;
 
+const DEFAULT_STATS = {
+  newQuestions: 0,
+  totalQuestions: 0,
+  questionsByCategory: 0,
+  emptyAttempts: 0,
+  maxEmptyAttempts: 0,
+};
+
+const DEFAULT_PROGRESS = {
+  current: 0,
+  total: 0,
+  percentage: 0,
+};
+
 // Console UI state model - only essential data for rendering
 export const DrivingTestStateModel = types
   .model("DrivingTestState", {
@@ -38,16 +52,10 @@ export const DrivingTestStateModel = types
     statusText: types.string,
     status: StatusKindModel,
     progress: types.optional(ProgressModel, {
-      current: 0,
-      total: 0,
-      percentage: 0,
+      ...DEFAULT_PROGRESS,
     }),
     stats: types.optional(StatsModel, {
-      newQuestions: 0,
-      totalQuestions: 0,
-      questionsByCategory: 0,
-      emptyAttempts: 0,
-      maxEmptyAttempts: 0,
+      ...DEFAULT_STATS,
     }),
     lastError: types.maybeNull(types.string),
     currentUrl: types.string,
