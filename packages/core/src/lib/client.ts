@@ -3,7 +3,7 @@ import { LowSync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import { Either, Just, Left, Maybe, Nothing, Right } from "purify-ts";
 
-import type { Category, Subcategory } from "../config";
+import { type Category, type Subcategory } from "../config";
 import type { DrivingTestQuestionWithKey } from "../types";
 import { Cache, CacheKey, type Database as CacheDatabase } from "./cache";
 
@@ -71,11 +71,14 @@ export class QuestionsClient {
     );
   }
 
-  // Get a random question
-  public getRandomQuestion(): Either<
-    ClientError,
-    DrivingTestQuestionWithKey<Category>
-  > {
+  // Get a list of random questions
+  public getRandomQuestions(
+    limit: number,
+    options?: {
+      category?: Category;
+      subcategory?: Subcategory<Category>;
+    },
+  ): Either<ClientError, DrivingTestQuestionWithKey<Category>[]> {
     return this.getAllQuestions().chain(
       (questions: DrivingTestQuestionWithKey<Category>[]) => {
         if (questions.length === 0) {
@@ -85,14 +88,34 @@ export class QuestionsClient {
           });
         }
 
-        const randomIndex = Math.floor(Math.random() * questions.length);
-        const question = questions[randomIndex];
-        return question
-          ? Right(question)
-          : Left({
-              type: "QUESTION_NOT_FOUND",
-              message: "Failed to get random question",
-            });
+        // Filter questions based on options if provided
+        let filteredQuestions = questions;
+        if (options?.category) {
+          filteredQuestions = filteredQuestions.filter(
+            (q) => q.category === options.category,
+          );
+        }
+        if (options?.subcategory) {
+          filteredQuestions = filteredQuestions.filter(
+            (q) => q.subcategory === options.subcategory,
+          );
+        }
+
+        if (filteredQuestions.length === 0) {
+          return Left({
+            type: "QUESTION_NOT_FOUND",
+            message: `No questions found matching the specified criteria`,
+          });
+        }
+
+        // Get random questions without replacement
+        const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
+        const selectedQuestions = shuffled.slice(
+          0,
+          Math.min(limit, filteredQuestions.length),
+        );
+
+        return Right(selectedQuestions);
       },
     );
   }
@@ -124,128 +147,6 @@ export class QuestionsClient {
     );
   }
 
-  // Get questions by category
-  public getQuestionsByCategory(
-    category: Category,
-  ): Either<ClientError, DrivingTestQuestionWithKey<Category>[]> {
-    return this.getAllQuestions()
-      .map((questions: DrivingTestQuestionWithKey<Category>[]) =>
-        questions.filter(
-          (q: DrivingTestQuestionWithKey<Category>) => q.category === category,
-        ),
-      )
-      .chain((questions: DrivingTestQuestionWithKey<Category>[]) => {
-        if (questions.length === 0) {
-          return Left({
-            type: "QUESTION_NOT_FOUND",
-            message: `No questions found for category '${category}'`,
-          });
-        }
-        return Right(questions);
-      });
-  }
-
-  // Get questions by subcategory
-  public getQuestionsBySubcategory(
-    subcategory: string,
-  ): Either<ClientError, DrivingTestQuestionWithKey<Category>[]> {
-    return this.getAllQuestions()
-      .map((questions: DrivingTestQuestionWithKey<Category>[]) =>
-        questions.filter(
-          (q: DrivingTestQuestionWithKey<Category>) =>
-            q.subcategory === subcategory,
-        ),
-      )
-      .chain((questions: DrivingTestQuestionWithKey<Category>[]) => {
-        if (questions.length === 0) {
-          return Left({
-            type: "QUESTION_NOT_FOUND",
-            message: `No questions found for subcategory '${subcategory}'`,
-          });
-        }
-        return Right(questions);
-      });
-  }
-
-  // Get questions by category and subcategory
-  public getQuestionsByCategoryAndSubcategory(
-    category: Category,
-    subcategory: Subcategory<Category>,
-  ): Either<ClientError, DrivingTestQuestionWithKey<Category>[]> {
-    return this.getAllQuestions()
-      .map((questions: DrivingTestQuestionWithKey<Category>[]) =>
-        questions.filter(
-          (q: DrivingTestQuestionWithKey<Category>) =>
-            q.category === category && q.subcategory === subcategory,
-        ),
-      )
-      .chain((questions: DrivingTestQuestionWithKey<Category>[]) => {
-        if (questions.length === 0) {
-          return Left({
-            type: "QUESTION_NOT_FOUND",
-            message: `No questions found for category '${category}' and subcategory '${subcategory}'`,
-          });
-        }
-        return Right(questions);
-      });
-  }
-
-  // Get a random question by category
-  public getRandomQuestionByCategory(
-    category: Category,
-  ): Either<ClientError, DrivingTestQuestionWithKey<Category>> {
-    return this.getQuestionsByCategory(category).chain(
-      (questions: DrivingTestQuestionWithKey<Category>[]) => {
-        const randomIndex = Math.floor(Math.random() * questions.length);
-        const question = questions[randomIndex];
-        return question
-          ? Right(question)
-          : Left({
-              type: "QUESTION_NOT_FOUND",
-              message: "Failed to get random question",
-            });
-      },
-    );
-  }
-
-  // Get a random question by subcategory
-  public getRandomQuestionBySubcategory(
-    subcategory: string,
-  ): Either<ClientError, DrivingTestQuestionWithKey<Category>> {
-    return this.getQuestionsBySubcategory(subcategory).chain(
-      (questions: DrivingTestQuestionWithKey<Category>[]) => {
-        const randomIndex = Math.floor(Math.random() * questions.length);
-        const question = questions[randomIndex];
-        return question
-          ? Right(question)
-          : Left({
-              type: "QUESTION_NOT_FOUND",
-              message: "Failed to get random question",
-            });
-      },
-    );
-  }
-
-  // Get a random question by category and subcategory
-  public getRandomQuestionByCategoryAndSubcategory(
-    category: Category,
-    subcategory: Subcategory<Category>,
-  ): Either<ClientError, DrivingTestQuestionWithKey<Category>> {
-    return this.getQuestionsByCategoryAndSubcategory(
-      category,
-      subcategory,
-    ).chain((questions: DrivingTestQuestionWithKey<Category>[]) => {
-      const randomIndex = Math.floor(Math.random() * questions.length);
-      const question = questions[randomIndex];
-      return question
-        ? Right(question)
-        : Left({
-            type: "QUESTION_NOT_FOUND",
-            message: "Failed to get random question",
-          });
-    });
-  }
-
   // Get all available categories
   public getCategories(): Either<ClientError, Category[]> {
     return this.getAllQuestions().map(
@@ -271,29 +172,6 @@ export class QuestionsClient {
             ),
           ),
         ].sort(),
-    );
-  }
-
-  // Get subcategories for a specific category
-  public getSubcategoriesByCategory(
-    category: Category,
-  ): Either<ClientError, string[]> {
-    return this.getQuestionsByCategory(category).map(
-      (questions: DrivingTestQuestionWithKey<Category>[]) =>
-        [
-          ...new Set(
-            questions.map(
-              (q: DrivingTestQuestionWithKey<Category>) => q.subcategory,
-            ),
-          ),
-        ].sort(),
-    );
-  }
-
-  // Get total question count
-  public getQuestionCount(): Either<ClientError, number> {
-    return this.getAllQuestions().map(
-      (questions: DrivingTestQuestionWithKey<Category>[]) => questions.length,
     );
   }
 }

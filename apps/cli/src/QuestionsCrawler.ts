@@ -31,7 +31,7 @@ export default class QuestionsCrawler<T extends Category> {
   #browser: Browser | null = null;
   #page: Page | null = null;
   #state: DrivingTestState;
-  #renderer: IReactiveRenderer<DrivingTestState>;
+  #renderer: IReactiveRenderer;
 
   maximumEmptyAttempts: number;
   headless: boolean;

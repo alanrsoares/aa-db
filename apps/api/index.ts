@@ -7,12 +7,10 @@ import {
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { Either, Left, Right } from "purify-ts";
+import { Either } from "purify-ts";
 
 // API-specific error types
-export type APIError =
-  | { type: "VALIDATION_ERROR"; message: string }
-  | ClientError;
+export type APIError = ClientError;
 
 // Create Hono app
 const app = new Hono();
@@ -54,18 +52,6 @@ const handleEitherResponse = <T>(
   });
 };
 
-// Helper function to validate category parameter using purify-ts v2+
-const validateCategory = (category: string): Either<APIError, Category> => {
-  const validCategories: Category[] = ["car", "motorbike", "heavy_vehicle"];
-
-  return validCategories.includes(category as Category)
-    ? Right(category as Category)
-    : Left({
-        type: "VALIDATION_ERROR",
-        message: `Invalid category. Must be one of: ${validCategories.join(", ")}`,
-      });
-};
-
 // Helper function to get appropriate HTTP status code for error types
 const getErrorStatusCode = (errorType: string): number => {
   switch (errorType) {
@@ -73,9 +59,6 @@ const getErrorStatusCode = (errorType: string): number => {
     case "QUESTION_NOT_FOUND":
       return 404;
     case "INVALID_JSON":
-    case "INVALID_FILTER":
-    case "VALIDATION_ERROR":
-      return 400;
     case "CACHE_ERROR":
       return 500;
     default:
@@ -92,9 +75,31 @@ app.get("/", (c) => {
   });
 });
 
-// Get a random question
-app.get("/questions/random", (c) => {
-  const result = questionsClient.getRandomQuestion();
+// Get random questions
+app.get("/questions/:category/:subcategory/:limit", (c) => {
+  const limit = parseInt(c.req.param("limit") || "1");
+  const category = c.req.param("category") as Category | undefined;
+  const subcategory = c.req.param("subcategory") as
+    | Subcategory<Category>
+    | undefined;
+
+  const options = { category, subcategory };
+
+  if (!category || !subcategory) {
+    return c.json(
+      {
+        success: false,
+        error: {
+          type: "INVALID_REQUEST",
+          message: "Category and subcategory are required",
+        },
+      },
+      400,
+    );
+  }
+
+  const result = questionsClient.getRandomQuestions(limit, options);
+
   return handleEitherResponse(result, c);
 });
 
@@ -105,67 +110,6 @@ app.get("/questions/:id", (c) => {
   return handleEitherResponse(result, c);
 });
 
-// Get questions by category with validation
-app.get("/questions/category/:category", (c) => {
-  const categoryParam = c.req.param("category");
-
-  const result = validateCategory(categoryParam).chain((category) => {
-    return questionsClient.getQuestionsByCategory(category);
-  });
-
-  return handleEitherResponse(result, c);
-});
-
-// Get questions by subcategory
-app.get("/questions/subcategory/:subcategory", (c) => {
-  const subcategory = c.req.param("subcategory");
-  const result = questionsClient.getQuestionsBySubcategory(subcategory);
-  return handleEitherResponse(result, c);
-});
-
-// Get questions by category and subcategory
-app.get("/questions/category/:category/subcategory/:subcategory", (c) => {
-  const category = c.req.param("category") as Category;
-  const subcategory = c.req.param("subcategory") as Subcategory<Category>;
-  const result = questionsClient.getQuestionsByCategoryAndSubcategory(
-    category,
-    subcategory,
-  );
-  return handleEitherResponse(result, c);
-});
-
-// Get a random question by category with validation
-app.get("/questions/random/category/:category", (c) => {
-  const categoryParam = c.req.param("category");
-
-  const result = validateCategory(categoryParam).chain((category) => {
-    return questionsClient.getRandomQuestionByCategory(category);
-  });
-
-  return handleEitherResponse(result, c);
-});
-
-// Get a random question by subcategory
-app.get("/questions/random/subcategory/:subcategory", (c) => {
-  const subcategory = c.req.param("subcategory");
-  const result = questionsClient.getRandomQuestionBySubcategory(subcategory);
-  return handleEitherResponse(result, c);
-});
-
-// Get a random question by category and subcategory
-app.get(
-  "/questions/random/category/:category/subcategory/:subcategory",
-  (c) => {
-    const category = c.req.param("category") as Category;
-    const subcategory = c.req.param("subcategory") as Subcategory<Category>;
-    const result = questionsClient.getRandomQuestionByCategoryAndSubcategory(
-      category,
-      subcategory,
-    );
-    return handleEitherResponse(result, c);
-  },
-);
-
 // Get all available categories
 app.get("/categories", (c) => {
   const result = questionsClient.getCategories();
@@ -175,17 +119,6 @@ app.get("/categories", (c) => {
 // Get all available subcategories
 app.get("/subcategories", (c) => {
   const result = questionsClient.getSubcategories();
-  return handleEitherResponse(result, c);
-});
-
-// Get subcategories for a specific category with validation
-app.get("/categories/:category/subcategories", (c) => {
-  const categoryParam = c.req.param("category");
-
-  const result = validateCategory(categoryParam).chain((category) => {
-    return questionsClient.getSubcategoriesByCategory(category);
-  });
-
   return handleEitherResponse(result, c);
 });
 
