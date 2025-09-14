@@ -1,9 +1,8 @@
 {
   "name": "@roadcodetests/cli",
   "version": "2.0.0",
-  "description": "Crawler to drain AA Questions Database",
+  "description": "Crawler to scrape Roadcode Questions",
   "packageManager": "bun@1.2.21",
-  "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
