@@ -14,7 +14,6 @@ export type ClientError =
   | { type: "FILE_NOT_FOUND"; message: string }
   | { type: "INVALID_JSON"; message: string }
   | { type: "QUESTION_NOT_FOUND"; message: string }
-  | { type: "INVALID_FILTER"; message: string }
   | { type: "CACHE_ERROR"; message: string };
 
 // Client class with functional programming patterns
@@ -295,31 +294,6 @@ export class QuestionsClient {
   public getQuestionCount(): Either<ClientError, number> {
     return this.getAllQuestions().map(
       (questions: DrivingTestQuestionWithKey<Category>[]) => questions.length,
-    );
-  }
-
-  // Clear the cache (useful for testing or when database changes)
-  public clearCache(): void {
-    this.cache = Nothing;
-  }
-
-  // Add a question to the cache
-  public addQuestion(
-    question: DrivingTestQuestionWithKey<Category>,
-  ): Either<ClientError, void> {
-    return this.getCache().map(
-      (cache: Cache<DrivingTestQuestionWithKey<Category>>) => {
-        cache.set(question.key, question);
-      },
-    );
-  }
-
-  // Remove a question from the cache
-  public removeQuestion(key: string): Either<ClientError, void> {
-    return this.getCache().map(
-      (cache: Cache<DrivingTestQuestionWithKey<Category>>) => {
-        cache.invalidate(key);
-      },
     );
   }
 }
