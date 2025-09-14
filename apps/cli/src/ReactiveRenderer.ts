@@ -10,6 +10,12 @@ const components = {
   dividerLine(length: number) {
     return `\n${chalk.gray("=".repeat(length))}\n`;
   },
+  progressBar(percentage: number, barLength = 30) {
+    const filledLength = Math.round((percentage / 100) * barLength);
+    const filledSegment = "█".repeat(filledLength);
+    const emptySegment = "░".repeat(barLength - filledLength);
+    return `[${filledSegment}${emptySegment}] ${percentage.toFixed(1)}%`;
+  },
 };
 
 const statusStyles = {
@@ -60,13 +66,13 @@ export class ReactiveRenderer implements IReactiveRenderer {
     console.clear();
 
     const {
-      statusText: status,
       progress,
       stats,
       lastError,
       currentUrl,
-      status: statusKind,
       hasErrors,
+      status,
+      statusText,
     } = this.#state;
 
     // Header
@@ -74,9 +80,9 @@ export class ReactiveRenderer implements IReactiveRenderer {
     console.log(components.dividerLine(50));
 
     // Status with loading indicator
-    const statusColor = statusStyles[statusKind];
-    const loadingIndicator = statusKind === "loading" ? " ⏳" : "";
-    console.log(statusColor(`Status: ${status}${loadingIndicator}`));
+    const statusColor = statusStyles[status];
+    const loadingIndicator = status === "loading" ? " ⏳" : "";
+    console.log(statusColor(`Status: ${statusText}${loadingIndicator}`));
 
     // URL being scraped
     if (currentUrl) {
@@ -85,14 +91,9 @@ export class ReactiveRenderer implements IReactiveRenderer {
 
     // Progress bar
     if (progress.total) {
-      const barLength = 30;
-      const filledLength = Math.round((progress.percentage / 100) * barLength);
-      const bar =
-        "█".repeat(filledLength) + "░".repeat(barLength - filledLength);
+      const bar = components.progressBar(progress.percentage);
       console.log(
-        chalk.green(
-          `Progress: [${bar}] ${progress.percentage.toFixed(1)}% (${progress.current}/${progress.total})`,
-        ),
+        chalk.green(`Progress: ${bar} (${progress.current}/${progress.total})`),
       );
     }
 
@@ -119,7 +120,7 @@ export class ReactiveRenderer implements IReactiveRenderer {
     }
 
     // Success message
-    if (statusKind === "finished" && !hasErrors) {
+    if (status === "finished" && !hasErrors) {
       console.log(chalk.bold.green(`\n✅ Operation completed successfully!`));
     }
 
