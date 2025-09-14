@@ -32,9 +32,11 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@types/node": "^24.3.3",
     "lowdb": "^7.0.1",
     "mobx": "^6.13.7",
     "mobx-state-tree": "^7.0.2",
+    "purify-ts": "^2.1.2",
     "tiny-invariant": "^1.3.3"
   }
 }

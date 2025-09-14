@@ -3,3 +3,4 @@ export * from "./config";
 export * from "./utils";
 export * from "./models";
 export * from "./lib/cache";
+export * from "./lib/client";
