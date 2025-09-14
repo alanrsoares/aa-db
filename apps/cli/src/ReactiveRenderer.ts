@@ -20,7 +20,7 @@ const statusStyles = {
   ready: chalk.blue,
 } as const satisfies Record<StatusKind, Chalk>;
 
-export class ReactiveRenderer implements IReactiveRenderer<DrivingTestState> {
+export class ReactiveRenderer implements IReactiveRenderer {
   #disposer: IReactionDisposer | null = null;
   #isRendering = false;
   #state: DrivingTestState;
