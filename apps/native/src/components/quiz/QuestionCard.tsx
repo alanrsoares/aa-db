@@ -1,14 +1,14 @@
-import { View, Text, Image, ScrollView } from "react-native";
 import type { DrivingTestQuestionWithKey } from "@roadcodetests/core";
+import { Image, ScrollView, Text, View } from "react-native";
 
 interface QuestionCardProps {
   question: DrivingTestQuestionWithKey<any>;
   showExplanation?: boolean;
 }
 
-export const QuestionCard = ({ 
-  question, 
-  showExplanation = false 
+export const QuestionCard = ({
+  question,
+  showExplanation = false,
 }: QuestionCardProps) => {
   return (
     <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
@@ -23,12 +23,12 @@ export const QuestionCard = ({
             />
           </View>
         )}
-        
+
         {/* Question Text */}
         <Text className="text-lg font-semibold text-gray-800 mb-4 leading-6">
           {question.question}
         </Text>
-        
+
         {/* Category and Subcategory */}
         <View className="flex-row mb-4">
           <View className="bg-blue-100 px-3 py-1 rounded-full mr-2">
@@ -38,11 +38,11 @@ export const QuestionCard = ({
           </View>
           <View className="bg-gray-100 px-3 py-1 rounded-full">
             <Text className="text-xs font-medium text-gray-600 capitalize">
-              {question.subcategory.replace(/-/g, ' ')}
+              {question.subcategory.replace(/-/g, " ")}
             </Text>
           </View>
         </View>
-        
+
         {/* Explanation */}
         {showExplanation && question.explanation && (
           <View className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">

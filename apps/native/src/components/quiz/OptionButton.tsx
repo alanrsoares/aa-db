@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 interface OptionButtonProps {
   option: {
@@ -27,11 +27,11 @@ export const OptionButton = ({
       if (isIncorrect) return "bg-red-100 border-red-500";
       return "bg-gray-100 border-gray-300";
     }
-    
+
     if (isSelected) {
       return "bg-blue-100 border-blue-500";
     }
-    
+
     return "bg-white border-gray-300";
   };
 
@@ -41,11 +41,11 @@ export const OptionButton = ({
       if (isIncorrect) return "text-red-700";
       return "text-gray-500";
     }
-    
+
     if (isSelected) {
       return "text-blue-700";
     }
-    
+
     return "text-gray-700";
   };
 
@@ -55,11 +55,11 @@ export const OptionButton = ({
       if (isIncorrect) return "bg-red-500 text-white";
       return "bg-gray-400 text-white";
     }
-    
+
     if (isSelected) {
       return "bg-blue-500 text-white";
     }
-    
+
     return "bg-gray-200 text-gray-700";
   };
 
@@ -71,7 +71,9 @@ export const OptionButton = ({
       activeOpacity={disabled ? 1 : 0.7}
     >
       <View className="flex-row items-center">
-        <View className={`w-8 h-8 rounded-full items-center justify-center mr-3 ${getLetterStyle()}`}>
+        <View
+          className={`w-8 h-8 rounded-full items-center justify-center mr-3 ${getLetterStyle()}`}
+        >
           <Text className="font-bold text-sm">{option.letter}</Text>
         </View>
         <Text className={`flex-1 text-base ${getTextStyle()}`}>

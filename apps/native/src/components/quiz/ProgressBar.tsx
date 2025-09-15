@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 
 interface ProgressBarProps {
   current: number;
@@ -7,11 +7,11 @@ interface ProgressBarProps {
   showNumbers?: boolean;
 }
 
-export const ProgressBar = ({ 
-  current, 
-  total, 
-  percentage, 
-  showNumbers = true 
+export const ProgressBar = ({
+  current,
+  total,
+  percentage,
+  showNumbers = true,
 }: ProgressBarProps) => {
   return (
     <View className="w-full mb-6">
@@ -25,9 +25,9 @@ export const ProgressBar = ({
           </Text>
         </View>
       )}
-      
+
       <View className="w-full bg-gray-200 rounded-full h-2">
-        <View 
+        <View
           className="bg-blue-500 h-2 rounded-full transition-all duration-300"
           style={{ width: `${Math.min(percentage, 100)}%` }}
         />
