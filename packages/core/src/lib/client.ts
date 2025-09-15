@@ -1,5 +1,4 @@
-import { join } from "path";
-import { LowSync } from "lowdb";
+import { LowSync, MemorySync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import { Either, Just, Left, Maybe, Nothing, Right } from "purify-ts";
 
@@ -21,8 +20,9 @@ export class QuestionsClient {
   private readonly dbPath: string;
   private cache: Maybe<Cache<DrivingTestQuestionWithKey<Category>>> = Nothing;
 
-  constructor(dbPath?: string) {
-    this.dbPath = dbPath || join(process.cwd(), "data", "db", "db.json");
+  constructor(dbPath: string) {
+    // Use a default path that works in both Node.js and web environments
+    this.dbPath = dbPath;
   }
 
   // Initialize cache with error handling
@@ -31,11 +31,28 @@ export class QuestionsClient {
     Cache<DrivingTestQuestionWithKey<Category>>
   > {
     try {
-      const adapter = new JSONFileSync<DB>(this.dbPath);
-      const db = new LowSync<DB>(adapter, { cache: [] });
-      const cache = new Cache<DrivingTestQuestionWithKey<Category>>({ db });
-      this.cache = Just(cache);
-      return Right(cache);
+      // Check if we're in a Node.js environment
+      if (
+        typeof process !== "undefined" &&
+        process.versions &&
+        process.versions.node &&
+        JSONFileSync
+      ) {
+        // Node.js environment - use file system
+        const adapter = new JSONFileSync<DB>(this.dbPath);
+        const db = new LowSync<DB>(adapter, { cache: [] });
+        // Read existing data from file
+        db.read();
+        const cache = new Cache<DrivingTestQuestionWithKey<Category>>({ db });
+        this.cache = Just(cache);
+        return Right(cache);
+      } else {
+        // Web environment - use in-memory storage
+        const db = new LowSync<DB>(new MemorySync<DB>(), { cache: [] });
+        const cache = new Cache<DrivingTestQuestionWithKey<Category>>({ db });
+        this.cache = Just(cache);
+        return Right(cache);
+      }
     } catch (error: any) {
       return Left({
         type: "CACHE_ERROR",
@@ -61,14 +78,14 @@ export class QuestionsClient {
     ClientError,
     DrivingTestQuestionWithKey<Category>[]
   > {
-    return this.getCache().map(
-      (cache: Cache<DrivingTestQuestionWithKey<Category>>) => {
-        // Get all questions from the cache collection
-        return cache.collection.map(
-          (item: CacheKey<DrivingTestQuestionWithKey<Category>>) => item.value,
-        );
-      },
-    );
+    const cache = this.getCache();
+
+    return cache.map((cache) => {
+      // Get all questions from the cache collection
+      return cache.collection.map(
+        (item: CacheKey<DrivingTestQuestionWithKey<Category>>) => item.value,
+      );
+    });
   }
 
   // Get a list of random questions
@@ -177,9 +194,6 @@ export class QuestionsClient {
 }
 
 // Factory function to create a client instance
-export const createQuestionsClient = (dbPath?: string): QuestionsClient => {
+export const createQuestionsClient = (dbPath: string): QuestionsClient => {
   return new QuestionsClient(dbPath);
 };
-
-// Default client instance
-export const questionsClient = createQuestionsClient();

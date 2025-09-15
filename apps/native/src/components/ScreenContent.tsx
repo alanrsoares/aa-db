@@ -1,11 +1,7 @@
-import {
-  Category,
-  DrivingTestQuestionWithKey,
-  questionsClient,
-} from "@roadcodetests/core";
-import { useEffect, useState } from "react";
+import type { Category } from "@roadcodetests/core";
 import { Text, View } from "react-native";
 
+import { useRandomQuestions } from "../hooks/useQuizQueries";
 import { EditScreenInfo } from "./EditScreenInfo";
 
 type ScreenContentProps = {
@@ -14,30 +10,18 @@ type ScreenContentProps = {
   children?: React.ReactNode;
 };
 
-function useQuestionsClient() {
-  return questionsClient;
-}
-
 export const ScreenContent = ({
   title,
   path,
   children,
 }: ScreenContentProps) => {
-  const questionsClient = useQuestionsClient();
+  const {
+    data: questions,
+    isLoading,
+    error,
+  } = useRandomQuestions("car", "core", 1, true);
 
-  const [question, setQuestion] =
-    useState<DrivingTestQuestionWithKey<Category> | null>(null);
-
-  useEffect(() => {
-    questionsClient.getRandomQuestion().caseOf({
-      Left: (error) => {
-        console.error(error);
-      },
-      Right: (question) => {
-        setQuestion(question);
-      },
-    });
-  }, []);
+  const question = questions && questions.length > 0 ? questions[0] : null;
 
   return (
     <View className={styles.container}>
