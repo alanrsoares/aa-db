@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -37,7 +38,7 @@ const getCategoryInfo = (category: Category) => {
 
 const QUIZ_LENGTHS = [10, 15, 20, 30, 35];
 
-export const HomeScreen = ({ onStartQuiz }: HomeScreenProps) => {
+export const HomeScreen = observer(({ onStartQuiz }: HomeScreenProps) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("car");
   const [selectedSubcategory, setSelectedSubcategory] =
     useState<Subcategory<Category>>("core");
@@ -243,4 +244,4 @@ export const HomeScreen = ({ onStartQuiz }: HomeScreenProps) => {
       </ScrollView>
     </Container>
   );
-};
+});

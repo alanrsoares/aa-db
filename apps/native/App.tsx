@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 
 import { QuizNavigation } from "./src/components/QuizNavigation";
+import { QuizStoreProvider } from "./src/contexts/QuizStoreContext";
 
 import "./global.css";
 
@@ -28,8 +29,10 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <QuizNavigation />
-      <StatusBar style="auto" />
+      <QuizStoreProvider>
+        <QuizNavigation />
+        <StatusBar style="auto" />
+      </QuizStoreProvider>
     </QueryClientProvider>
   );
 }

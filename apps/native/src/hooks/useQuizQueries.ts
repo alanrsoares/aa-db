@@ -83,3 +83,19 @@ export const usePrefetchQuestions = () => {
     },
   });
 };
+
+// Hook to handle quiz data fetching with QuizStore integration
+export const useQuizData = (
+  category: Category,
+  subcategory: Subcategory<Category>,
+  quizLength: number,
+  enabled: boolean = true,
+) => {
+  const query = useRandomQuestions(category, subcategory, quizLength, enabled);
+
+  return {
+    ...query,
+    // Additional helper methods can be added here if needed
+    isReady: !query.isLoading && !query.error && !!query.data,
+  };
+};

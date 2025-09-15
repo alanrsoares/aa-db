@@ -1,37 +1,27 @@
+import { observer } from "mobx-react-lite";
 import { useState } from "react";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
-import { HomeScreen } from "../screens/HomeScreen";
-import { QuizScreen } from "../screens/QuizScreen";
-import { ResultsScreen } from "../screens/ResultsScreen";
+import { useQuizStore } from "~/contexts/QuizStoreContext";
+import { HomeScreen } from "~/screens/HomeScreen";
+import { QuizScreen } from "~/screens/QuizScreen";
+import { ResultsScreen } from "~/screens/ResultsScreen";
 
 type Screen = "home" | "quiz" | "results";
 
-interface QuizState {
-  category: Category;
-  subcategory: Subcategory<Category>;
-  quizLength: number;
-}
-
-interface ResultsState {
-  score: {
-    correct: number;
-    total: number;
-    percentage: number;
-  };
-}
-
-const QuizNavigation = () => {
+const QuizNavigation = observer(() => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("home");
-  const [quizState, setQuizState] = useState<QuizState | null>(null);
-  const [resultsState, setResultsState] = useState<ResultsState | null>(null);
+  const quizStore = useQuizStore();
 
   const handleStartQuiz = (
     category: Category,
     subcategory: Subcategory<Category>,
     quizLength: number,
   ) => {
-    setQuizState({ category, subcategory, quizLength });
+    // Set quiz configuration in the store
+    quizStore.setConfig({ category, subcategory, quizLength });
+    // Start the quiz (this will set status to loading)
+    quizStore.startQuiz();
     setCurrentScreen("quiz");
   };
 
@@ -40,26 +30,23 @@ const QuizNavigation = () => {
     total: number;
     percentage: number;
   }) => {
-    setResultsState({ score });
     setCurrentScreen("results");
   };
 
   const handleBackToHome = () => {
+    quizStore.resetQuiz();
     setCurrentScreen("home");
-    setQuizState(null);
-    setResultsState(null);
   };
 
   const handleRestartQuiz = () => {
-    if (quizState) {
-      setCurrentScreen("quiz");
-      setResultsState(null);
-    }
+    // Reset the quiz and start again with the same configuration
+    quizStore.startQuiz();
+    setCurrentScreen("quiz");
   };
 
   const handleBackFromQuiz = () => {
+    quizStore.resetQuiz();
     setCurrentScreen("home");
-    setQuizState(null);
   };
 
   switch (currentScreen) {
@@ -67,26 +54,28 @@ const QuizNavigation = () => {
       return <HomeScreen onStartQuiz={handleStartQuiz} />;
 
     case "quiz":
-      if (!quizState) {
+      // Check if we have a valid quiz configuration
+      if (!quizStore.config.category || !quizStore.config.subcategory) {
         return <HomeScreen onStartQuiz={handleStartQuiz} />;
       }
       return (
         <QuizScreen
-          category={quizState.category}
-          subcategory={quizState.subcategory}
-          quizLength={quizState.quizLength}
+          category={quizStore.config.category as Category}
+          subcategory={quizStore.config.subcategory as Subcategory<Category>}
+          quizLength={quizStore.config.quizLength}
           onComplete={handleQuizComplete}
           onBack={handleBackFromQuiz}
         />
       );
 
     case "results":
-      if (!resultsState) {
+      // Check if quiz is completed and we have score data
+      if (!quizStore.isQuizComplete) {
         return <HomeScreen onStartQuiz={handleStartQuiz} />;
       }
       return (
         <ResultsScreen
-          score={resultsState.score}
+          score={quizStore.score}
           onRestart={handleRestartQuiz}
           onHome={handleBackToHome}
         />
@@ -95,6 +84,6 @@ const QuizNavigation = () => {
     default:
       return <HomeScreen onStartQuiz={handleStartQuiz} />;
   }
-};
+});
 
 export { QuizNavigation };

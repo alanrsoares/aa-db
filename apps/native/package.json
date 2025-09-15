@@ -12,10 +12,11 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@roadcodetests/core": "workspace:*",
     "@expo/metro-runtime": "~5.0.4",
+    "@roadcodetests/core": "workspace:*",
     "expo": "~53.0.22",
     "expo-status-bar": "~2.2.3",
+    "mobx-react-lite": "^4.1.0",
     "nativewind": "latest",
     "react": "19.0.0",
     "react-dom": "19.0.0",
