@@ -35,7 +35,7 @@ const getCategoryInfo = (category: Category) => {
   );
 };
 
-const QUIZ_LENGTHS = [5, 10, 15, 20, 30];
+const QUIZ_LENGTHS = [10, 15, 20, 30, 35];
 
 export const HomeScreen = ({ onStartQuiz }: HomeScreenProps) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("car");
