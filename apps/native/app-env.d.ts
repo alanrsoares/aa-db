@@ -1,7 +1,6 @@
 import type {
   ActivityIndicatorProps,
   ImageProps,
-  SafeAreaViewProps,
   ScrollViewProps,
   TextProps,
   TouchableOpacityProps,
@@ -23,6 +22,6 @@ declare module "react-native" {
   export const TouchableOpacity: StyleableComponent<TouchableOpacityProps>;
   export const ScrollView: StyleableComponent<ScrollViewProps>;
   export const Image: StyleableComponent<ImageProps>;
-  export const SafeAreaView: StyleableComponent<SafeAreaViewProps>;
+  export const SafeAreaView: StyleableComponent<ViewProps>;
   export const StatusBar: StyleableComponent<StatusBarProps>;
 }
