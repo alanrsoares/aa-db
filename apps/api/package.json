@@ -4,6 +4,9 @@
   "type": "module",
   "private": true,
   "packageManager": "bun@1.2.21",
+  "scripts": {
+    "start": "bun run index.ts"
+  },
   "dependencies": {
     "hono": "^4.9.7",
     "purify-ts": "^2.1.2",

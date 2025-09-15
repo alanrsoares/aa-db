@@ -1,5 +1,7 @@
+import { existsSync } from "fs";
+import { join, resolve } from "path";
 import {
-  questionsClient,
+  createQuestionsClient,
   type Category,
   type ClientError,
   type Subcategory,
@@ -11,6 +13,17 @@ import { Either } from "purify-ts";
 
 // API-specific error types
 export type APIError = ClientError;
+
+const dbPath =
+  process.env.DB_PATH || resolve("..", "..", "data", "db", "db.json");
+
+// check if dbPath exists
+if (!existsSync(dbPath)) {
+  console.error(`DB path ${dbPath} does not exist`);
+  process.exit(1);
+}
+
+const questionsClient = createQuestionsClient(dbPath);
 
 // Create Hono app
 const app = new Hono();
