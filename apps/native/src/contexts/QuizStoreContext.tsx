@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useMemo } from "react";
 
 import { QuizStoreModel, type QuizStore } from "../models/QuizStore";
 
@@ -11,7 +11,7 @@ interface QuizStoreProviderProps {
 }
 
 export const QuizStoreProvider = ({ children }: QuizStoreProviderProps) => {
-  const quizStore = QuizStoreModel.create();
+  const quizStore = useMemo(() => QuizStoreModel.create(), []);
 
   return (
     <QuizStoreContext.Provider value={quizStore}>

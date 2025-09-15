@@ -1,7 +1,12 @@
-// @ts-ignore
-/// <reference types="nativewind/types" />
-
-// import og Alert
+import type {
+  ActivityIndicatorProps,
+  ImageProps,
+  SafeAreaViewProps,
+  ScrollViewProps,
+  TextProps,
+  TouchableOpacityProps,
+  ViewProps,
+} from "react-native";
 
 declare module "react-native" {
   type StyleableComponent<T = Record<string, unknown>> = React.ComponentType<
@@ -11,24 +16,13 @@ declare module "react-native" {
     } & T
   >;
 
-  export const Alert: {
-    alert: (
-      title: string,
-      message: string,
-      buttons?: { text: string; onPress: () => void }[],
-    ) => void;
-  };
+  export const ActivityIndicator: React.ComponentType<ActivityIndicatorProps>;
 
-  export const ActivityIndicator: React.ComponentType<{
-    size?: "small" | "large";
-    color?: string;
-  }>;
-
-  export const View: StyleableComponent;
-  export const Text: StyleableComponent;
-  export const TouchableOpacity: StyleableComponent;
-  export const ScrollView: StyleableComponent;
+  export const View: StyleableComponent<ViewProps>;
+  export const Text: StyleableComponent<TextProps>;
+  export const TouchableOpacity: StyleableComponent<TouchableOpacityProps>;
+  export const ScrollView: StyleableComponent<ScrollViewProps>;
   export const Image: StyleableComponent<ImageProps>;
-  export const SafeAreaView: StyleableComponent;
-  export const StatusBar: StyleableComponent;
+  export const SafeAreaView: StyleableComponent<SafeAreaViewProps>;
+  export const StatusBar: StyleableComponent<StatusBarProps>;
 }

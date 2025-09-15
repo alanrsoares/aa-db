@@ -11,15 +11,15 @@ interface QuestionCardProps {
 export const QuestionCard = observer(
   ({ question, showExplanation = false }: QuestionCardProps) => {
     return (
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <View className="bg-white rounded-lg p-6 mb-6 shadow-sm">
+      <ScrollView className="flex-1 gap-6" showsVerticalScrollIndicator={false}>
+        <View className="bg-white rounded-lg p-6 shadow-sm border">
           {/* Question Image */}
           {question.imageUrl && (
             <View className="mb-4">
               <Image
                 source={{ uri: question.imageUrl }}
                 className="w-full h-48 rounded-lg"
-                resizeMode="cover"
+                resizeMode="contain"
               />
             </View>
           )}
