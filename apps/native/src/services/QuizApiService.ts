@@ -17,13 +17,15 @@ export interface QuizApiService {
   getRandomQuestions(
     limit: number,
     category: Category,
-    subcategory: Subcategory<Category>
+    subcategory: Subcategory<Category>,
   ): Promise<DrivingTestQuestionWithKey<Category>[]>;
-  
-  getQuestionById(id: string): Promise<DrivingTestQuestionWithKey<Category> | null>;
-  
+
+  getQuestionById(
+    id: string,
+  ): Promise<DrivingTestQuestionWithKey<Category> | null>;
+
   getCategories(): Promise<Category[]>;
-  
+
   getSubcategories(category?: Category): Promise<Subcategory<Category>[]>;
 }
 
@@ -36,7 +38,7 @@ class QuizApiServiceImpl implements QuizApiService {
 
   private async makeRequest<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
   ): Promise<T> {
     try {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
@@ -52,7 +54,7 @@ class QuizApiServiceImpl implements QuizApiService {
       }
 
       const result: ApiResponse<T> = await response.json();
-      
+
       if (!result.success) {
         throw new Error(result.error?.message || "API request failed");
       }
@@ -67,12 +69,12 @@ class QuizApiServiceImpl implements QuizApiService {
   async getRandomQuestions(
     limit: number,
     category: Category,
-    subcategory: Subcategory<Category>
+    subcategory: Subcategory<Category>,
   ): Promise<DrivingTestQuestionWithKey<Category>[]> {
     try {
-      const questions = await this.makeRequest<DrivingTestQuestionWithKey<Category>[]>(
-        `/questions/${category}/${subcategory}/${limit}`
-      );
+      const questions = await this.makeRequest<
+        DrivingTestQuestionWithKey<Category>[]
+      >(`/questions/${category}/${subcategory}/${limit}`);
       return questions;
     } catch (error) {
       console.error("Failed to fetch random questions:", error);
@@ -81,12 +83,12 @@ class QuizApiServiceImpl implements QuizApiService {
   }
 
   async getQuestionById(
-    id: string
+    id: string,
   ): Promise<DrivingTestQuestionWithKey<Category> | null> {
     try {
-      const question = await this.makeRequest<DrivingTestQuestionWithKey<Category>>(
-        `/questions/${id}`
-      );
+      const question = await this.makeRequest<
+        DrivingTestQuestionWithKey<Category>
+      >(`/questions/${id}`);
       return question;
     } catch (error) {
       console.error("Failed to fetch question by ID:", error);
@@ -104,10 +106,15 @@ class QuizApiServiceImpl implements QuizApiService {
     }
   }
 
-  async getSubcategories(category?: Category): Promise<Subcategory<Category>[]> {
+  async getSubcategories(
+    category?: Category,
+  ): Promise<Subcategory<Category>[]> {
     try {
-      const endpoint = category ? `/subcategories?category=${category}` : "/subcategories";
-      const subcategories = await this.makeRequest<Subcategory<Category>[]>(endpoint);
+      const endpoint = category
+        ? `/subcategories?category=${category}`
+        : "/subcategories";
+      const subcategories =
+        await this.makeRequest<Subcategory<Category>[]>(endpoint);
       return subcategories;
     } catch (error) {
       console.error("Failed to fetch subcategories:", error);

@@ -6,8 +6,8 @@
   "packages": [
     {
       "name": "nativewind",
-      "type": "styling"
-    }
+      "type": "styling",
+    },
   ],
   "flags": {
     "noGit": false,
@@ -16,16 +16,16 @@
     "importAlias": true,
     "packageManager": "bun",
     "eas": false,
-    "publish": false
+    "publish": false,
   },
   "packageManager": {
     "type": "bun",
-    "version": "1.2.21"
+    "version": "1.2.21",
   },
   "os": {
     "type": "Darwin",
     "platform": "darwin",
     "arch": "arm64",
-    "kernelVersion": "24.6.0"
-  }
+    "kernelVersion": "24.6.0",
+  },
 }

@@ -1,7 +1,7 @@
-import type { Category, Subcategory } from "@roadcodetests/core";
 import { useEffect, useState } from "react";
 import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
+import type { Category, Subcategory } from "@roadcodetests/core";
 import { useCategories, useSubcategories } from "~/hooks/useQuizQueries";
 import { Container } from "../components/Container";
 

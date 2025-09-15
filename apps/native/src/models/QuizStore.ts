@@ -1,15 +1,15 @@
-import type {
-  Category,
-  DrivingTestQuestionWithKey,
-  Option,
-  Subcategory,
-} from "@roadcodetests/core";
 import {
   types,
   type Instance,
   type SnapshotIn,
   type SnapshotOut,
 } from "mobx-state-tree";
+
+import type {
+  Category,
+  DrivingTestQuestionWithKey,
+  Subcategory,
+} from "@roadcodetests/core";
 
 // User Answer model
 const UserAnswerModel = types.model("UserAnswer", {

@@ -1,4 +1,3 @@
-import type { Category, Subcategory } from "@roadcodetests/core";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -8,6 +7,7 @@ import {
   View,
 } from "react-native";
 
+import type { Category, Subcategory } from "@roadcodetests/core";
 import { Container } from "../components/Container";
 import { OptionButton } from "../components/quiz/OptionButton";
 import { ProgressBar } from "../components/quiz/ProgressBar";

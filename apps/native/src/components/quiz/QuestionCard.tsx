@@ -1,5 +1,6 @@
-import type { DrivingTestQuestionWithKey } from "@roadcodetests/core";
 import { Image, ScrollView, Text, View } from "react-native";
+
+import type { DrivingTestQuestionWithKey } from "@roadcodetests/core";
 
 interface QuestionCardProps {
   question: DrivingTestQuestionWithKey<any>;

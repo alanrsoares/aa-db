@@ -1,6 +1,6 @@
-import type { Category, Subcategory } from "@roadcodetests/core";
 import { useState } from "react";
 
+import type { Category, Subcategory } from "@roadcodetests/core";
 import { HomeScreen } from "../screens/HomeScreen";
 import { QuizScreen } from "../screens/QuizScreen";
 import { ResultsScreen } from "../screens/ResultsScreen";
