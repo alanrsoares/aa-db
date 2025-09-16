@@ -1,5 +1,5 @@
 import { existsSync } from "fs";
-import { join, resolve } from "path";
+import { resolve } from "path";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
