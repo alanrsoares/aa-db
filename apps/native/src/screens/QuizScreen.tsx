@@ -113,9 +113,8 @@ export const QuizScreen = observer<QuizScreenProps>(
     }
 
     const currentQuestion = quizStore.currentQuestion;
-    const isCorrect = selectedOption
-      ? quizStore.checkAnswer(selectedOption)
-      : false;
+
+    const correctAnswer = currentQuestion.answer;
 
     return (
       <Container>
@@ -152,22 +151,28 @@ export const QuizScreen = observer<QuizScreenProps>(
 
           {/* Options */}
           <View className="mb-6">
-            {currentQuestion.options.map((option) => (
-              <OptionButton
-                key={option.id}
-                option={option}
-                isSelected={selectedOption === option.id}
-                isCorrect={
-                  showAnswer && isCorrect && selectedOption === option.id
-                }
-                isIncorrect={
-                  showAnswer && !isCorrect && selectedOption === option.id
-                }
-                onPress={() => handleOptionSelect(option.id)}
-                disabled={showAnswer}
-                testID={`option-${option.letter.toLowerCase()}`}
-              />
-            ))}
+            {currentQuestion.options.map((option) => {
+              const isSelected = selectedOption === option.id;
+              const isCorrect = correctAnswer === option.letter;
+
+              const buttonVariant = showAnswer
+                ? isSelected
+                  ? isCorrect
+                    ? "correct" // selected and correct
+                    : "incorrect" // selected and incorrect
+                  : "disabled" // not selected and show answer
+                : "default"; // not selected and not show answer
+
+              return (
+                <OptionButton
+                  key={option.id}
+                  option={option}
+                  variant={buttonVariant}
+                  onPress={() => handleOptionSelect(option.id)}
+                  testID={`option-${option.letter.toLowerCase()}`}
+                />
+              );
+            })}
           </View>
 
           {/* Navigation Buttons */}
