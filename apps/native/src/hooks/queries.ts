@@ -1,7 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
-import { quizApiService } from "~/services/QuizApiService";
+import { QuizApiService } from "@roadcodetests/core/services";
+
+const quizApiService = new QuizApiService();
+
+const THIRTY_MIN = 30 * 60 * 1000; // 30 minutes
+const FIVE_MIN = 5 * 60 * 1000; // 5 minutes
 
 // Query Keys
 export const quizKeys = {
@@ -22,7 +27,7 @@ export function useCategories() {
   return useQuery({
     queryKey: quizKeys.categories(),
     queryFn: () => quizApiService.getCategories(),
-    staleTime: 30 * 60 * 1000, // 30 minutes - categories don't change often
+    staleTime: THIRTY_MIN, // 30 minutes - categories don't change often
   });
 }
 
@@ -34,7 +39,7 @@ export function useSubcategories(category?: Category) {
         ? quizApiService.getSubcategories(category)
         : Promise.resolve([]),
     enabled: !!category,
-    staleTime: 30 * 60 * 1000, // 30 minutes
+    staleTime: THIRTY_MIN, // 30 minutes
   });
 }
 
@@ -59,7 +64,7 @@ export function useQuestionById(id: string, enabled: boolean = true) {
     queryKey: quizKeys.question(id),
     queryFn: () => quizApiService.getQuestionById(id),
     enabled: enabled && !!id,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: FIVE_MIN, // 5 minutes
   });
 }
 

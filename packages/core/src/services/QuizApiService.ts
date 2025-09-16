@@ -118,5 +118,3 @@ export class QuizApiService implements IQuizApiService {
     }
   }
 }
-
-export const quizApiService = new QuizApiService();

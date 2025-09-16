@@ -17,6 +17,11 @@
       "bun": "./src/index.ts",
       "import": "./src/index.ts",
       "require": "./src/index.ts"
+    },
+    "./services": {
+      "bun": "./src/services/index.ts",
+      "import": "./src/services/index.ts",
+      "require": "./src/services/index.ts"
     }
   },
   "repository": "git@github.com:alanrsoares/roadcodetests.git",
