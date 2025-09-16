@@ -9,6 +9,7 @@ import { cva } from "styled-cva";
 interface ChipProps extends TouchableOpacityProps {
   label: string;
   selected: boolean;
+  testID?: string;
 }
 
 const chipVariants = cva(`px-4 py-2 rounded-full border`, {
@@ -34,12 +35,14 @@ export const Chip: FC<ChipProps> = ({
   selected,
   onPress,
   className,
+  testID,
   ...props
 }: ChipProps) => {
   return (
     <TouchableOpacity
       className={chipVariants({ selected, className })}
       onPress={onPress}
+      testID={testID}
       {...props}
     >
       <Text className={labelVariants({ selected })}>{label}</Text>

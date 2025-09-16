@@ -67,7 +67,10 @@ const textVariants = cva("font-medium text-center", {
   },
 });
 
-type ButtonProps = TouchableOpacityProps & VariantProps<typeof buttonVariants>;
+type ButtonProps = TouchableOpacityProps &
+  VariantProps<typeof buttonVariants> & {
+    testID?: string;
+  };
 
 export const Button: FC<ButtonProps> = ({
   children,
@@ -75,6 +78,7 @@ export const Button: FC<ButtonProps> = ({
   size = "md",
   disabled = false,
   className,
+  testID,
   onPress,
   ...props
 }) => {
@@ -84,6 +88,7 @@ export const Button: FC<ButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={disabled ? 1 : 0.7}
+      testID={testID}
       {...props}
     >
       {typeof children === "string" ? (

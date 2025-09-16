@@ -5,7 +5,11 @@ module.exports = {
   presets: [require("nativewind/preset")],
   darkMode: "class", // Use class-based dark mode instead of media queries
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "rgb(59 130 246 / var(--tw-bg-opacity, 1));",
+      },
+    },
   },
   plugins: [],
 };

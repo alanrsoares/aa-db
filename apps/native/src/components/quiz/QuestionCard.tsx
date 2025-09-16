@@ -8,6 +8,7 @@ import { Typography } from "../ui/Typography";
 interface QuestionCardProps {
   question: DrivingTestQuestionWithKey<any>;
   showExplanation?: boolean;
+  testID?: string;
 }
 
 // Style variants using cva - only for styles that have variants
@@ -38,9 +39,14 @@ const explanationVariants = cva(`mt-4 p-4 rounded-lg border`, {
 export const QuestionCard: FC<QuestionCardProps> = ({
   question,
   showExplanation = false,
+  testID,
 }) => {
   return (
-    <ScrollView className="flex-1 gap-6" showsVerticalScrollIndicator={false}>
+    <ScrollView
+      className="flex-1 gap-6"
+      showsVerticalScrollIndicator={false}
+      testID={testID}
+    >
       <View className="bg-white rounded-lg p-6 shadow-sm border">
         {/* Question Image */}
         {question.imageUrl && (
@@ -54,7 +60,12 @@ export const QuestionCard: FC<QuestionCardProps> = ({
         )}
 
         {/* Question Text */}
-        <Typography variant="h6" className="mb-4" leading="relaxed">
+        <Typography
+          variant="h6"
+          className="mb-4"
+          leading="relaxed"
+          testID="question-text"
+        >
           {question.question}
         </Typography>
 

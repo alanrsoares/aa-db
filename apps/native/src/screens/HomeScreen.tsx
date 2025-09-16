@@ -141,6 +141,7 @@ export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
                     description={description}
                     selected={selectedCategory === category}
                     onPress={setSelectedCategory.bind(null, category)}
+                    testID={`category-${category}`}
                   />
                 );
               })}
@@ -168,6 +169,7 @@ export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
                     label={getSubcategoryLabel(subcategory)}
                     selected={selectedSubcategory === subcategory}
                     onPress={setSelectedSubcategory.bind(null, subcategory)}
+                    testID={`subcategory-${subcategory}`}
                   />
                 ))}
               </View>
@@ -187,6 +189,7 @@ export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
                 variant={selectedQuizLength === length ? "primary" : "outline"}
                 size="sm"
                 onPress={() => setSelectedQuizLength(length)}
+                testID={`quiz-length-${length}`}
               >
                 {`${length} questions`}
               </Button>
@@ -201,6 +204,7 @@ export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
           onPress={handleStartQuiz}
           disabled={loadingCategories || loadingSubcategories}
           className="mb-8"
+          testID="start-quiz-button"
         >
           Start Quiz
         </Button>

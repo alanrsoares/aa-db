@@ -122,7 +122,12 @@ export const QuizScreen = observer<QuizScreenProps>(
         <View className="flex-1">
           {/* Header */}
           <View className="flex-row items-center justify-between mb-6">
-            <Button variant="secondary" size="md" onPress={onBack}>
+            <Button
+              variant="secondary"
+              size="md"
+              onPress={onBack}
+              testID="quiz-back-button"
+            >
               Back
             </Button>
 
@@ -160,6 +165,7 @@ export const QuizScreen = observer<QuizScreenProps>(
                 }
                 onPress={() => handleOptionSelect(option.id)}
                 disabled={showAnswer}
+                testID={`option-${option.letter.toLowerCase()}`}
               />
             ))}
           </View>
@@ -171,12 +177,22 @@ export const QuizScreen = observer<QuizScreenProps>(
               size="lg"
               onPress={handlePrevious}
               disabled={quizStore.currentQuestionIndex === 0}
+              testID="previous-button"
             >
               Previous
             </Button>
 
             {showAnswer && (
-              <Button variant="primary" size="lg" onPress={handleNext}>
+              <Button
+                variant="primary"
+                size="lg"
+                onPress={handleNext}
+                testID={
+                  quizStore.isLastQuestion
+                    ? "finish-quiz-button"
+                    : "next-button"
+                }
+              >
                 {quizStore.isLastQuestion ? "Finish Quiz" : "Next Question"}
               </Button>
             )}

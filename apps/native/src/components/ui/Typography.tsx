@@ -77,6 +77,7 @@ type TypographyProps = TextProps &
   VariantProps<typeof typographyVariants> & {
     children: ReactNode;
     className?: string;
+    testID?: string;
   };
 
 export const Typography: FC<TypographyProps> = ({
@@ -88,6 +89,7 @@ export const Typography: FC<TypographyProps> = ({
   transform = "none",
   leading = "normal",
   className,
+  testID,
   ...props
 }) => {
   return (
@@ -101,6 +103,7 @@ export const Typography: FC<TypographyProps> = ({
         leading,
         className,
       })}
+      testID={testID}
       {...props}
     >
       {children}

@@ -14,6 +14,7 @@ interface OptionButtonProps {
   isIncorrect?: boolean;
   onPress: () => void;
   disabled?: boolean;
+  testID?: string;
 }
 
 export const OptionButton: FC<OptionButtonProps> = ({
@@ -23,6 +24,7 @@ export const OptionButton: FC<OptionButtonProps> = ({
   isIncorrect,
   onPress,
   disabled = false,
+  testID,
 }) => {
   const getButtonStyle = () => {
     if (disabled) {
@@ -72,6 +74,7 @@ export const OptionButton: FC<OptionButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={disabled ? 1 : 0.7}
+      testID={testID}
     >
       <View className="flex-row items-center">
         <View

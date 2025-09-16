@@ -8,6 +8,7 @@ interface ProgressBarProps {
   total: number;
   percentage: number;
   showNumbers?: boolean;
+  testID?: string;
 }
 
 export const ProgressBar: FC<ProgressBarProps> = ({
@@ -15,9 +16,10 @@ export const ProgressBar: FC<ProgressBarProps> = ({
   total,
   percentage,
   showNumbers = true,
+  testID,
 }) => {
   return (
-    <View className="w-full mb-6">
+    <View className="w-full mb-6" testID={testID}>
       {showNumbers && (
         <View className="flex-row justify-between items-center mb-2">
           <Typography variant="bodySmall" weight="medium" color="tertiary">

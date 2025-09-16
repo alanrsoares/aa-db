@@ -11,6 +11,7 @@ export interface TouchableCardProps extends TouchableOpacityProps {
   label: string;
   description: string;
   selected: boolean;
+  testID?: string;
 }
 
 export const TouchableCard: FC<TouchableCardProps> = ({
@@ -18,11 +19,13 @@ export const TouchableCard: FC<TouchableCardProps> = ({
   description,
   selected,
   className,
+  testID,
   ...props
 }) => {
   return (
     <TouchableOpacity
       className={cardVariants({ selected, className })}
+      testID={testID}
       {...props}
     >
       <Text className={labelVariants({ selected })}>{label}</Text>

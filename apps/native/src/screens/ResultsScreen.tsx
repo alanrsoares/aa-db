@@ -70,6 +70,7 @@ export const ResultsScreen = observer<ResultsScreenProps>(
               <Typography
                 variant="h2"
                 className={`${getScoreColor(score.percentage)}`}
+                testID="score-percentage"
               >
                 {Math.round(score.percentage)}%
               </Typography>
@@ -161,11 +162,21 @@ export const ResultsScreen = observer<ResultsScreenProps>(
 
           {/* Action Buttons */}
           <View className="space-y-4">
-            <Button variant="primary" size="xl" onPress={onRestart}>
+            <Button
+              variant="primary"
+              size="xl"
+              onPress={onRestart}
+              testID="take-another-quiz-button"
+            >
               Take Another Quiz
             </Button>
 
-            <Button variant="secondary" size="xl" onPress={onHome}>
+            <Button
+              variant="secondary"
+              size="xl"
+              onPress={onHome}
+              testID="back-to-home-button"
+            >
               Back to Home
             </Button>
           </View>

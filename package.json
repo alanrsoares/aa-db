@@ -1,19 +1,20 @@
 {
   "name": "roadcodetests",
   "version": "1.0.0",
-  "description": "",
+  "description": "Road Code Quiz monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "format": "prettier --write .",
-    "dev:web": "concurrently \"cd apps/native && bun web\" \"cd apps/api && bun start\""
+    "dev:web": "concurrently 'cd apps/native && bun web' 'cd apps/api && bun start'",
+    "test:e2e": "concurrently 'bun dev:web' 'cd apps/e2e && bun run test'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "bun@1.2.21",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@tsconfig/strictest": "^2.0.5",
