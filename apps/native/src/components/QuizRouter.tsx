@@ -9,7 +9,7 @@ import { ResultsScreen } from "~/screens/ResultsScreen";
 
 type Screen = "home" | "quiz" | "results";
 
-const QuizNavigation = observer(() => {
+export const QuizRouter = observer(() => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("home");
   const quizStore = useQuizStore();
 
@@ -85,5 +85,3 @@ const QuizNavigation = observer(() => {
       return <HomeScreen onStartQuiz={handleStartQuiz} />;
   }
 });
-
-export { QuizNavigation };

@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 
-import { QuizNavigation } from "./src/components/QuizNavigation";
+import { QuizRouter } from "./src/components/QuizRouter";
 import { QuizStoreProvider } from "./src/contexts/QuizStoreContext";
 
 import "./global.css";
@@ -30,7 +30,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <QuizStoreProvider>
-        <QuizNavigation />
+        <QuizRouter />
         <StatusBar style="auto" />
       </QuizStoreProvider>
     </QueryClientProvider>
