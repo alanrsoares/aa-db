@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from "react";
 
-import { QuizStoreModel, type QuizStore } from "../models/QuizStore";
+import { QuizStoreModel, type QuizStore } from "~/store";
 
 const QuizStoreContext = createContext<QuizStore | null>(null);
 

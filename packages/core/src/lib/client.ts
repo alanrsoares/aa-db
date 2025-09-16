@@ -2,8 +2,8 @@ import { LowSync, MemorySync } from "lowdb";
 import { JSONFileSync } from "lowdb/node";
 import { Either, Just, Left, Maybe, Nothing, Right } from "purify-ts";
 
-import { type Category, type Subcategory } from "../config";
-import type { DrivingTestQuestionWithKey } from "../types";
+import { CATEGORIES, type Category, type Subcategory } from "~/config";
+import type { DrivingTestQuestionWithKey } from "~/types";
 import { Cache, CacheKey, type Database as CacheDatabase } from "./cache";
 
 type DB = CacheDatabase<DrivingTestQuestionWithKey<Category>>;
@@ -13,7 +13,8 @@ export type ClientError =
   | { type: "FILE_NOT_FOUND"; message: string }
   | { type: "INVALID_JSON"; message: string }
   | { type: "QUESTION_NOT_FOUND"; message: string }
-  | { type: "CACHE_ERROR"; message: string };
+  | { type: "CACHE_ERROR"; message: string }
+  | { type: "CATEGORY_NOT_FOUND"; message: string };
 
 // Client class with functional programming patterns
 export class QuestionsClient {
@@ -92,8 +93,8 @@ export class QuestionsClient {
   public getRandomQuestions(
     limit: number,
     options?: {
-      category?: Category;
-      subcategory?: Subcategory<Category>;
+      category?: Category | "all";
+      subcategory?: Subcategory<Category> | "all";
     },
   ): Either<ClientError, DrivingTestQuestionWithKey<Category>[]> {
     return this.getAllQuestions().chain(
@@ -107,12 +108,13 @@ export class QuestionsClient {
 
         // Filter questions based on options if provided
         let filteredQuestions = questions;
-        if (options?.category) {
+        if (options?.category && options.category !== "all") {
           filteredQuestions = filteredQuestions.filter(
             (q) => q.category === options.category,
           );
         }
-        if (options?.subcategory) {
+
+        if (options?.subcategory && options.subcategory !== "all") {
           filteredQuestions = filteredQuestions.filter(
             (q) => q.subcategory === options.subcategory,
           );
@@ -179,17 +181,19 @@ export class QuestionsClient {
   }
 
   // Get all available subcategories
-  public getSubcategories(): Either<ClientError, string[]> {
-    return this.getAllQuestions().map(
-      (questions: DrivingTestQuestionWithKey<Category>[]) =>
-        [
-          ...new Set(
-            questions.map(
-              (q: DrivingTestQuestionWithKey<Category>) => q.subcategory,
-            ),
-          ),
-        ].sort(),
-    );
+  public getSubcategories<T extends Category>(
+    category: T,
+  ): Either<ClientError, Subcategory<T>[]> {
+    const subcategories = CATEGORIES[category];
+
+    if (!subcategories) {
+      return Left({
+        type: "CATEGORY_NOT_FOUND",
+        message: `Category '${category}' not found`,
+      });
+    }
+
+    return Right(subcategories as unknown as Subcategory<T>[]);
   }
 }
 

@@ -2,10 +2,10 @@ import { observer } from "mobx-react-lite";
 import { useState } from "react";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
-import { useQuizStore } from "~/contexts/QuizStoreContext";
 import { HomeScreen } from "~/screens/HomeScreen";
 import { QuizScreen } from "~/screens/QuizScreen";
 import { ResultsScreen } from "~/screens/ResultsScreen";
+import { useQuizStore } from "~/store/context";
 
 type Screen = "home" | "quiz" | "results";
 

@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { Alert, ScrollView, View } from "react-native";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
-import { useCategories, useSubcategories } from "~/hooks/useQuizQueries";
-import { Container } from "../components/Container";
-import { Button } from "../components/ui/Button";
-import { Chip } from "../components/ui/Chip";
-import { TouchableCard } from "../components/ui/TouchableCard";
-import { Typography } from "../components/ui/Typography";
+import { Container } from "~/components/Container";
+import { Button } from "~/components/ui/Button";
+import { Chip } from "~/components/ui/Chip";
+import { TouchableCard } from "~/components/ui/TouchableCard";
+import { Typography } from "~/components/ui/Typography";
+import { useCategories, useSubcategories } from "~/hooks/queries";
 
 interface HomeScreenProps {
   onStartQuiz: (

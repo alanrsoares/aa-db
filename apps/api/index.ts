@@ -97,8 +97,6 @@ app.get("/questions/:category/:subcategory/:limit", (c) => {
     | Subcategory<Category>
     | undefined;
 
-  const options = { category, subcategory };
-
   if (!category || !subcategory) {
     return c.json(
       {
@@ -112,7 +110,10 @@ app.get("/questions/:category/:subcategory/:limit", (c) => {
     );
   }
 
-  const result = questionsClient.getRandomQuestions(limit, options);
+  const result = questionsClient.getRandomQuestions(limit, {
+    category,
+    subcategory,
+  });
 
   return handleEitherResponse(result, c);
 });
@@ -131,8 +132,9 @@ app.get("/categories", (c) => {
 });
 
 // Get all available subcategories
-app.get("/subcategories", (c) => {
-  const result = questionsClient.getSubcategories();
+app.get("/subcategories/:category", (c) => {
+  const category = c.req.param("category") as Category;
+  const result = questionsClient.getSubcategories(category);
   return handleEitherResponse(result, c);
 });
 

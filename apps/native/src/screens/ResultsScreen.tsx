@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { ScrollView, View } from "react-native";
 
-import { Container } from "../components/Container";
-import { Button } from "../components/ui/Button";
-import { Typography } from "../components/ui/Typography";
+import { Container } from "~/components/Container";
+import { Button } from "~/components/ui/Button";
+import { Typography } from "~/components/ui/Typography";
 
 interface ResultsScreenProps {
   score: {

@@ -13,7 +13,7 @@ export interface ApiResponse<T> {
   };
 }
 
-export interface QuizApiService {
+export interface IQuizApiService {
   getRandomQuestions(
     limit: number,
     category: Category,
@@ -29,7 +29,7 @@ export interface QuizApiService {
   getSubcategories(category?: Category): Promise<Subcategory<Category>[]>;
 }
 
-class QuizApiServiceImpl implements QuizApiService {
+export class QuizApiService implements IQuizApiService {
   private baseUrl: string;
 
   constructor(baseUrl: string = "http://localhost:3000") {
@@ -106,15 +106,11 @@ class QuizApiServiceImpl implements QuizApiService {
     }
   }
 
-  async getSubcategories(
-    category?: Category,
-  ): Promise<Subcategory<Category>[]> {
+  async getSubcategories(category: Category): Promise<Subcategory<Category>[]> {
     try {
-      const endpoint = category
-        ? `/subcategories?category=${category}`
-        : "/subcategories";
-      const subcategories =
-        await this.makeRequest<Subcategory<Category>[]>(endpoint);
+      const subcategories = await this.makeRequest<Subcategory<Category>[]>(
+        `/subcategories/${category}`,
+      );
       return subcategories;
     } catch (error) {
       console.error("Failed to fetch subcategories:", error);
@@ -123,8 +119,4 @@ class QuizApiServiceImpl implements QuizApiService {
   }
 }
 
-// Export singleton instance
-export const quizApiService = new QuizApiServiceImpl();
-
-// Export class for testing
-export { QuizApiServiceImpl };
+export const quizApiService = new QuizApiService();

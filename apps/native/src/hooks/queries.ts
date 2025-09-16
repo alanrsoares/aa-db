@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
-import { quizApiService } from "../services/QuizApiService";
+import { quizApiService } from "~/services/QuizApiService";
 
 // Query Keys
 export const quizKeys = {
@@ -29,7 +29,10 @@ export function useCategories() {
 export function useSubcategories(category?: Category) {
   return useQuery({
     queryKey: quizKeys.subcategories(category),
-    queryFn: () => quizApiService.getSubcategories(category),
+    queryFn: () =>
+      !!category
+        ? quizApiService.getSubcategories(category)
+        : Promise.resolve([]),
     enabled: !!category,
     staleTime: 30 * 60 * 1000, // 30 minutes
   });

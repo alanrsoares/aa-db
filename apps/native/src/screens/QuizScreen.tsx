@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, Alert, View } from "react-native";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
-import { Container } from "../components/Container";
-import { OptionButton } from "../components/quiz/OptionButton";
-import { QuestionCard } from "../components/quiz/QuestionCard";
-import { Button } from "../components/ui/Button";
-import { ProgressBar } from "../components/ui/ProgressBar";
-import { Typography } from "../components/ui/Typography";
-import { useQuizStore } from "../contexts/QuizStoreContext";
-import { useQuizData } from "../hooks/useQuizQueries";
+import { Container } from "~/components/Container";
+import { OptionButton } from "~/components/quiz/OptionButton";
+import { QuestionCard } from "~/components/quiz/QuestionCard";
+import { Button } from "~/components/ui/Button";
+import { ProgressBar } from "~/components/ui/ProgressBar";
+import { Typography } from "~/components/ui/Typography";
+import { useQuizData } from "~/hooks/queries";
+import { useQuizStore } from "~/store/context";
 
 interface QuizScreenProps {
   category: Category;
