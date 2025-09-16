@@ -11,13 +11,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-blue-500 border-blue-500",
-        secondary: "bg-gray-200 border-gray-200",
-        outline: "bg-white border-gray-300",
+        primary: "bg-primary border-primary",
+        secondary: "bg-neutral border-neutral",
+        outline: "bg-background border-neutral-dark",
         ghost: "bg-transparent border-transparent",
-        success: "bg-green-500 border-green-500",
-        danger: "bg-red-500 border-red-500",
-        warning: "bg-yellow-500 border-yellow-500",
+        success: "bg-success border-success",
+        danger: "bg-danger border-danger",
+        warning: "bg-warning border-warning",
       },
       size: {
         sm: "px-3 py-2",
@@ -42,9 +42,9 @@ const textVariants = cva("font-medium text-center", {
   variants: {
     variant: {
       primary: "text-white",
-      secondary: "text-gray-700",
-      outline: "text-gray-700",
-      ghost: "text-gray-700",
+      secondary: "text-text-secondary",
+      outline: "text-text-secondary",
+      ghost: "text-text-secondary",
       success: "text-white",
       danger: "text-white",
       warning: "text-white",

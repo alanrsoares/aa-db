@@ -31,9 +31,9 @@ export const ProgressBar: FC<ProgressBarProps> = ({
         </View>
       )}
 
-      <View className="w-full bg-gray-200 rounded-full h-2">
+      <View className="w-full bg-neutral rounded-full h-2">
         <View
-          className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+          className="bg-primary h-2 rounded-full transition-all duration-300"
           style={{ width: `${Math.min(percentage, 100)}%` }}
         />
       </View>

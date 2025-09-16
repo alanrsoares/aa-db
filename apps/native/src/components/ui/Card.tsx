@@ -11,8 +11,8 @@ interface CardProps extends TouchableOpacityProps {
 export const cardVariants = cva(`p-4 rounded-lg border-2`, {
   variants: {
     selected: {
-      true: "border-blue-500 bg-blue-50",
-      false: "border-gray-200 bg-white",
+      true: "border-primary bg-primary/10",
+      false: "border-neutral bg-background",
     },
   },
 });
@@ -20,8 +20,8 @@ export const cardVariants = cva(`p-4 rounded-lg border-2`, {
 export const labelVariants = cva(`text-lg font-medium`, {
   variants: {
     selected: {
-      true: "text-blue-700",
-      false: "text-gray-700",
+      true: "text-info-dark",
+      false: "text-text-secondary",
     },
   },
 });
@@ -29,8 +29,8 @@ export const labelVariants = cva(`text-lg font-medium`, {
 export const descriptionVariants = cva(`text-sm mt-1`, {
   variants: {
     selected: {
-      true: "text-blue-600",
-      false: "text-gray-500",
+      true: "text-info",
+      false: "text-text-muted",
     },
   },
 });

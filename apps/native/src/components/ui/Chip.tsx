@@ -15,8 +15,8 @@ interface ChipProps extends TouchableOpacityProps {
 const chipVariants = cva(`px-4 py-2 rounded-full border`, {
   variants: {
     selected: {
-      true: "border-blue-500 bg-blue-500",
-      false: "border-gray-300 bg-white",
+      true: "border-primary bg-primary",
+      false: "border-neutral-dark bg-background",
     },
   },
 });
@@ -25,7 +25,7 @@ const labelVariants = cva(`text-sm font-medium`, {
   variants: {
     selected: {
       true: "text-white",
-      false: "text-gray-700",
+      false: "text-text-secondary",
     },
   },
 });

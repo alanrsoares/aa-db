@@ -52,7 +52,7 @@ export class ErrorBoundary extends Component<
       }
 
       return (
-        <View className="flex-1 justify-center items-center p-6 bg-white">
+        <View className="flex-1 justify-center items-center p-6 bg-background">
           <View className="items-center">
             <Typography variant="h1" className="mb-4">
               ⚠️
@@ -64,13 +64,13 @@ export class ErrorBoundary extends Component<
               An unexpected error occurred. Please try refreshing the page.
             </Typography>
             {__DEV__ && this.state.error && (
-              <View className="bg-gray-100 p-4 rounded-lg mb-4">
+              <View className="bg-background-secondary p-4 rounded-lg mb-4">
                 <Typography variant="code" color="secondary">
                   {this.state.error.message}
                 </Typography>
               </View>
             )}
-            <View className="bg-blue-500 px-6 py-3 rounded-lg">
+            <View className="bg-primary px-6 py-3 rounded-lg">
               <Typography
                 color="white"
                 weight="semibold"
@@ -114,7 +114,7 @@ export const DefaultErrorFallback = ({
           </Typography>
         </View>
       )}
-      <View className="bg-blue-500 px-6 py-3 rounded-lg">
+      <View className="bg-primary px-6 py-3 rounded-lg">
         <Typography color="white" weight="semibold" onPress={resetError}>
           Try Again
         </Typography>

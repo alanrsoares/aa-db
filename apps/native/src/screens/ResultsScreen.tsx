@@ -18,9 +18,9 @@ interface ResultsScreenProps {
 export const ResultsScreen = observer<ResultsScreenProps>(
   ({ score, onRestart, onHome }) => {
     const getScoreColor = (percentage: number) => {
-      if (percentage >= 80) return "text-green-600";
-      if (percentage >= 60) return "text-yellow-600";
-      return "text-red-600";
+      if (percentage >= 80) return "text-success";
+      if (percentage >= 60) return "text-warning";
+      return "text-danger";
     };
 
     const getScoreMessage = (percentage: number) => {
@@ -65,7 +65,7 @@ export const ResultsScreen = observer<ResultsScreenProps>(
           </View>
 
           {/* Score Card */}
-          <View className="bg-white rounded-lg p-6 mb-8 shadow-sm">
+          <View className="bg-background rounded-lg p-6 mb-8 shadow-sm">
             <View className="items-center mb-6">
               <Typography
                 variant="h2"
@@ -80,14 +80,14 @@ export const ResultsScreen = observer<ResultsScreenProps>(
             </View>
 
             {/* Progress Bar */}
-            <View className="w-full bg-gray-200 rounded-full h-3 mb-4">
+            <View className="w-full bg-neutral rounded-full h-3 mb-4">
               <View
                 className={`h-3 rounded-full ${
                   score.percentage >= 80
-                    ? "bg-green-500"
+                    ? "bg-success"
                     : score.percentage >= 60
-                      ? "bg-yellow-500"
-                      : "bg-red-500"
+                      ? "bg-warning"
+                      : "bg-danger"
                 }`}
                 style={{ width: `${Math.min(score.percentage, 100)}%` }}
               />
@@ -125,7 +125,7 @@ export const ResultsScreen = observer<ResultsScreenProps>(
           </View>
 
           {/* Performance Tips */}
-          <View className="bg-blue-50 rounded-lg p-6 mb-8">
+          <View className="bg-info-light rounded-lg p-6 mb-8">
             <Typography variant="h6" color="blueDarker" className="mb-3">
               Performance Tips
             </Typography>

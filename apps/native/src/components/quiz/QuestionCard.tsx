@@ -15,8 +15,8 @@ interface QuestionCardProps {
 const categoryChipVariants = cva(`px-3 py-1 rounded-full mr-2`, {
   variants: {
     type: {
-      category: "bg-blue-100",
-      subcategory: "bg-gray-100",
+      category: "bg-info-light",
+      subcategory: "bg-background-secondary",
     },
   },
   defaultVariants: {
@@ -27,7 +27,7 @@ const categoryChipVariants = cva(`px-3 py-1 rounded-full mr-2`, {
 const explanationVariants = cva(`mt-4 p-4 rounded-lg border`, {
   variants: {
     visible: {
-      true: "bg-yellow-50 border-yellow-200",
+      true: "bg-warning-light border-warning",
       false: "hidden",
     },
   },
@@ -47,7 +47,7 @@ export const QuestionCard: FC<QuestionCardProps> = ({
       showsVerticalScrollIndicator={false}
       testID={testID}
     >
-      <View className="bg-white rounded-lg p-6 shadow-sm border">
+      <View className="bg-background rounded-lg p-6 shadow-sm border">
         {/* Question Image */}
         {question.imageUrl && (
           <View className="mb-4">

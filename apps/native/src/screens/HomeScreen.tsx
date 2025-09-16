@@ -125,7 +125,7 @@ export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
             Select Category
           </Typography>
           {loadingCategories ? (
-            <View className="p-4 bg-gray-100 rounded-lg">
+            <View className="p-4 bg-background-secondary rounded-lg">
               <Typography color="tertiary" align="center">
                 Loading categories...
               </Typography>
@@ -155,7 +155,7 @@ export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
             Select Topic
           </Typography>
           {loadingSubcategories ? (
-            <View className="p-4 bg-gray-100 rounded-lg">
+            <View className="p-4 bg-background-secondary rounded-lg">
               <Typography color="tertiary" align="center">
                 Loading topics...
               </Typography>
