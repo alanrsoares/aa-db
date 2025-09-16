@@ -1,10 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
 import { useCategories, useSubcategories } from "~/hooks/useQuizQueries";
 import { Container } from "../components/Container";
+import { Button } from "../components/ui/Button";
+import { Chip } from "../components/ui/Chip";
+import { TouchableCard } from "../components/ui/TouchableCard";
+import { Typography } from "../components/ui/Typography";
 
 interface HomeScreenProps {
   onStartQuiz: (
@@ -14,20 +18,24 @@ interface HomeScreenProps {
   ) => void;
 }
 
+interface CategoryInfo {
+  label: string;
+  description: string;
+}
+
 // Helper function to get category display info
-const getCategoryInfo = (category: Category) => {
-  const categoryMap: Record<Category, { label: string; description: string }> =
-    {
-      car: { label: "Car", description: "Standard car license questions" },
-      motorbike: {
-        label: "Motorbike",
-        description: "Motorcycle license questions",
-      },
-      heavy_vehicle: {
-        label: "Heavy Vehicle",
-        description: "Truck and heavy vehicle questions",
-      },
-    };
+const getCategoryInfo = (category: Category): CategoryInfo => {
+  const categoryMap: Record<Category, CategoryInfo> = {
+    car: { label: "Car", description: "Standard car license questions" },
+    motorbike: {
+      label: "Motorbike",
+      description: "Motorcycle license questions",
+    },
+    heavy_vehicle: {
+      label: "Heavy Vehicle",
+      description: "Truck and heavy vehicle questions",
+    },
+  };
   return (
     categoryMap[category] || {
       label: category,
@@ -38,7 +46,7 @@ const getCategoryInfo = (category: Category) => {
 
 const QUIZ_LENGTHS = [10, 15, 20, 30, 35];
 
-export const HomeScreen = observer(({ onStartQuiz }: HomeScreenProps) => {
+export const HomeScreen = observer<HomeScreenProps>(({ onStartQuiz }) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>("car");
   const [selectedSubcategory, setSelectedSubcategory] =
     useState<Subcategory<Category>>("core");
@@ -103,58 +111,37 @@ export const HomeScreen = observer(({ onStartQuiz }: HomeScreenProps) => {
     <Container>
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <View className="mb-8">
-          <Text className="text-3xl font-bold text-gray-800 mb-2">
+          <Typography variant="h3" className="mb-2">
             Road Code Quiz
-          </Text>
-          <Text className="text-lg text-gray-600">
+          </Typography>
+          <Typography variant="bodyLarge" color="tertiary">
             Test your knowledge of New Zealand road rules
-          </Text>
+          </Typography>
         </View>
 
         {/* Category Selection */}
         <View className="mb-8">
-          <Text className="text-xl font-semibold text-gray-800 mb-4">
+          <Typography variant="h5" className="mb-4">
             Select Category
-          </Text>
+          </Typography>
           {loadingCategories ? (
             <View className="p-4 bg-gray-100 rounded-lg">
-              <Text className="text-gray-600 text-center">
+              <Typography color="tertiary" align="center">
                 Loading categories...
-              </Text>
+              </Typography>
             </View>
           ) : (
             <View className="space-y-3">
               {categories.map((category) => {
-                const categoryInfo = getCategoryInfo(category);
+                const { label, description } = getCategoryInfo(category);
                 return (
-                  <TouchableOpacity
+                  <TouchableCard
                     key={category}
-                    className={`p-4 rounded-lg border-2 ${
-                      selectedCategory === category
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-200 bg-white"
-                    }`}
-                    onPress={() => setSelectedCategory(category)}
-                  >
-                    <Text
-                      className={`text-lg font-medium ${
-                        selectedCategory === category
-                          ? "text-blue-700"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      {categoryInfo.label}
-                    </Text>
-                    <Text
-                      className={`text-sm mt-1 ${
-                        selectedCategory === category
-                          ? "text-blue-600"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {categoryInfo.description}
-                    </Text>
-                  </TouchableOpacity>
+                    label={label}
+                    description={description}
+                    selected={selectedCategory === category}
+                    onPress={setSelectedCategory.bind(null, category)}
+                  />
                 );
               })}
             </View>
@@ -163,38 +150,25 @@ export const HomeScreen = observer(({ onStartQuiz }: HomeScreenProps) => {
 
         {/* Subcategory Selection */}
         <View className="mb-8">
-          <Text className="text-xl font-semibold text-gray-800 mb-4">
+          <Typography variant="h5" className="mb-4">
             Select Topic
-          </Text>
+          </Typography>
           {loadingSubcategories ? (
             <View className="p-4 bg-gray-100 rounded-lg">
-              <Text className="text-gray-600 text-center">
+              <Typography color="tertiary" align="center">
                 Loading topics...
-              </Text>
+              </Typography>
             </View>
           ) : (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View className="flex-row space-x-3">
                 {subcategories.map((subcategory) => (
-                  <TouchableOpacity
+                  <Chip
                     key={subcategory}
-                    className={`px-4 py-2 rounded-full border ${
-                      selectedSubcategory === subcategory
-                        ? "border-blue-500 bg-blue-500"
-                        : "border-gray-300 bg-white"
-                    }`}
-                    onPress={() => setSelectedSubcategory(subcategory)}
-                  >
-                    <Text
-                      className={`text-sm font-medium ${
-                        selectedSubcategory === subcategory
-                          ? "text-white"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      {getSubcategoryLabel(subcategory)}
-                    </Text>
-                  </TouchableOpacity>
+                    label={getSubcategoryLabel(subcategory)}
+                    selected={selectedSubcategory === subcategory}
+                    onPress={setSelectedSubcategory.bind(null, subcategory)}
+                  />
                 ))}
               </View>
             </ScrollView>
@@ -203,44 +177,33 @@ export const HomeScreen = observer(({ onStartQuiz }: HomeScreenProps) => {
 
         {/* Quiz Length Selection */}
         <View className="mb-8">
-          <Text className="text-xl font-semibold text-gray-800 mb-4">
+          <Typography variant="h5" className="mb-4">
             Quiz Length
-          </Text>
+          </Typography>
           <View className="flex-row flex-wrap gap-3">
             {QUIZ_LENGTHS.map((length) => (
-              <TouchableOpacity
+              <Button
                 key={length}
-                className={`px-4 py-2 rounded-lg border ${
-                  selectedQuizLength === length
-                    ? "border-blue-500 bg-blue-500"
-                    : "border-gray-300 bg-white"
-                }`}
+                variant={selectedQuizLength === length ? "primary" : "outline"}
+                size="sm"
                 onPress={() => setSelectedQuizLength(length)}
               >
-                <Text
-                  className={`font-medium ${
-                    selectedQuizLength === length
-                      ? "text-white"
-                      : "text-gray-700"
-                  }`}
-                >
-                  {length} questions
-                </Text>
-              </TouchableOpacity>
+                {`${length} questions`}
+              </Button>
             ))}
           </View>
         </View>
 
         {/* Start Quiz Button */}
-        <TouchableOpacity
-          className="bg-blue-500 p-4 rounded-lg mb-8"
+        <Button
+          variant="primary"
+          size="xl"
           onPress={handleStartQuiz}
           disabled={loadingCategories || loadingSubcategories}
+          className="mb-8"
         >
-          <Text className="text-white text-lg font-semibold text-center">
-            Start Quiz
-          </Text>
-        </TouchableOpacity>
+          Start Quiz
+        </Button>
       </ScrollView>
     </Container>
   );

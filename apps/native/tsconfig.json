@@ -3,7 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]

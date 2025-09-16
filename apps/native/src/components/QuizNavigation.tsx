@@ -25,7 +25,7 @@ const QuizNavigation = observer(() => {
     setCurrentScreen("quiz");
   };
 
-  const handleQuizComplete = (score: {
+  const handleQuizComplete = (_score: {
     correct: number;
     total: number;
     percentage: number;

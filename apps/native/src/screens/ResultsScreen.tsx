@@ -1,7 +1,9 @@
 import { observer } from "mobx-react-lite";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { Container } from "../components/Container";
+import { Button } from "../components/ui/Button";
+import { Typography } from "../components/ui/Typography";
 
 interface ResultsScreenProps {
   score: {
@@ -13,8 +15,8 @@ interface ResultsScreenProps {
   onHome: () => void;
 }
 
-export const ResultsScreen = observer(
-  ({ score, onRestart, onHome }: ResultsScreenProps) => {
+export const ResultsScreen = observer<ResultsScreenProps>(
+  ({ score, onRestart, onHome }) => {
     const getScoreColor = (percentage: number) => {
       if (percentage >= 80) return "text-green-600";
       if (percentage >= 60) return "text-yellow-600";
@@ -44,30 +46,36 @@ export const ResultsScreen = observer(
       <Container>
         <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
           <View className="items-center mb-8">
-            <Text className="text-6xl mb-4">
+            <Typography variant="h1" className="mb-4">
               {getScoreEmoji(score.percentage)}
-            </Text>
+            </Typography>
 
-            <Text className="text-3xl font-bold text-gray-800 mb-2">
+            <Typography variant="h3" className="mb-2">
               Quiz Complete!
-            </Text>
+            </Typography>
 
-            <Text className="text-lg text-gray-600 text-center mb-8">
+            <Typography
+              variant="bodyLarge"
+              color="tertiary"
+              align="center"
+              className="mb-8"
+            >
               {getScoreMessage(score.percentage)}
-            </Text>
+            </Typography>
           </View>
 
           {/* Score Card */}
           <View className="bg-white rounded-lg p-6 mb-8 shadow-sm">
             <View className="items-center mb-6">
-              <Text
-                className={`text-5xl font-bold ${getScoreColor(score.percentage)}`}
+              <Typography
+                variant="h2"
+                className={`${getScoreColor(score.percentage)}`}
               >
                 {Math.round(score.percentage)}%
-              </Text>
-              <Text className="text-lg text-gray-600 mt-2">
+              </Typography>
+              <Typography variant="bodyLarge" color="tertiary" className="mt-2">
                 {score.correct} out of {score.total} correct
-              </Text>
+              </Typography>
             </View>
 
             {/* Progress Bar */}
@@ -87,83 +95,79 @@ export const ResultsScreen = observer(
             {/* Score Breakdown */}
             <View className="flex-row justify-between">
               <View className="items-center">
-                <Text className="text-2xl font-bold text-green-600">
+                <Typography variant="h4" color="green">
                   {score.correct}
-                </Text>
-                <Text className="text-sm text-gray-600">Correct</Text>
+                </Typography>
+                <Typography variant="bodySmall" color="tertiary">
+                  Correct
+                </Typography>
               </View>
 
               <View className="items-center">
-                <Text className="text-2xl font-bold text-red-600">
+                <Typography variant="h4" color="red">
                   {score.total - score.correct}
-                </Text>
-                <Text className="text-sm text-gray-600">Incorrect</Text>
+                </Typography>
+                <Typography variant="bodySmall" color="tertiary">
+                  Incorrect
+                </Typography>
               </View>
 
               <View className="items-center">
-                <Text className="text-2xl font-bold text-blue-600">
+                <Typography variant="h4" color="blue">
                   {score.total}
-                </Text>
-                <Text className="text-sm text-gray-600">Total</Text>
+                </Typography>
+                <Typography variant="bodySmall" color="tertiary">
+                  Total
+                </Typography>
               </View>
             </View>
           </View>
 
           {/* Performance Tips */}
           <View className="bg-blue-50 rounded-lg p-6 mb-8">
-            <Text className="text-lg font-semibold text-blue-800 mb-3">
+            <Typography variant="h6" color="blueDarker" className="mb-3">
               Performance Tips
-            </Text>
+            </Typography>
 
             {score.percentage >= 80 ? (
               <View>
-                <Text className="text-blue-700 mb-2">
+                <Typography color="blueDark" className="mb-2">
                   • You&apos;re doing great! Keep up the good work.
-                </Text>
-                <Text className="text-blue-700 mb-2">
+                </Typography>
+                <Typography color="blueDark" className="mb-2">
                   • Consider taking longer quizzes to challenge yourself.
-                </Text>
-                <Text className="text-blue-700">
+                </Typography>
+                <Typography color="blueDark">
                   • Try different categories to expand your knowledge.
-                </Text>
+                </Typography>
               </View>
             ) : (
               <View>
-                <Text className="text-blue-700 mb-2">
+                <Typography color="blueDark" className="mb-2">
                   • Review the questions you got wrong.
-                </Text>
-                <Text className="text-blue-700 mb-2">
+                </Typography>
+                <Typography color="blueDark" className="mb-2">
                   • Focus on the topics where you struggled.
-                </Text>
-                <Text className="text-blue-700 mb-2">
+                </Typography>
+                <Typography color="blueDark" className="mb-2">
                   • Take shorter quizzes to build confidence.
-                </Text>
-                <Text className="text-blue-700">
+                </Typography>
+                <Typography color="blueDark">
                   • Practice regularly to improve your knowledge.
-                </Text>
+                </Typography>
               </View>
             )}
           </View>
 
           {/* Action Buttons */}
           <View className="space-y-4">
-            <TouchableOpacity
-              className="bg-blue-500 p-4 rounded-lg"
-              onPress={onRestart}
-            >
-              <Text className="text-white text-lg font-semibold text-center">
-                Take Another Quiz
-              </Text>
-            </TouchableOpacity>
+            <Button variant="primary" size="xl" onPress={onRestart}>
+              Take Another Quiz
+            </Button>
 
-            <TouchableOpacity
-              className="bg-gray-200 p-4 rounded-lg"
-              onPress={onHome}
-            >
-              <Text className="text-gray-700 text-lg font-semibold text-center">
-                Back to Home
-              </Text>
-            </TouchableOpacity>
+            <Button variant="secondary" size="xl" onPress={onHome}>
+              Back to Home
+            </Button>
           </View>
         </ScrollView>
       </Container>

@@ -4,7 +4,9 @@ import {
   type ErrorInfo,
   type ReactNode,
 } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+
+import { Typography } from "./ui/Typography";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -52,27 +54,30 @@ export class ErrorBoundary extends Component<
       return (
         <View className="flex-1 justify-center items-center p-6 bg-white">
           <View className="items-center">
-            <Text className="text-6xl mb-4">⚠️</Text>
-            <Text className="text-xl font-bold text-red-600 mb-4">
+            <Typography variant="h1" className="mb-4">
+              ⚠️
+            </Typography>
+            <Typography variant="h5" color="red" className="mb-4">
               Something went wrong
-            </Text>
-            <Text className="text-gray-600 text-center mb-6">
+            </Typography>
+            <Typography color="tertiary" align="center" className="mb-6">
               An unexpected error occurred. Please try refreshing the page.
-            </Text>
+            </Typography>
             {__DEV__ && this.state.error && (
               <View className="bg-gray-100 p-4 rounded-lg mb-4">
-                <Text className="text-sm text-gray-700 font-mono">
+                <Typography variant="code" color="secondary">
                   {this.state.error.message}
-                </Text>
+                </Typography>
               </View>
             )}
             <View className="bg-blue-500 px-6 py-3 rounded-lg">
-              <Text
-                className="text-white font-semibold"
+              <Typography
+                color="white"
+                weight="semibold"
                 onPress={this.resetError}
               >
                 Try Again
-              </Text>
+              </Typography>
             </View>
           </View>
         </View>
@@ -93,24 +98,26 @@ export const DefaultErrorFallback = ({
 }) => (
   <View className="flex-1 justify-center items-center p-6 bg-white">
     <View className="items-center">
-      <Text className="text-6xl mb-4">⚠️</Text>
-      <Text className="text-xl font-bold text-red-600 mb-4">
+      <Typography variant="h1" className="mb-4">
+        ⚠️
+      </Typography>
+      <Typography variant="h5" color="red" className="mb-4">
         Something went wrong
-      </Text>
-      <Text className="text-gray-600 text-center mb-6">
+      </Typography>
+      <Typography color="tertiary" align="center" className="mb-6">
         An unexpected error occurred. Please try refreshing the page.
-      </Text>
+      </Typography>
       {__DEV__ && error && (
         <View className="bg-gray-100 p-4 rounded-lg mb-4">
-          <Text className="text-sm text-gray-700 font-mono">
+          <Typography variant="code" color="secondary">
             {error.message}
-          </Text>
+          </Typography>
         </View>
       )}
       <View className="bg-blue-500 px-6 py-3 rounded-lg">
-        <Text className="text-white font-semibold" onPress={resetError}>
+        <Typography color="white" weight="semibold" onPress={resetError}>
           Try Again
-        </Text>
+        </Typography>
       </View>
     </View>
   </View>

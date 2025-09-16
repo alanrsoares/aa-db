@@ -1,18 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ActivityIndicator, Alert, View } from "react-native";
 
 import type { Category, Subcategory } from "@roadcodetests/core";
 import { Container } from "../components/Container";
 import { OptionButton } from "../components/quiz/OptionButton";
-import { ProgressBar } from "../components/quiz/ProgressBar";
 import { QuestionCard } from "../components/quiz/QuestionCard";
+import { Button } from "../components/ui/Button";
+import { ProgressBar } from "../components/ui/ProgressBar";
+import { Typography } from "../components/ui/Typography";
 import { useQuizStore } from "../contexts/QuizStoreContext";
 import { useQuizData } from "../hooks/useQuizQueries";
 
@@ -28,14 +24,8 @@ interface QuizScreenProps {
   onBack: () => void;
 }
 
-export const QuizScreen = observer(
-  ({
-    category,
-    subcategory,
-    quizLength,
-    onComplete,
-    onBack,
-  }: QuizScreenProps) => {
+export const QuizScreen = observer<QuizScreenProps>(
+  ({ category, subcategory, quizLength, onComplete, onBack }) => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [showAnswer, setShowAnswer] = useState(false);
     const quizStore = useQuizStore();
@@ -99,9 +89,9 @@ export const QuizScreen = observer(
         <Container>
           <View className="flex-1 justify-center items-center">
             <ActivityIndicator size="large" color="#3B82F6" />
-            <Text className="text-lg text-gray-600 mt-4">
+            <Typography variant="bodyLarge" color="tertiary" className="mt-4">
               Loading questions...
-            </Text>
+            </Typography>
           </View>
         </Container>
       );
@@ -111,15 +101,12 @@ export const QuizScreen = observer(
       return (
         <Container>
           <View className="flex-1 justify-center items-center">
-            <Text className="text-lg text-gray-600 mb-4">
+            <Typography variant="bodyLarge" color="tertiary" className="mb-4">
               No questions available
-            </Text>
-            <TouchableOpacity
-              className="bg-blue-500 px-6 py-3 rounded-lg"
-              onPress={onBack}
-            >
-              <Text className="text-white font-semibold">Go Back</Text>
-            </TouchableOpacity>
+            </Typography>
+            <Button variant="primary" size="lg" onPress={onBack}>
+              Go Back
+            </Button>
           </View>
         </Container>
       );
@@ -135,17 +122,14 @@ export const QuizScreen = observer(
         <View className="flex-1">
           {/* Header */}
           <View className="flex-row items-center justify-between mb-6">
-            <TouchableOpacity
-              className="bg-gray-200 px-4 py-2 rounded-lg"
-              onPress={onBack}
-            >
-              <Text className="text-gray-700 font-medium">Back</Text>
-            </TouchableOpacity>
+            <Button variant="secondary" size="md" onPress={onBack}>
+              Back
+            </Button>
 
             <View className="flex-row items-center">
-              <Text className="text-sm text-gray-600 mr-2">
+              <Typography variant="bodySmall" color="tertiary" className="mr-2">
                 {category} • {subcategory.replace(/-/g, " ")}
-              </Text>
+              </Typography>
             </View>
           </View>
 
@@ -182,35 +166,19 @@ export const QuizScreen = observer(
 
           {/* Navigation Buttons */}
           <View className="flex-row justify-between">
-            <TouchableOpacity
-              className={`px-6 py-3 rounded-lg ${
-                quizStore.currentQuestionIndex > 0
-                  ? "bg-gray-200"
-                  : "bg-gray-100"
-              }`}
+            <Button
+              variant="secondary"
+              size="lg"
               onPress={handlePrevious}
               disabled={quizStore.currentQuestionIndex === 0}
             >
-              <Text
-                className={`font-medium ${
-                  quizStore.currentQuestionIndex > 0
-                    ? "text-gray-700"
-                    : "text-gray-400"
-                }`}
-              >
-                Previous
-              </Text>
-            </TouchableOpacity>
+              Previous
+            </Button>
 
             {showAnswer && (
-              <TouchableOpacity
-                className="bg-blue-500 px-6 py-3 rounded-lg"
-                onPress={handleNext}
-              >
-                <Text className="text-white font-semibold">
-                  {quizStore.isLastQuestion ? "Finish Quiz" : "Next Question"}
-                </Text>
-              </TouchableOpacity>
+              <Button variant="primary" size="lg" onPress={handleNext}>
+                {quizStore.isLastQuestion ? "Finish Quiz" : "Next Question"}
+              </Button>
             )}
           </View>
         </View>
