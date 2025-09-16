@@ -12,29 +12,35 @@ interface QuestionCardProps {
 }
 
 // Style variants using cva - only for styles that have variants
-const categoryChipVariants = cva(`px-3 py-1 rounded-full mr-2`, {
-  variants: {
-    type: {
-      category: "bg-info-light",
-      subcategory: "bg-background-secondary",
+const categoryChipVariants = cva(
+  `px-3 py-1 rounded-full mr-2 transition-colors`,
+  {
+    variants: {
+      type: {
+        category: "bg-info-light",
+        subcategory: "bg-background-secondary",
+      },
+    },
+    defaultVariants: {
+      type: "category",
     },
   },
-  defaultVariants: {
-    type: "category",
-  },
-});
+);
 
-const explanationVariants = cva(`mt-4 p-4 rounded-lg border`, {
-  variants: {
-    visible: {
-      true: "bg-warning-light border-warning",
-      false: "hidden",
+const explanationVariants = cva(
+  `mt-4 p-4 rounded-lg border transition-colors`,
+  {
+    variants: {
+      visible: {
+        true: "bg-warning-light border-warning",
+        false: "hidden",
+      },
+    },
+    defaultVariants: {
+      visible: true,
     },
   },
-  defaultVariants: {
-    visible: true,
-  },
-});
+);
 
 export const QuestionCard: FC<QuestionCardProps> = ({
   question,

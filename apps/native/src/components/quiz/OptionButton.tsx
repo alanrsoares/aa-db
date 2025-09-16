@@ -21,7 +21,7 @@ const buttonVariants = cva("p-4 rounded-lg border-2 mb-3", {
 
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
-const textVariants = cva("flex-1", {
+const textVariants = cva("flex-1 transition-colors", {
   variants: {
     variant: {
       default: "text-text-secondary",
@@ -37,7 +37,7 @@ const textVariants = cva("flex-1", {
 });
 
 const letterVariants = cva(
-  "w-8 h-8 rounded-full items-center justify-center mr-3",
+  "w-8 h-8 rounded-full items-center justify-center mr-3 transition-colors",
   {
     variants: {
       variant: {
