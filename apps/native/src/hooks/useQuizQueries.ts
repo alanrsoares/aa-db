@@ -18,29 +18,29 @@ export const quizKeys = {
 };
 
 // Hooks
-export const useCategories = () => {
+export function useCategories() {
   return useQuery({
     queryKey: quizKeys.categories(),
     queryFn: () => quizApiService.getCategories(),
     staleTime: 30 * 60 * 1000, // 30 minutes - categories don't change often
   });
-};
+}
 
-export const useSubcategories = (category?: Category) => {
+export function useSubcategories(category?: Category) {
   return useQuery({
     queryKey: quizKeys.subcategories(category),
     queryFn: () => quizApiService.getSubcategories(category),
     enabled: !!category,
     staleTime: 30 * 60 * 1000, // 30 minutes
   });
-};
+}
 
-export const useRandomQuestions = (
+export function useRandomQuestions(
   category: Category,
   subcategory: Subcategory<Category>,
   limit: number,
   enabled: boolean = true,
-) => {
+) {
   return useQuery({
     queryKey: quizKeys.questions(category, subcategory, limit),
     queryFn: () =>
@@ -49,19 +49,19 @@ export const useRandomQuestions = (
     staleTime: 0, // Always fetch fresh questions for quiz
     gcTime: 0, // Don't cache quiz questions
   });
-};
+}
 
-export const useQuestionById = (id: string, enabled: boolean = true) => {
+export function useQuestionById(id: string, enabled: boolean = true) {
   return useQuery({
     queryKey: quizKeys.question(id),
     queryFn: () => quizApiService.getQuestionById(id),
     enabled: enabled && !!id,
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
-};
+}
 
 // Mutation for prefetching questions
-export const usePrefetchQuestions = () => {
+export function usePrefetchQuestions() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -82,15 +82,15 @@ export const usePrefetchQuestions = () => {
       });
     },
   });
-};
+}
 
 // Hook to handle quiz data fetching with QuizStore integration
-export const useQuizData = (
+export function useQuizData(
   category: Category,
   subcategory: Subcategory<Category>,
   quizLength: number,
   enabled: boolean = true,
-) => {
+) {
   const query = useRandomQuestions(category, subcategory, quizLength, enabled);
 
   return {
@@ -98,4 +98,4 @@ export const useQuizData = (
     // Additional helper methods can be added here if needed
     isReady: !query.isLoading && !query.error && !!query.data,
   };
-};
+}

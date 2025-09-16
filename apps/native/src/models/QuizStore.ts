@@ -27,13 +27,12 @@ const QuizConfigModel = types.model("QuizConfig", {
   timeLimit: types.maybeNull(types.number), // in seconds, null for no limit
 });
 
-// Quiz Statistics model
-const QuizStatsModel = types.model("QuizStats", {
-  totalQuestions: types.number,
-  correctAnswers: types.number,
-  incorrectAnswers: types.number,
-  totalTimeSpent: types.number,
-  averageTimePerQuestion: types.number,
+// User Preferences model for persistence
+const UserPreferencesModel = types.model("UserPreferences", {
+  lastSelectedCategory: types.optional(types.string, "car"),
+  lastSelectedSubcategory: types.optional(types.string, "core"),
+  lastSelectedQuizLength: types.optional(types.number, 10),
+  preferredTimeLimit: types.maybeNull(types.number),
 });
 
 // Quiz Status enum
@@ -66,14 +65,15 @@ export const QuizStoreModel = types
       timeLimit: null,
     }),
 
-    // Statistics
-    stats: types.optional(QuizStatsModel, {
-      totalQuestions: 0,
-      correctAnswers: 0,
-      incorrectAnswers: 0,
-      totalTimeSpent: 0,
-      averageTimePerQuestion: 0,
-    }),
+    // User preferences for persistence
+    userPreferences: types.optional(UserPreferencesModel, {}),
+
+    // Current answer selection state
+    currentAnswerSelection: types.maybeNull(types.string),
+    showAnswer: types.optional(types.boolean, false),
+
+    // Navigation state
+    navigationHistory: types.array(types.number),
 
     // Error handling
     error: types.maybeNull(types.string),
@@ -98,13 +98,41 @@ export const QuizStoreModel = types
       };
     },
 
-    get score() {
+    // Computed stats - no more manual updates needed
+    get stats() {
+      const totalQuestions = self.questions.length;
+      const correctAnswers = self.userAnswers.filter(
+        (answer) => answer.isCorrect,
+      ).length;
+      const incorrectAnswers = self.userAnswers.filter(
+        (answer) => !answer.isCorrect,
+      ).length;
+      const totalTimeSpent = self.userAnswers.reduce(
+        (sum, answer) => sum + answer.timeSpent,
+        0,
+      );
+      const averageTimePerQuestion =
+        self.userAnswers.length > 0
+          ? totalTimeSpent / self.userAnswers.length
+          : 0;
+
       return {
-        correct: self.stats.correctAnswers,
-        total: self.stats.totalQuestions,
+        totalQuestions,
+        correctAnswers,
+        incorrectAnswers,
+        totalTimeSpent,
+        averageTimePerQuestion,
+      };
+    },
+
+    get score() {
+      const stats = this.stats;
+      return {
+        correct: stats.correctAnswers,
+        total: stats.totalQuestions,
         percentage:
-          self.stats.totalQuestions > 0
-            ? (self.stats.correctAnswers / self.stats.totalQuestions) * 100
+          stats.totalQuestions > 0
+            ? (stats.correctAnswers / stats.totalQuestions) * 100
             : 0,
       };
     },
@@ -123,6 +151,34 @@ export const QuizStoreModel = types
         self.questions[self.currentQuestionIndex] !== undefined
       );
     },
+
+    // New computed views
+    get hasAnsweredCurrentQuestion() {
+      return self.currentAnswerSelection !== null;
+    },
+
+    get canGoBack() {
+      return self.navigationHistory.length > 0;
+    },
+
+    get currentConfig() {
+      return {
+        category: self.config.category,
+        subcategory: self.config.subcategory,
+        quizLength: self.config.quizLength,
+        timeLimit: self.config.timeLimit,
+      };
+    },
+
+    get isCurrentAnswerCorrect(): boolean {
+      if (!self.currentAnswerSelection || !this.currentQuestion) return false;
+      const currentQuestion = this.currentQuestion;
+      const correctAnswer = currentQuestion.answer;
+      if (Array.isArray(correctAnswer)) {
+        return correctAnswer.includes(self.currentAnswerSelection);
+      }
+      return correctAnswer === self.currentAnswerSelection;
+    },
   }))
   .actions((self) => ({
     // Configuration actions
@@ -137,11 +193,48 @@ export const QuizStoreModel = types
       Object.assign(self.config, config);
     },
 
+    // Enhanced configuration management
+    setSelectedCategory(category: Category) {
+      self.config.category = category;
+      // Auto-reset subcategory when category changes
+      self.config.subcategory = "core";
+      // Update user preferences
+      self.userPreferences.lastSelectedCategory = category;
+    },
+
+    setSelectedSubcategory(subcategory: Subcategory<Category>) {
+      self.config.subcategory = subcategory;
+      self.userPreferences.lastSelectedSubcategory = subcategory;
+    },
+
+    setQuizLength(length: number) {
+      self.config.quizLength = length;
+      self.userPreferences.lastSelectedQuizLength = length;
+    },
+
+    setTimeLimit(timeLimit: number | null) {
+      self.config.timeLimit = timeLimit;
+      self.userPreferences.preferredTimeLimit = timeLimit;
+    },
+
+    // Load user preferences into config
+    loadUserPreferences() {
+      self.config.category = self.userPreferences
+        .lastSelectedCategory as Category;
+      self.config.subcategory = self.userPreferences
+        .lastSelectedSubcategory as Subcategory<Category>;
+      self.config.quizLength = self.userPreferences.lastSelectedQuizLength;
+      self.config.timeLimit = self.userPreferences.preferredTimeLimit;
+    },
+
     // Quiz lifecycle actions
     startQuiz() {
       self.status = "loading";
       self.currentQuestionIndex = 0;
       self.userAnswers.clear();
+      self.navigationHistory.clear();
+      self.currentAnswerSelection = null;
+      self.showAnswer = false;
       self.questionStartTime = Date.now();
       self.quizStartTime = Date.now();
       self.error = null;
@@ -149,58 +242,93 @@ export const QuizStoreModel = types
 
     setQuestions(questions: DrivingTestQuestionWithKey<Category>[]) {
       self.questions.replace(questions);
-      self.stats.totalQuestions = questions.length;
-      self.stats.correctAnswers = 0;
-      self.stats.incorrectAnswers = 0;
-      self.stats.totalTimeSpent = 0;
       self.status = "active";
     },
 
-    // Question navigation
+    // Enhanced navigation actions
     nextQuestion() {
       if (self.currentQuestionIndex < self.questions.length - 1) {
+        self.navigationHistory.push(self.currentQuestionIndex);
         self.currentQuestionIndex += 1;
         self.questionStartTime = Date.now();
+        this.clearCurrentAnswer();
       }
     },
 
     previousQuestion() {
       if (self.currentQuestionIndex > 0) {
+        self.navigationHistory.push(self.currentQuestionIndex);
         self.currentQuestionIndex -= 1;
         self.questionStartTime = Date.now();
+        this.clearCurrentAnswer();
       }
     },
 
-    // Answer handling
-    selectAnswer(selectedOption: string) {
-      const currentQuestion = self.questions[self.currentQuestionIndex];
-      if (!currentQuestion || self.status !== "active") return;
+    goToQuestion(index: number) {
+      if (index >= 0 && index < self.questions.length) {
+        self.navigationHistory.push(self.currentQuestionIndex);
+        self.currentQuestionIndex = index;
+        self.questionStartTime = Date.now();
+        this.clearCurrentAnswer();
+      }
+    },
+
+    goBack() {
+      if (self.navigationHistory.length > 0) {
+        const previousIndex = self.navigationHistory.pop();
+        if (previousIndex !== undefined) {
+          self.currentQuestionIndex = previousIndex;
+          self.questionStartTime = Date.now();
+          this.clearCurrentAnswer();
+        }
+      }
+    },
+
+    // Enhanced answer handling
+    selectCurrentAnswer(optionId: string) {
+      if (self.status !== "active" || !self.currentQuestion) return;
+
+      self.currentAnswerSelection = optionId;
+      self.showAnswer = true;
+    },
+
+    clearCurrentAnswer() {
+      self.currentAnswerSelection = null;
+      self.showAnswer = false;
+    },
+
+    // Submit answer and move to next question
+    submitAnswer() {
+      if (
+        !self.currentAnswerSelection ||
+        !self.currentQuestion ||
+        self.status !== "active"
+      )
+        return;
 
       const timeSpent = self.questionStartTime
         ? Date.now() - self.questionStartTime
         : 0;
 
-      const isCorrect = this.checkAnswer(selectedOption);
+      const isCorrect = this.checkAnswer(self.currentAnswerSelection);
 
       const userAnswer = {
-        questionId: currentQuestion.key,
-        selectedOption,
+        questionId: self.currentQuestion.key,
+        selectedOption: self.currentAnswerSelection,
         isCorrect,
         timeSpent,
       };
 
       self.userAnswers.push(userAnswer);
 
-      // Update stats
-      if (isCorrect) {
-        self.stats.correctAnswers += 1;
-      } else {
-        self.stats.incorrectAnswers += 1;
-      }
+      // Clear current answer state
+      this.clearCurrentAnswer();
+    },
 
-      self.stats.totalTimeSpent += timeSpent;
-      self.stats.averageTimePerQuestion =
-        self.stats.totalTimeSpent / self.userAnswers.length;
+    // Legacy method for backward compatibility
+    selectAnswer(selectedOption: string) {
+      this.selectCurrentAnswer(selectedOption);
+      this.submitAnswer();
     },
 
     checkAnswer(selectedOption: string): boolean {
@@ -229,20 +357,18 @@ export const QuizStoreModel = types
       self.error = null;
     },
 
-    // Reset quiz
+    // Simplified reset quiz - stats are now computed
     resetQuiz() {
       self.status = "idle";
       self.currentQuestionIndex = 0;
       self.questions.clear();
       self.userAnswers.clear();
+      self.navigationHistory.clear();
+      self.currentAnswerSelection = null;
+      self.showAnswer = false;
       self.error = null;
       self.questionStartTime = null;
       self.quizStartTime = null;
-      self.stats.totalQuestions = 0;
-      self.stats.correctAnswers = 0;
-      self.stats.incorrectAnswers = 0;
-      self.stats.totalTimeSpent = 0;
-      self.stats.averageTimePerQuestion = 0;
     },
   }));
 
@@ -252,4 +378,4 @@ export type QuizStoreSnapshotIn = SnapshotIn<typeof QuizStoreModel>;
 export type QuizStoreSnapshotOut = SnapshotOut<typeof QuizStoreModel>;
 export type UserAnswer = Instance<typeof UserAnswerModel>;
 export type QuizConfig = Instance<typeof QuizConfigModel>;
-export type QuizStats = Instance<typeof QuizStatsModel>;
+export type UserPreferences = Instance<typeof UserPreferencesModel>;
